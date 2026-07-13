@@ -61,14 +61,18 @@ h1, h2, h3, .font-display {
   letter-spacing: 0;
 }
 
-/* Reusable eyebrow / kicker label */
-.eyebrow {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-clay);
+/* Reusable eyebrow / kicker label.
+   In @layer components so utility text colors (e.g. text-gold) can override
+   the default clay — otherwise an unlayered rule would win over utilities. */
+@layer components {
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-clay);
+  }
 }
 
 /* Refined link underline for prose */
