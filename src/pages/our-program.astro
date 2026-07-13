@@ -6,72 +6,46 @@ import { withBase } from "../lib/base";
 
 const curriculum = [
   {
-    title: "Establishing a Foundation for Healing & Integration",
-    body: "Upon arrival, we help our guests establish a sense of safety and stability through grounding practices, support for physical health, and a thoughtful assessment of their current circumstances. This foundation allows them to feel secure, free, and empowered to begin the deeper work of healing and integration.",
+    title: "A Foundation for Healing",
+    body: "Arrive to safety and stability — grounding, rest, and a gentle assessment of where you are.",
   },
   {
     title: "Self-Examination",
-    body: "Guests are guided through a process of honest self-reflection—examining their conscience, identifying root causes of harmful behavioral patterns, and beginning to understand the inner dynamics that have shaped their past.",
+    body: "Honest reflection to uncover the root causes beneath harmful patterns.",
   },
   {
     title: "Spiritual Development",
-    body: "We offer opportunities for guests to explore and cultivate a personal connection with the divine and the creative forces of life. This includes spiritual disciplines, guided work with sacrament, and the study of various wisdom traditions that encourage inner growth and transformation.",
+    body: "Cultivate a personal connection to Spirit through practice, sacrament, and wisdom traditions.",
   },
   {
     title: "Acceptance & The Will to Heal",
-    body: "At this stage, guests begin to accept their past and connect with their innate capacity to create a new, meaningful life. This shift marks a powerful turning point—one rooted in integrity, self-compassion, and the will to heal.",
+    body: "Accept the past and reconnect with your capacity to create a new, meaningful life.",
   },
   {
     title: "Inner Healing",
-    body: "With the support of our licensed therapists and experienced coaches, guests engage in 1-1 and group healing practices. These practices provide essential tools and a clear framework for sustained personal transformation.",
+    body: "1-on-1 and group work with licensed therapists and coaches, for change that lasts.",
   },
   {
     title: "Reconciliation",
-    body: "We support our guests in rebuilding and healing relationships with loved ones, offering guidance and, when needed, facilitate processes to help restore trust, connection, and mutual understanding.",
+    body: "Rebuild trust and connection with the people you love.",
   },
   {
     title: "Life Planning & Preparation",
-    body: "As our guests prepare to re-enter the world, they leave with a grounded spiritual practice, an embodied orientation to healing work, and a clear, personalized plan to begin their new life with purpose and clarity.",
+    body: "Leave with a grounded practice and a clear, personal plan for your new life.",
   },
 ];
 
+// Short, benefit-focused lines — how each supports recovery, integration, and the nervous system.
 const activities = [
-  {
-    title: "Physical Fitness",
-    body: "Movement is a key component of healing, helping to release stored tension, regulate emotions, and rebuild strength. Our program incorporates various forms of exercise to support physical and mental well-being.",
-  },
-  {
-    title: "Art and Music",
-    body: "Creative expression offers a powerful outlet for processing emotions and reconnecting with the self. Through pottery, wood working, music, and other artistic practices, guests explore their inner world in a safe and therapeutic way.",
-  },
-  {
-    title: "Outdoor Activities",
-    body: "Nature plays a vital role in healing, grounding individuals in the present moment while providing fresh air, movement, and connection. Hikes, swimming, and time in natural settings help restore balance and clarity.",
-  },
-  {
-    title: "Yoga and Qi Gong",
-    body: "These ancient practices integrate breath, movement, and mindfulness to cultivate inner peace and physical vitality. They promote emotional regulation, flexibility, and a deep sense of presence.",
-  },
-  {
-    title: "Massage Therapy",
-    body: "Touch is a powerful tool for releasing stored tension, promoting relaxation, and restoring the nervous system. Therapeutic massage helps guests reconnect with their bodies in a nurturing way.",
-  },
-  {
-    title: "Rest and Reflection",
-    body: "True healing requires moments of stillness. Dedicated time for rest, journaling, and contemplation allows guests to process their experiences and integrate personal insights.",
-  },
-  {
-    title: "Sound Healing",
-    body: "Vibrational therapy using instruments like singing bowls and gongs helps calm the mind, release emotional blockages, and promote deep relaxation and energetic alignment.",
-  },
-  {
-    title: "Acupuncture",
-    body: "This time-honored healing practice balances the body's energy flow, alleviating stress, improving circulation, and supporting overall well-being on a deep level.",
-  },
-  {
-    title: "Meditation and Mindfulness",
-    body: "Cultivating present-moment awareness is central to recovery. Through guided meditation and mindfulness practices, guests develop the ability to observe thoughts and emotions without attachment, fostering greater inner peace and clarity.",
-  },
+  { title: "Physical Fitness", body: "Releases stored tension and rebuilds strength.", icon: "M13.5 5.5c1.09 0 2-.92 2-2a2 2 0 0 0-2-2c-1.11 0-2 .88-2 2c0 1.08.89 2 2 2M9.89 19.38l1-4.38L13 17v6h2v-7.5l-2.11-2l.61-3A7.3 7.3 0 0 0 19 13v-2c-1.91 0-3.5-1-4.31-2.42l-1-1.58c-.4-.62-1-1-1.69-1c-.31 0-.5.08-.81.08L6 8.28V13h2V9.58l1.79-.7L8.19 17l-4.9-1l-.4 2z" },
+  { title: "Art & Music", body: "Processes emotion and reconnects you with yourself.", icon: "M12 22A10 10 0 0 1 2 12A10 10 0 0 1 12 2c5.5 0 10 4 10 9a6 6 0 0 1-6 6h-1.8c-.3 0-.5.2-.5.5c0 .1.1.2.1.3c.4.5.6 1.1.6 1.7c.1 1.4-1 2.5-2.4 2.5m0-18a8 8 0 0 0-8 8a8 8 0 0 0 8 8c.3 0 .5-.2.5-.5c0-.2-.1-.3-.1-.4c-.4-.5-.6-1-.6-1.6c0-1.4 1.1-2.5 2.5-2.5H16a4 4 0 0 0 4-4c0-3.9-3.6-7-8-7m-5.5 6c.8 0 1.5.7 1.5 1.5S7.3 13 6.5 13S5 12.3 5 11.5S5.7 10 6.5 10m3-4c.8 0 1.5.7 1.5 1.5S10.3 9 9.5 9S8 8.3 8 7.5S8.7 6 9.5 6m5 0c.8 0 1.5.7 1.5 1.5S15.3 9 14.5 9S13 8.3 13 7.5S13.7 6 14.5 6m3 4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5" },
+  { title: "Time Outdoors", body: "Grounds the nervous system in the present moment.", icon: "M10 21v-3H3l5-5H5l5-5H7l5-5l5 5h-3l5 5h-3l5 5h-7v3z" },
+  { title: "Yoga & Qi Gong", body: "Calms the body and mind through breath and movement.", icon: "M13 2a2 2 0 1 0 0 4c1.11 0 2-.89 2-2a2 2 0 0 0-2-2M4 7v2h6v6l-5.07 5.07l1.41 1.43l6.72-6.73L17 17.13V21h2v-4.43c0-.36-.18-.68-.5-.86L15 13.6V9h6V7z" },
+  { title: "Massage Therapy", body: "Releases held tension and settles the nervous system.", icon: "M15.5 9.63a14.2 14.2 0 0 0-3.5 2.63a13.7 13.7 0 0 0-3.5-2.63C8.74 6.86 9.92 4.14 12.06 2c2.12 2.12 3.25 4.84 3.44 7.63M12 15.45C14.15 12.17 17.82 10 22 10c0 10-9.32 11.88-10 12c-.68-.11-10-2-10-12c4.18 0 7.85 2.17 10 5.45m.05-10.26c-.66 1.04-1.12 2.19-1.37 3.39l1.32.97l1.35-.98c-.23-1.2-.67-2.35-1.3-3.38M12 19.97s6-.97 7.74-7.72C14 14 12 19.1 12 19.1S9 13 4.26 12.26C6 19 12 19.97 12 19.97" },
+  { title: "Rest & Reflection", body: "Stillness to process and integrate what surfaced.", icon: "m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3zm3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31" },
+  { title: "Sound Healing", body: "Quiets the mind and releases what the body holds.", icon: "M12 3v10.55A4 4 0 1 0 14 17V7h4V3m-8 16a2 2 0 1 1 2-2a2 2 0 0 1-2 2" },
+  { title: "Acupuncture", body: "Balances the body and eases stress.", icon: "m11.15 15.18l-1.42-1.41l1.42-1.42l1.41 1.42l1.41-1.42l-1.41-1.41l1.41-1.41l1.42 1.41l1.41-1.41l-2.83-2.83l-7.07 7.07l2.83 2.83zM3.08 19l3.12-3.11l-2.12-2.12l9.89-9.9L16.1 6l1.4-1.42l-1.4-1.42l1.4-1.41L21.75 6l-1.41 1.4L18.92 6L17.5 7.4l2.13 2.13l-9.9 9.89l-2.12-2.12l-4.53 4.54z" },
+  { title: "Meditation & Mindfulness", body: "Builds the capacity to meet thoughts and feelings with calm.", icon: "M12 4c1.11 0 2 .89 2 2s-.89 2-2 2s-2-.89-2-2s.9-2 2-2m9 12v-2c-2.24 0-4.16-.96-5.6-2.68l-1.34-1.6A1.98 1.98 0 0 0 12.53 9H11.5c-.61 0-1.17.26-1.55.72l-1.34 1.6C7.16 13.04 5.24 14 3 14v2c2.77 0 5.19-1.17 7-3.25V15l-3.88 1.55c-.67.27-1.12.95-1.12 1.66C5 19.2 5.8 20 6.79 20H9v-.5a2.5 2.5 0 0 1 2.5-2.5h3c.28 0 .5.22.5.5s-.22.5-.5.5h-3c-.83 0-1.5.67-1.5 1.5v.5h7.21c.99 0 1.79-.8 1.79-1.79c0-.71-.45-1.39-1.12-1.66L14 15v-2.25c1.81 2.08 4.23 3.25 7 3.25" },
 ];
 ---
 
@@ -79,79 +53,63 @@ const activities = [
   title="Our Program · Casa da Nova Vida"
   description="A personalized residential healing program for 3–5 guests at a time, uncovering root causes and building a foundation for lasting transformation."
 >
+  <!-- ===================== HERO (image + title only) ===================== -->
   <PageHero
     eyebrow="Our Program"
     title="What to Expect"
-    intro="We emphasize the importance of not overwhelming our guests—recognizing that healing requires a conscious breath. Our guests receive sufficient time and space outside their “everyday” environment where they reflect and integrate the therapeutic experiences through spiritual work with sacrament, therapy and community."
-    image="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&w=2000&q=80"
-    imageAlt="A calm natural landscape at golden hour"
+    image="/images/photos/cards/program-hero.jpg"
+    imageAlt="A person standing with open arms at the water's edge at sunrise"
   />
 
-  <!-- Facts strip -->
-  <section class="border-b border-sand px-6 py-14 lg:px-10">
-    <div
-      class="mx-auto grid max-w-5xl gap-8 text-center sm:grid-cols-3 sm:divide-x sm:divide-sand"
-    >
+  <!-- ===================== LEAD ===================== -->
+  <section class="px-6 py-16 lg:px-10 lg:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="font-display text-2xl leading-[1.5] text-cocoa sm:text-3xl sm:leading-[1.45]">
+        Healing requires a <span class="text-pine">conscious breath</span>. We
+        give our guests time and space — outside the everyday — to reflect and
+        integrate, through spiritual work, therapy, and community.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== FACTS ===================== -->
+  <section class="border-y border-sand bg-cream px-6 py-14 lg:px-10">
+    <div class="mx-auto grid max-w-5xl gap-8 text-center sm:grid-cols-3 sm:divide-x sm:divide-sand">
       <div>
         <p class="font-display text-4xl text-clay">3–5</p>
-        <p class="mt-2 text-sm uppercase tracking-[0.16em] text-stone">
-          Guests at a time
-        </p>
+        <p class="mt-2 text-sm uppercase tracking-[0.16em] text-stone">Guests at a time</p>
       </div>
       <div>
         <p class="font-display text-4xl text-clay">4–6</p>
-        <p class="mt-2 text-sm uppercase tracking-[0.16em] text-stone">
-          Weeks, with room to extend
-        </p>
+        <p class="mt-2 text-sm uppercase tracking-[0.16em] text-stone">Weeks, with room to extend</p>
       </div>
       <div>
         <p class="font-display text-4xl text-clay">1:1</p>
-        <p class="mt-2 text-sm uppercase tracking-[0.16em] text-stone">
-          Integration coaching
-        </p>
+        <p class="mt-2 text-sm uppercase tracking-[0.16em] text-stone">Integration coaching</p>
       </div>
     </div>
   </section>
 
-  <!-- What to expect continued -->
-  <section class="px-6 pt-16 lg:px-10 lg:pt-20">
-    <div class="mx-auto max-w-3xl text-cocoa leading-relaxed">
-      <p>
-        We serve 3-5 guests at a time, allowing for a very personalized healing
-        journey with our support team. Days consist of healing the spiritual,
-        mental, emotional, and physical bodies through a wide variety of group
-        and individual sessions facilitated by our team of practitioners and
-        coaches. Our guests typically stay with us for 4-6 weeks, though the
-        opportunity to extend one's stay is available.
-      </p>
-    </div>
-  </section>
-
-  <!-- Our Curriculum -->
+  <!-- ===================== CURRICULUM ===================== -->
   <section class="px-6 py-20 lg:px-10 lg:py-28">
-    <div class="mx-auto max-w-7xl">
-      <div class="max-w-2xl">
+    <div class="mx-auto max-w-6xl">
+      <div class="mx-auto max-w-2xl text-center">
         <p class="eyebrow">Our Curriculum</p>
-        <p class="mt-6 text-cocoa leading-relaxed">
-          At Nova Vida, our recovery program is built on the understanding that
-          true healing begins with identifying the root causes of destructive
-          behaviors. This journey requires deep self-reflection, commitment, and
-          time. We support our guests in uncovering past trauma and developing a
-          personalized healing plan that integrates therapeutic work, holistic
-          practices, and sustainable healthy habits. Our approach is designed to
-          foster lasting transformation, ensuring that each individual leaves
-          with the tools and strategies needed to continue their healing journey
-          long after their stay.
+        <h2 class="mt-4 text-3xl text-pine sm:text-4xl">A path to the root, step by step</h2>
+        <p class="mt-5 leading-relaxed text-cocoa">
+          Lasting healing begins by uncovering the root causes beneath the
+          behavior. We walk each guest through this journey — at a pace that
+          honors the work.
         </p>
       </div>
 
-      <div class="mt-14 grid gap-6 sm:grid-cols-2">
+      <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
           curriculum.map((c, i) => (
-            <div class="rounded-2xl border border-sand bg-parchment p-8">
-              <span class="font-display text-sm text-clay">0{i + 1}</span>
-              <h3 class="mt-2 text-xl text-forest">{c.title}</h3>
-              <p class="mt-3 text-cocoa leading-relaxed">{c.body}</p>
+            <div class="rounded-2xl border border-sand bg-parchment p-7">
+              <span class="font-display text-2xl text-clay">0{i + 1}</span>
+              <h3 class="mt-2 text-lg text-forest">{c.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-cocoa">{c.body}</p>
             </div>
           ))
         }
@@ -159,21 +117,31 @@ const activities = [
     </div>
   </section>
 
-  <!-- Activities -->
-  <section class="bg-cream px-6 py-20 lg:px-10 lg:py-28">
-    <div class="mx-auto max-w-7xl">
-      <div class="max-w-2xl">
-        <p class="eyebrow">Activities</p>
-        <h2 class="mt-4 text-3xl text-pine sm:text-4xl">
-          The daily practices that carry the work
-        </h2>
+  <!-- ===================== TOOLS & PRACTICES (was Activities) ===================== -->
+  <section class="border-y border-sand bg-cream px-6 py-20 lg:px-10 lg:py-28">
+    <div class="mx-auto max-w-6xl">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Tools &amp; practices</p>
+        <h2 class="mt-4 text-3xl text-pine sm:text-4xl">Ways we support your integration</h2>
+        <p class="mt-5 leading-relaxed text-cocoa">
+          A growing set of modalities we draw on to calm the nervous system and
+          deepen recovery. We tailor them to each guest — and add more as we grow.
+        </p>
       </div>
-      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+      <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
           activities.map((a) => (
-            <div class="rounded-2xl border border-sand bg-linen p-7">
-              <h3 class="text-lg text-forest">{a.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-cocoa">{a.body}</p>
+            <div class="group flex items-start gap-4 rounded-2xl border border-sand bg-linen p-6 transition-shadow duration-300 hover:shadow-[0_16px_40px_-24px_rgba(43,54,70,0.35)]">
+              <div class="flex h-12 w-12 flex-none items-center justify-center rounded-xl bg-gradient-to-br from-cream to-sage/40 text-pine ring-1 ring-sand">
+                <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor" aria-hidden="true">
+                  <path d={a.icon} />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-base text-forest">{a.title}</h3>
+                <p class="mt-1 text-sm leading-relaxed text-cocoa">{a.body}</p>
+              </div>
             </div>
           ))
         }
@@ -181,24 +149,17 @@ const activities = [
     </div>
   </section>
 
-  <!-- Nutrition -->
+  <!-- ===================== NUTRITION ===================== -->
   <section class="bg-forest px-6 py-20 text-linen lg:px-10 lg:py-28">
-    <div class="mx-auto max-w-3xl">
-      <p class="eyebrow text-gold">Nutrition at Nova Vida</p>
-      <p class="mt-6 text-sagelight leading-relaxed">
-        At our recovery house, we believe that true healing starts from the
-        inside out. That's why we prioritize serving our guests healthy, organic,
-        and seasonal meals designed to support stabilization and promote deep
-        healing—mentally, emotionally, and physically. Our meals are thoughtfully
-        prepared to nourish the body, calm the mind, and restore balance. Beyond
-        just providing wholesome food, we also empower our guests with the
-        knowledge and skills to maintain a healthy lifestyle after they leave.
-        Through hands-on guidance, we teach the fundamentals of smart shopping,
-        nutritious cooking, and intentional eating, helping them build a
-        sustainable relationship with food that supports long-term recovery and
-        overall well-being.
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow text-gold">Nutrition</p>
+      <p class="mt-6 text-lg leading-relaxed text-sagelight">
+        We serve healthy, organic, seasonal meals designed to stabilize and
+        nourish — body, mind, and emotions. And we teach the fundamentals of
+        shopping, cooking, and intentional eating, so a healthy relationship with
+        food continues long after you leave.
       </p>
-      <blockquote class="mt-8 font-display text-2xl italic leading-relaxed text-gold">
+      <blockquote class="mt-8 font-display text-2xl italic leading-relaxed text-gold sm:text-3xl">
         “Let food be thy medicine and medicine be thy food”
         <cite class="mt-3 block font-sans text-sm not-italic uppercase tracking-[0.18em] text-sage">
           Hippocrates
@@ -207,12 +168,10 @@ const activities = [
     </div>
   </section>
 
-  <!-- Applying -->
-  <section class="px-6 py-20 lg:px-10 lg:py-28">
-    <div class="mx-auto max-w-3xl text-center">
-      <h2 class="text-3xl text-pine sm:text-4xl">
-        Interested in learning more or becoming a guest?
-      </h2>
+  <!-- ===================== APPLY ===================== -->
+  <section class="px-6 py-20 text-center lg:px-10 lg:py-28">
+    <div class="mx-auto max-w-2xl">
+      <h2 class="text-3xl text-pine sm:text-4xl">Interested in becoming a guest?</h2>
       <a
         href={withBase("/contact")}
         class="mt-9 inline-flex rounded-full bg-pine px-8 py-4 font-medium text-linen transition-colors hover:bg-forest"
