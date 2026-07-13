@@ -3,6 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import CTABand from "../components/CTABand.astro";
 import { withBase } from "../lib/base";
 
+const R = "/images/photos/resources/";
+const C = "/images/photos/cards/";
+
 // ── Filter tags (wired to the library grid via data-cat below) ─────────────
 const filters = [
   { slug: "all", label: "All" },
@@ -16,222 +19,240 @@ const filters = [
   { slug: "research", label: "Research" },
 ];
 
-// ── Featured resource ──────────────────────────────────────────────────────
-const featured = {
-  label: "Featured · Stanford Medicine",
-  title: "Ibogaine reduces PTSD and depression in veterans",
-  body: "A landmark 2024 Stanford study found ibogaine led to dramatic, rapid reductions in PTSD, depression, and anxiety in veterans with traumatic brain injury, alongside gains in cognition, with no serious side effects.",
-  href: "https://med.stanford.edu/news/all-news/2024/01/ibogaine-ptsd.html",
-  img: "/images/photos/cards/welcome-iboga.jpg",
-};
-
 // ── Resource library ───────────────────────────────────────────────────────
 const library = [
-  // Ibogaine
+  {
+    source: "Stanford Medicine",
+    tag: "Ibogaine",
+    title: "Ibogaine reduces PTSD and depression in veterans",
+    body: "A landmark 2024 study found ibogaine led to rapid, dramatic reductions in PTSD, depression, and anxiety in veterans with traumatic brain injury, with no serious side effects.",
+    href: "https://med.stanford.edu/news/all-news/2024/01/ibogaine-ptsd.html",
+    img: C + "welcome-iboga.jpg",
+    cat: "ibogaine research",
+  },
   {
     source: "Nature Medicine",
+    tag: "Research",
     title: "Magnesium-ibogaine therapy in veterans with traumatic brain injuries",
-    meta: "Study · 2024",
     body: "The peer-reviewed Stanford study behind the headlines, published in Nature Medicine.",
     href: "https://www.nature.com/articles/s41591-023-02705-w",
+    img: R + "14314636.jpg",
     cat: "ibogaine research",
   },
   {
     source: "MindScape Retreat",
+    tag: "Ibogaine",
     title: "Integration therapy after ibogaine: why the first 90 days matter",
-    meta: "Article",
     body: "Why the window right after ibogaine is decisive, and how aftercare turns relief into lasting recovery.",
     href: "https://www.mindscaperetreat.com/news/integration-therapy-after-ibogaine-treatment-why-the-first-90-days-determine-long-term-recovery",
+    img: R + "2883087.jpg",
     cat: "ibogaine integration",
   },
   {
     source: "Psychable",
+    tag: "Ibogaine",
     title: "Ibogaine integration and aftercare for addiction",
-    meta: "Guide",
     body: "A practical overview of the integration and aftercare that follows ibogaine treatment for addiction.",
     href: "https://psychable.com/addiction/ibogaine-integration-and-aftercare-for-addiction",
+    img: R + "1092183.jpg",
     cat: "ibogaine integration addiction",
   },
   {
     source: "PubMed",
+    tag: "Ibogaine",
     title: "Persisting effects following ibogaine detoxification",
-    meta: "Research",
     body: "A mixed-method study of the lasting effects, and the integration needs, people report after ibogaine.",
     href: "https://pubmed.ncbi.nlm.nih.gov/30020025/",
+    img: C + "welcome-path.jpg",
     cat: "ibogaine research addiction",
   },
-  // Ayahuasca
   {
     source: "Psychedelic Support",
+    tag: "Ayahuasca",
     title: "Integrating ayahuasca experiences",
-    meta: "Guide",
     body: "Common themes and grounded practices for bringing ayahuasca insights into everyday life.",
     href: "https://psychedelic.support/resources/integrating-ayahuasca-experiences/",
+    img: R + "29152688.jpg",
     cat: "ayahuasca integration",
   },
   {
     source: "Psychedelic Support",
+    tag: "Ayahuasca",
     title: "Emotional healing with ayahuasca",
-    meta: "Article",
     body: "How ayahuasca can surface and help process grief, fear, and long-held emotion.",
     href: "https://psychedelic.support/resources/emotional-healing-with-ayahuasca/",
+    img: R + "37812265.jpg",
     cat: "ayahuasca",
   },
   {
     source: "Ayahuasca Foundation",
+    tag: "Ayahuasca",
     title: "Ayahuasca integration: counseling, support, and practices",
-    meta: "Guide",
     body: "Counseling, community, and daily practices that help ayahuasca work take root.",
     href: "https://www.ayahuascafoundation.org/information/preparation-integration/ayahuasca-integration/",
+    img: R + "17025853.jpg",
     cat: "ayahuasca integration",
   },
   {
     source: "Psychotherapy Networker",
+    tag: "Ayahuasca",
     title: "Inside the ayahuasca experience",
-    meta: "Article · 2018",
     body: "A close, thoughtful look at the ayahuasca experience and its place in emotional healing.",
     href: "https://www.psychotherapynetworker.org/article/inside-ayahuasca-experience-septemberoctober-2018/",
+    img: R + "14189966.jpg",
     cat: "ayahuasca integration",
   },
-  // Integration
   {
     source: "Frontiers in Psychology",
+    tag: "Integration",
     title: "Psychedelic integration: an analysis of the concept and its practice",
-    meta: "Research",
     body: "A scholarly look at what integration actually is, and how it is practiced.",
     href: "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2022.824077/full",
+    img: R + "5357086.jpg",
     cat: "integration research",
   },
   {
     source: "ADAA",
+    tag: "Integration",
     title: "Your psychedelic therapy journey continues: integration 101",
-    meta: "Primer",
     body: "An accessible primer on why integration, not the experience alone, is where lasting change is made.",
     href: "https://adaa.org/learn-from-us/from-the-experts/blog-posts/consumer-professional/your-psychedelic-therapy-journey",
+    img: R + "1051838.jpg",
     cat: "integration",
   },
   {
     source: "Psychology Today",
+    tag: "Integration",
     title: "The art of integration after a psychedelic experience",
-    meta: "Article",
     body: "On turning insight into embodied, durable change once the ceremony ends.",
     href: "https://www.psychologytoday.com/us/blog/truth-medicine/202604/the-art-of-integration-after-a-psychedelic-experience",
+    img: R + "3363111.jpg",
     cat: "integration",
   },
   {
     source: "MAPS",
+    tag: "Integration",
     title: "The six domains of psychedelic integration",
-    meta: "Framework",
     body: "A framework for integrating across mind, body, spirit, relationships, and daily life.",
     href: "https://maps.org/integration/the-6-domains-of-psychedelic-integration/",
+    img: R + "1198171.jpg",
     cat: "integration",
   },
   {
     source: "Frontiers in Psychology",
+    tag: "Integration",
     title: "Coping and support strategies for extended difficulties after psychedelics",
-    meta: "Research",
     body: "A qualitative study of how people move through hard, lingering effects after a psychedelic experience.",
     href: "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2024.1369715/full",
+    img: R + "9601212.jpg",
     cat: "integration research",
   },
   {
     source: "Psychedelic Support",
+    tag: "Integration",
     title: "What to do after you've taken psychedelics",
-    meta: "Guide",
     body: "Concrete, grounding steps for the vulnerable days and weeks that follow.",
     href: "https://psychedelic.support/resources/now-that-its-over-what-to-do-after-youve-taken-psychedelics/",
+    img: R + "4709903.jpg",
     cat: "integration",
   },
-  // Addiction & trauma
   {
     source: "Dr. Gabor Maté",
+    tag: "Addiction",
     title: "In the Realm of Hungry Ghosts",
-    meta: "Book",
     body: "Maté's landmark work reframing addiction not as a moral failing, but as a response to pain and trauma.",
     href: "https://drgabormate.com/book/in-the-realm-of-hungry-ghosts/",
+    img: R + "1205693.jpg",
     cat: "addiction",
   },
   {
     source: "Recovery.com",
+    tag: "Harm Reduction",
     title: "Abstinence vs. harm reduction in addiction recovery",
-    meta: "Guide",
     body: "How the two approaches compare, and how meeting people where they are can become a bridge to healing.",
     href: "https://recovery.com/resources/abstinence-vs-harm-reduction-in-addiction-recovery/",
+    img: R + "6340694.jpg",
     cat: "harm-reduction addiction",
   },
   {
     source: "National Harm Reduction Coalition",
+    tag: "Harm Reduction",
     title: "Principles of harm reduction",
-    meta: "Guide",
     body: "The foundational principles: dignity, respect, and self-determination on each person's path.",
     href: "https://harmreduction.org/about-us/principles-of-harm-reduction/",
+    img: R + "17010855.jpg",
     cat: "harm-reduction",
   },
   {
     source: "PMC",
+    tag: "Addiction",
     title: "Psilocybin-assisted therapy for relapse prevention in alcohol use disorder",
-    meta: "Trial",
     body: "A phase 2 randomized clinical trial on psilocybin therapy for preventing relapse.",
     href: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11937691/",
+    img: R + "10827984.jpg",
     cat: "addiction research",
   },
-  // Neuroplasticity
   {
     source: "Frontiers in Psychiatry",
+    tag: "Neuroplasticity",
     title: "Psychedelics and neuroplasticity: a systematic review",
-    meta: "Research",
     body: "A systematic review of how psychedelics stimulate neuroplasticity, the brain's capacity to rewire.",
     href: "https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2021.724606/full",
+    img: R + "14314636.jpg",
     cat: "neuroplasticity research",
   },
   {
     source: "Fireside Project",
+    tag: "Neuroplasticity",
     title: "Psychedelics and neuroplasticity: unlocking the healing brain",
-    meta: "Article",
     body: "A plain-language look at the window of plasticity psychedelics open, and why it matters for recovery.",
     href: "https://firesideproject.org/blog/psychedelics-amp-neuroplasticity-unlocking-the-healing-brain",
+    img: R + "10827984.jpg",
     cat: "neuroplasticity",
   },
-  // Spirituality
   {
     source: "Int'l Society of Addiction Medicine",
+    tag: "Spirituality",
     title: "The role of spirituality in addiction medicine",
-    meta: "Position statement",
     body: "How spirituality can be meaningfully incorporated into addiction care and research.",
     href: "https://www.tandfonline.com/doi/full/10.1080/08897077.2021.1941514",
+    img: R + "8564615.jpg",
     cat: "spirituality addiction research",
   },
   {
     source: "PMC",
+    tag: "Spirituality",
     title: "Spirituality, life meaning, and quality of life in recovery",
-    meta: "Research",
     body: "On how spirituality, meaning, and social support relate to well-being in long-term recovery.",
     href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC1526775/",
+    img: R + "2563040.jpg",
     cat: "spirituality addiction research",
   },
-  // Research centers & support
   {
     source: "Johns Hopkins",
+    tag: "Research",
     title: "Center for Psychedelic and Consciousness Research",
-    meta: "Research center",
     body: "The largest psychedelic research center of its kind, with 150+ peer-reviewed studies.",
     href: "https://www.hopkinspsychedelic.org/",
+    img: R + "9501978.jpg",
     cat: "research integration",
   },
   {
     source: "MAPS",
+    tag: "Integration",
     title: "Psychedelic education and support resources",
-    meta: "Organization",
     body: "The Multidisciplinary Association for Psychedelic Studies' hub of research and integration resources.",
     href: "https://maps.org/take-action/resources/",
+    img: C + "welcome-grow.jpg",
     cat: "integration research",
   },
   {
     source: "Fireside Project",
+    tag: "Support",
     title: "Psychedelic peer support line",
-    meta: "Support",
     body: "Free, confidential peer support during and after psychedelic experiences. Call or text 62-FIRESIDE.",
     href: "https://firesideproject.org/",
+    img: R + "17010855.jpg",
     cat: "integration",
   },
 ];
@@ -254,35 +275,6 @@ const library = [
         and other plant medicines. Curated to support you as you carry the work
         into a lasting new life, without relapse.
       </p>
-    </div>
-  </section>
-
-  <!-- ===================== FEATURED ===================== -->
-  <section class="px-6 pt-16 lg:px-10 lg:pt-20">
-    <div class="mx-auto max-w-6xl">
-      <a
-        href={featured.href}
-        target="_blank"
-        rel="noopener"
-        class="group grid overflow-hidden rounded-[1.75rem] border border-sand bg-parchment shadow-sm transition-shadow duration-300 hover:shadow-[0_24px_60px_-28px_rgba(43,54,70,0.4)] md:grid-cols-2"
-      >
-        <div class="overflow-hidden">
-          <img
-            src={withBase(featured.img)}
-            alt=""
-            class="h-64 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105 md:h-full"
-            loading="lazy"
-          />
-        </div>
-        <div class="flex flex-col justify-center p-8 lg:p-12">
-          <p class="eyebrow text-clay">{featured.label}</p>
-          <h3 class="mt-4 text-2xl text-pine sm:text-3xl">{featured.title}</h3>
-          <p class="mt-4 leading-relaxed text-cocoa">{featured.body}</p>
-          <span class="mt-6 inline-flex items-center gap-2 font-medium text-forest">
-            Read the study <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
-          </span>
-        </div>
-      </a>
     </div>
   </section>
 
@@ -318,18 +310,29 @@ const library = [
               target="_blank"
               rel="noopener"
               data-cat={r.cat}
-              class="group flex flex-col rounded-2xl border border-sand bg-parchment p-6 shadow-sm transition-shadow duration-300 hover:shadow-[0_18px_50px_-24px_rgba(43,54,70,0.35)]"
+              class="group flex flex-col overflow-hidden rounded-2xl border border-sand bg-parchment shadow-sm transition-shadow duration-300 hover:shadow-[0_18px_50px_-24px_rgba(43,54,70,0.35)]"
             >
-              <p class="text-[0.7rem] uppercase tracking-[0.16em] text-clay">{r.source}</p>
-              <h3 class="mt-2 text-lg leading-snug text-forest transition-colors group-hover:text-pine">
-                {r.title}
-              </h3>
-              <p class="mt-2 flex-1 text-sm leading-relaxed text-cocoa">
-                <span class="text-stone">{r.meta}</span> · {r.body}
-              </p>
-              <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-forest">
-                Read <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
-              </span>
+              <div class="overflow-hidden">
+                <img
+                  src={withBase(r.img)}
+                  alt=""
+                  class="h-44 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <div class="flex flex-1 flex-col p-6">
+                <p class="text-[0.7rem] uppercase tracking-[0.16em] text-clay">
+                  {r.source} · {r.tag}
+                </p>
+                <h3 class="mt-2 text-lg leading-snug text-forest transition-colors group-hover:text-pine">
+                  {r.title}
+                </h3>
+                <p class="mt-2 flex-1 text-sm leading-relaxed text-cocoa">{r.body}</p>
+                <span class="mt-5 inline-flex items-center gap-1.5 border-t border-sand pt-4 text-sm font-medium text-forest">
+                  Read the article
+                  <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">↗</span>
+                </span>
+              </div>
             </a>
           ))
         }
