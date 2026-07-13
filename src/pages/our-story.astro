@@ -1,77 +1,121 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/PageHero.astro";
 import CTABand from "../components/CTABand.astro";
+import { withBase } from "../lib/base";
+
+const beliefs = [
+  {
+    title: "Spirit at the center",
+    body: "Spirituality is the cornerstone of recovering from addiction and building a life of true, balanced well-being. Healing is holistic — the spiritual, mental, emotional, and physical selves cannot be separated, and must be tended together.",
+  },
+  {
+    title: "Humility & harm reduction",
+    body: "Humility is the doorway to transformation — the willingness to be small, teachable, and honest. We hold a harm-reduction approach that honors each person's path as unique and non-linear, meeting people without judgment while gently inviting honesty and self-awareness.",
+  },
+  {
+    title: "Place, presence & time",
+    body: "Real change is not rushed. It is cultivated, like a garden, in a setting of safety, beauty, and belonging — through the quiet power of place, presence, and time.",
+  },
+];
 ---
 
 <Layout
   title="Our Story · Casa da Nova Vida"
   description="Why Casa da Nova Vida exists: a sanctuary born from the belief that spirituality is the cornerstone of lasting recovery and a truly new life."
 >
-  <PageHero
-    eyebrow="Our Story"
-    title="Born from a hard-won truth: real healing requires awakening to Spirit"
-    intro="Casa da Nova Vida, House of New Life, is a recovery house in the Texas Hill Country founded by Drew Walsh, offering an alternative, holistic path of healing for those working with sacred plant medicine."
-    image="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=2000&q=80"
-    imageAlt="Misty hills at first light"
-  />
-
-  <section class="px-6 py-20 lg:px-10 lg:py-28">
-    <div class="prose-links mx-auto max-w-3xl">
-      <p class="text-xl leading-relaxed text-cocoa">
-        Casa da Nova Vida began with our founder, Drew Walsh, and his own long
-        journey through addiction and recovery. Across years of using and
-        healing, one truth kept surfacing: real healing requires awakening to
-        Spirit. So he went all in, facing the wounds that had driven him, and
-        discovered that everything he needed was already within, waiting to be
-        remembered.
+  <!-- ===================== HERO ===================== -->
+  <section class="bg-pine px-6 pb-24 pt-32 text-linen lg:px-10 lg:pb-28 lg:pt-40">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow rise text-gold">Our Story</p>
+      <h1 class="rise rise-2 mt-5 text-4xl leading-[1.12] sm:text-5xl">
+        A call from Spirit
+      </h1>
+      <p class="rise rise-3 mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-cream/90">
+        Casa da Nova Vida, House of New Life, is a recovery house in the Texas
+        Hill Country founded by Drew Walsh — an alternative, holistic path of
+        healing for those working with sacred plant medicine.
       </p>
+    </div>
+  </section>
 
-      <blockquote
-        class="my-14 border-l-4 border-clay pl-6 font-display text-2xl leading-relaxed text-pine"
+  <!-- ===================== FOUNDER FEATURE ===================== -->
+  <section class="px-6 pt-20 lg:px-10 lg:pt-28">
+    <div class="relative mx-auto max-w-5xl">
+      <img
+        src={withBase("/images/photos/cards/drew.jpg")}
+        alt="Drew Walsh, founder of Casa da Nova Vida, at golden hour in the mountains"
+        class="h-[24rem] w-full rounded-[1.75rem] object-cover object-[36%_28%] shadow-lg sm:h-[30rem] lg:h-[34rem]"
+        loading="eager"
+      />
+      <figure
+        class="relative mx-auto -mt-20 max-w-md rounded-[1.5rem] bg-pine p-8 text-linen shadow-xl lg:absolute lg:bottom-8 lg:right-8 lg:mx-0 lg:mt-0 lg:p-9"
       >
-        “The single most essential attribute of my sobriety became my spiritual
-        awareness and my devotion to a life of healing.”
-        <cite class="mt-4 block font-sans text-sm not-italic uppercase tracking-[0.18em] text-stone">
-          Drew Walsh, Founder
-        </cite>
-      </blockquote>
+        <span class="font-display text-5xl leading-none text-gold/70">&ldquo;</span>
+        <blockquote class="-mt-4 font-display text-xl italic leading-relaxed sm:text-2xl">
+          The single most essential attribute of my sobriety became my spiritual
+          awareness and my devotion to a life of healing.
+        </blockquote>
+        <figcaption class="mt-5 text-xs uppercase tracking-[0.2em] text-sage">
+          Drew Walsh · Founder
+        </figcaption>
+      </figure>
+    </div>
+  </section>
 
-      <p class="mt-6 leading-relaxed text-cocoa">
+  <!-- ===================== STORY ===================== -->
+  <section class="px-6 pt-16 lg:px-10 lg:pt-24">
+    <div class="mx-auto max-w-3xl">
+      <p class="font-display text-2xl leading-[1.5] text-cocoa sm:text-[1.7rem] sm:leading-[1.5]">
+        Casa da Nova Vida began with Drew's own long journey through addiction
+        and recovery. Across years of using and healing, one truth kept
+        surfacing: <span class="text-pine">real healing requires awakening to
+        Spirit</span>. So he went all in — facing the wounds that had driven him,
+        and discovering that everything he needed was already within, waiting to
+        be remembered.
+      </p>
+      <p class="mt-8 leading-relaxed text-cocoa">
         Out of that conviction, Nova Vida was created as a recovery house for
         people walking an alternative path of healing through sacred plant
         medicine. Medicines like Iboga and Ayahuasca can catalyze deep
         breakthroughs, but the healing does not end when the ceremony does. The
         days and weeks that follow are among the most decisive of the entire
-        journey, and too often, people are sent home to face them alone. We built
-        a home instead: a place to land, stabilize, and weave those insights into
-        a lasting new life.
+        journey — and too often, people are sent home to face them alone. We
+        built a home instead: a place to land, stabilize, and weave those
+        insights into a lasting new life.
       </p>
+    </div>
+  </section>
 
-      <h2 class="mt-14 text-2xl text-pine">What we believe</h2>
-      <p class="mt-5 leading-relaxed text-cocoa">
-        We believe that spirituality is the cornerstone of recovering from
-        addiction and building a life of true, balanced well-being. We believe
-        healing is holistic: the spiritual, mental, emotional, and physical
-        selves cannot be separated, and must be tended together.
-      </p>
-      <p class="mt-5 leading-relaxed text-cocoa">
-        We believe in humility as the doorway to transformation, the willingness
-        to be small, teachable, and honest with ourselves. And we believe in harm
-        reduction as a compassionate, realistic approach, one that honors each
-        person's path as unique and non-linear, meeting people without judgment
-        while gently inviting honesty and self-awareness.
-      </p>
-      <p class="mt-5 leading-relaxed text-cocoa">
-        And we believe in the quiet power of place, presence, and time. Real
-        change is not rushed. It is cultivated, like a garden, in a setting of
-        safety, beauty, and belonging.
-      </p>
+  <!-- ===================== WHAT WE BELIEVE ===================== -->
+  <section class="mt-20 border-y border-sand bg-cream px-6 py-20 lg:mt-28 lg:px-10 lg:py-28">
+    <div class="mx-auto max-w-6xl">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">What we believe</p>
+        <h2 class="mt-4 text-3xl text-pine sm:text-4xl">
+          The convictions that shape this home
+        </h2>
+      </div>
+      <div class="mt-14 grid gap-6 md:grid-cols-3">
+        {
+          beliefs.map((b) => (
+            <div class="rounded-3xl border border-sand bg-parchment p-8">
+              <div class="h-1 w-10 rounded-full bg-clay" />
+              <h3 class="mt-5 text-xl text-forest">{b.title}</h3>
+              <p class="mt-3 leading-relaxed text-cocoa">{b.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
-      <h2 class="mt-14 text-2xl text-pine">The care you'll find here</h2>
-      <p class="mt-5 leading-relaxed text-cocoa">
+  <!-- ===================== THE CARE ===================== -->
+  <section class="px-6 py-20 lg:px-10 lg:py-28">
+    <div class="mx-auto max-w-3xl">
+      <p class="eyebrow">The care you'll find here</p>
+      <p class="mt-6 text-lg leading-relaxed text-cocoa">
         Our home sits in the Central Texas Hill Country, just outside Austin.
-        With only a few guests at a time, the care here is personal, never a
+        With only a few guests at a time, the care here is personal — never a
         program you disappear into, but a relationship you're held by. Through
         one-on-one integration coaching, mindfulness and meditation, somatic
         therapies, and holistic lifestyle support, we walk alongside each person
@@ -81,8 +125,10 @@ import CTABand from "../components/CTABand.astro";
     </div>
   </section>
 
-  <div class="pb-20 lg:pb-28"><CTABand
-    heading="Come see if this feels like home"
-    body="The best way to know whether Casa da Nova Vida is right for you is simply to talk. Reach out. There is no pressure, only a conversation."
-  /></div>
+  <div class="pb-20 lg:pb-28">
+    <CTABand
+      heading="Come see if this feels like home"
+      body="The best way to know whether Casa da Nova Vida is right for you is simply to talk. Reach out. There is no pressure, only a conversation."
+    />
+  </div>
 </Layout>

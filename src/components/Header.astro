@@ -6,6 +6,7 @@ const links = [
   { href: "/our-program", label: "Our Program" },
   { href: "/ibogaine-aftercare", label: "Ibogaine Aftercare" },
   { href: "/resources", label: "Resources" },
+  { href: "/journal", label: "Journal" },
   { href: "/our-location", label: "Our Location" },
 ];
 const path = Astro.url.pathname;
@@ -50,7 +51,7 @@ const isActive = (href: string) =>
         links.map((l) => (
           <a
             href={withBase(l.href)}
-            class:list={["nav-link text-sm transition-colors", isActive(l.href) && "is-current"]}
+            class:list={["nav-link whitespace-nowrap text-sm transition-colors", isActive(l.href) && "is-current"]}
           >
             {l.label}
           </a>
@@ -58,7 +59,7 @@ const isActive = (href: string) =>
       }
       <a
         href={withBase("/contact")}
-        class="header-cta rounded-full px-5 py-2.5 text-sm font-medium transition-colors"
+        class="header-cta whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition-colors"
       >
         Begin the Conversation
       </a>
