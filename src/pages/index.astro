@@ -25,14 +25,20 @@ const who = [
   {
     title: "Post Plant Medicine Treatment",
     body: "A grounded place to land after Iboga or Ayahuasca, and integrate those profound experiences into long-lasting change.",
+    img: "/images/photos/cards/welcome-land.jpg",
+    alt: "A quiet home resting in a golden Hill Country meadow",
   },
   {
     title: "Seeking an Alternative Path",
     body: "For those conventional 12-step programs haven't served, an earth-medicine path to the root cause of addiction.",
+    img: "/images/photos/cards/welcome-path.jpg",
+    alt: "Ancient cypress roots along clear spring-fed water",
   },
   {
     title: "Otherwise Ready to Heal",
     body: "It's not only those in addiction who need healing. Our doors are open to anyone seeking space and time to grow.",
+    img: "/images/photos/cards/welcome-grow.jpg",
+    alt: "The sun setting over open rolling hills",
   },
 ];
 ---
@@ -197,10 +203,21 @@ const who = [
       <div class="mt-16 grid gap-6 md:grid-cols-3">
         {
           who.map((c) => (
-            <div class="rounded-2xl border border-sand bg-linen p-8">
-              <h3 class="text-xl text-forest">{c.title}</h3>
-              <p class="mt-3 leading-relaxed text-cocoa">{c.body}</p>
-            </div>
+            <article class="group relative isolate overflow-hidden rounded-3xl shadow-sm ring-1 ring-sand/60 transition-shadow duration-300 hover:shadow-[0_24px_60px_-28px_rgba(43,54,70,0.5)]">
+              <img
+                src={withBase(c.img)}
+                alt={c.alt}
+                class="h-[26rem] w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-bark/90 via-bark/45 to-bark/5" />
+              <div class="absolute inset-x-0 bottom-0 p-7 lg:p-8">
+                <h3 class="text-2xl leading-snug text-linen [text-shadow:0_1px_12px_rgba(20,26,36,0.5)]">
+                  {c.title}
+                </h3>
+                <p class="mt-2.5 text-sm leading-relaxed text-cream/90">{c.body}</p>
+              </div>
+            </article>
           ))
         }
       </div>
