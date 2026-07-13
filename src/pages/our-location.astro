@@ -45,19 +45,19 @@ const nearby = [
 
 const gallery = [
   {
-    src: "/images/photos/property-sunset-hills.png",
+    src: "/images/photos/cards/gallery-sunset.jpg",
     alt: "Golden-hour sun setting over the rolling hills",
   },
   {
-    src: "/images/photos/property-porch-firepit.png",
+    src: "/images/photos/cards/gallery-porch.jpg",
     alt: "Covered porch with a fire pit overlooking the rolling hills",
   },
   {
-    src: "/images/photos/property-interior-dining.png",
+    src: "/images/photos/cards/gallery-dining.jpg",
     alt: "Light-filled dining room with wide windows onto the land",
   },
   {
-    src: "/images/photos/property-meadow-view.jpeg",
+    src: "/images/photos/cards/gallery-meadow.jpg",
     alt: "The house resting beyond a golden meadow at dusk",
   },
 ];
@@ -68,24 +68,36 @@ const gallery = [
   description="A serene recovery house in the Texas Hill Country near Austin: spring-fed waters, hiking trails, and rivers that play a key role in the experience we offer."
 >
   <PageHero
-    eyebrow="Our Location"
+    eyebrow="Texas Hill Country · Austin, TX"
     title="Our Location"
-    intro="Our recovery house is located in the Texas Hill County in Austin, Texas, known for its clear, spring-fed waters and scenic surroundings. The broader Central Texas area, with its hiking trails, natural swimming holes, and rivers play a key role in the experience we offer. This serene environment supports our guests on their journeys toward integration and healing, providing a peaceful setting that encourages reflection and rejuvenation."
-    image="/images/photos/property-front.png"
+    image="/images/photos/cards/house.jpg"
     imageAlt="The stone sanctuary house framed by hill country oaks"
   />
 
-  <section class="px-6 py-20 lg:px-10 lg:py-24">
-    <div class="mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:gap-6">
+  <!-- ===================== INTRO ===================== -->
+  <section class="px-6 py-16 lg:px-10 lg:py-24">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-lg leading-relaxed text-cocoa sm:text-xl sm:leading-relaxed">
+        Our recovery house is located in the Texas Hill Country near Austin,
+        Texas, known for its clear, spring-fed waters and scenic surroundings.
+        The broader Central Texas area — with its hiking trails, natural swimming
+        holes, and rivers — plays a key role in the experience we offer. This
+        serene environment supports our guests on their journey toward
+        integration and healing, providing a peaceful setting that encourages
+        reflection and rejuvenation.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== GALLERY ===================== -->
+  <section class="px-6 pb-20 lg:px-10 lg:pb-28">
+    <div class="mx-auto grid max-w-5xl grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
       {
-        gallery.map((g, i) => (
+        gallery.map((g) => (
           <img
             src={withBase(g.src)}
             alt={g.alt}
-            class:list={[
-              "h-56 w-full rounded-2xl object-cover sm:h-72",
-              i % 2 === 1 ? "mt-8" : "",
-            ]}
+            class="h-64 w-full rounded-2xl object-cover shadow-sm sm:h-72"
             loading="lazy"
           />
         ))
@@ -93,35 +105,75 @@ const gallery = [
     </div>
   </section>
 
-  <!-- Other local attractions -->
-  <section class="bg-cream px-6 py-20 lg:px-10 lg:py-28">
-    <div class="mx-auto max-w-6xl">
-      <div class="max-w-2xl">
-        <p class="eyebrow">Other local attractions</p>
+  <!-- ===================== OTHER LOCAL ATTRACTIONS (carousel) ===================== -->
+  <section class="overflow-hidden bg-cream py-20 lg:py-28">
+    <div class="mx-auto max-w-6xl px-6 lg:px-10">
+      <div class="flex items-end justify-between gap-4">
+        <div>
+          <p class="eyebrow">Explore nearby</p>
+          <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Other local attractions</h2>
+        </div>
+        <div class="hidden shrink-0 gap-2 sm:flex">
+          <button
+            type="button"
+            data-scroll="prev"
+            aria-label="Scroll left"
+            class="carousel-btn flex h-11 w-11 items-center justify-center rounded-full border border-moss/40 text-pine transition-colors hover:border-moss hover:bg-linen"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+          </button>
+          <button
+            type="button"
+            data-scroll="next"
+            aria-label="Scroll right"
+            class="carousel-btn flex h-11 w-11 items-center justify-center rounded-full border border-moss/40 text-pine transition-colors hover:border-moss hover:bg-linen"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+          </button>
+        </div>
       </div>
-      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          nearby.map((n) => (
-            <article class="group overflow-hidden rounded-3xl border border-sand bg-parchment shadow-sm transition-shadow duration-300 hover:shadow-[0_18px_50px_-24px_rgba(43,54,70,0.35)]">
-              <div class="overflow-hidden">
-                <img
-                  src={withBase(n.img)}
-                  alt={n.alt}
-                  class="h-52 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <div class="p-7">
-                <h3 class="text-lg text-forest">{n.name}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-cocoa">{n.body}</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-      <p class="mt-8 text-xs text-stone">Attraction photography via Wikimedia Commons.</p>
     </div>
+
+    <div
+      id="attractions-track"
+      class="no-scrollbar mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-6 pb-4 lg:px-10"
+    >
+      {
+        nearby.map((n) => (
+          <article class="w-[19rem] shrink-0 snap-start sm:w-[21rem]">
+            <div class="overflow-hidden rounded-3xl shadow-sm ring-1 ring-sand/70">
+              <img
+                src={withBase(n.img)}
+                alt={n.alt}
+                class="h-60 w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <h3 class="mt-4 text-xl text-forest">{n.name}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-cocoa">{n.body}</p>
+          </article>
+        ))
+      }
+      <div class="w-1 shrink-0 sm:w-4" aria-hidden="true"></div>
+    </div>
+    <p class="mx-auto mt-6 max-w-6xl px-6 text-xs text-stone lg:px-10">
+      Attraction photography via Wikimedia Commons.
+    </p>
   </section>
 
   <div class="py-20 lg:py-28"><CTABand /></div>
 </Layout>
+
+<script>
+  const track = document.getElementById("attractions-track");
+  const prev = document.querySelector('[data-scroll="prev"]');
+  const next = document.querySelector('[data-scroll="next"]');
+  const step = () => Math.min(track?.clientWidth ? track.clientWidth * 0.85 : 340, 360);
+  prev?.addEventListener("click", () => track?.scrollBy({ left: -step(), behavior: "smooth" }));
+  next?.addEventListener("click", () => track?.scrollBy({ left: step(), behavior: "smooth" }));
+</script>
+
+<style>
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+</style>
