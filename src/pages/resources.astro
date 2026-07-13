@@ -1,92 +1,298 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/PageHero.astro";
 import CTABand from "../components/CTABand.astro";
+import { withBase } from "../lib/base";
 
-const resources = [
+// ── Filter tags (wired to the library grid via data-cat below) ─────────────
+const filters = [
+  { slug: "all", label: "All" },
+  { slug: "news", label: "In the News" },
+  { slug: "blog", label: "Blog" },
+  { slug: "addiction", label: "Addiction" },
+  { slug: "trauma", label: "Trauma & PTSD" },
+  { slug: "ibogaine", label: "Ibogaine" },
+  { slug: "ayahuasca", label: "Ayahuasca" },
+  { slug: "integration", label: "Integration" },
+  { slug: "harm-reduction", label: "Harm Reduction" },
+  { slug: "neuroplasticity", label: "Neuroplasticity" },
+];
+
+// ── Featured resource ──────────────────────────────────────────────────────
+const featured = {
+  label: "Featured · Casa da Nova Vida",
+  title: "The importance of integration after plant medicine",
+  body: "Insight alone does not create lasting change. Integration is how the breakthroughs of Ibogaine and Ayahuasca take root — in the body, the nervous system, relationships, and daily life. A grounding place to begin.",
+  href: "/ibogaine-aftercare",
+  img: "/images/photos/cards/story-hero.jpg",
+};
+
+// ── Browse-by-topic cards ──────────────────────────────────────────────────
+const topics = [
+  { title: "Addiction", body: "Understanding addiction as a response to pain, not a moral failing.", img: "/images/photos/cards/welcome-path.jpg" },
+  { title: "Trauma & PTSD", body: "How stored trauma shapes the nervous system — and how it heals.", img: "/images/photos/cards/gallery-sunset.jpg" },
+  { title: "Depression", body: "Alternative, holistic paths toward relief and renewed meaning.", img: "/images/photos/attractions/jacobs-well.jpg" },
+  { title: "Anxiety", body: "Regulation, presence, and calming a threat-shaped nervous system.", img: "/images/photos/cards/welcome-grow.jpg" },
+  { title: "Grief", body: "Meeting loss with space, ritual, and gentle, honest support.", img: "/images/photos/attractions/san-marcos-river.jpg" },
+];
+
+// ── Resource library (real links + SEO placeholders) ───────────────────────
+const library = [
   {
-    eyebrow: "Harm Reduction",
+    source: "National Harm Reduction Coalition",
     title: "Principles of Harm Reduction",
-    body: "Harm reduction meets people where they are, honoring dignity, respect, and self-determination on the path of recovery. These principles shape how we hold space at Casa da Nova Vida.",
-    links: [
-      {
-        label: "Principles of Harm Reduction — National Harm Reduction Coalition",
-        href: "https://harmreduction.org/about-us/principles-of-harm-reduction/",
-      },
-    ],
+    meta: "Guide",
+    body: "Dignity, respect, and self-determination on the path of recovery — the principles that shape how we hold space.",
+    href: "https://harmreduction.org/about-us/principles-of-harm-reduction/",
+    img: "/images/photos/cards/gallery-meadow.jpg",
+    cat: "harm-reduction news",
   },
   {
-    eyebrow: "Trauma & Addiction",
-    title: "Understanding addiction as a response to trauma",
-    body: "Dr. Gabor Maté's work reframes addiction not as a moral failing, but as an understandable response to pain and trauma. This lens is foundational to how we understand and support each guest.",
-    links: [
-      {
-        label: "Dr. Gabor Maté",
-        href: "https://drgabormate.com/",
-      },
-      {
-        label: "Inside the Ayahuasca Experience — Psychotherapy Networker",
-        href: "https://www.psychotherapynetworker.org/article/inside-ayahuasca-experience-septemberoctober-2018/",
-      },
-    ],
+    source: "Dr. Gabor Maté",
+    title: "In the Realm of Hungry Ghosts",
+    meta: "Book",
+    body: "Reframing addiction not as a moral failing, but as an understandable response to trauma and pain.",
+    href: "https://drgabormate.com/",
+    img: "/images/photos/cards/welcome-iboga.jpg",
+    cat: "addiction blog",
   },
   {
-    eyebrow: "Integration",
-    title: "The importance of integration",
-    body: "Insight alone does not create lasting change. Integration and aftercare are what allow the breakthroughs of plant medicine and ibogaine to take root and become a lived, sustainable new life.",
-    links: [],
+    source: "Psychotherapy Networker",
+    title: "Inside the Ayahuasca Experience",
+    meta: "Article · 2018",
+    body: "A close look at the ayahuasca experience and its place in emotional healing and recovery.",
+    href: "https://www.psychotherapynetworker.org/article/inside-ayahuasca-experience-septemberoctober-2018/",
+    img: "/images/photos/attractions/krause-springs.jpg",
+    cat: "ayahuasca news",
+  },
+  {
+    source: "Casa da Nova Vida",
+    title: "Ibogaine and the interruption of addiction",
+    meta: "Placeholder — add content",
+    body: "How Ibogaine can quiet compulsive loops and open a window for lasting change.",
+    href: "/ibogaine-aftercare",
+    img: "/images/photos/attractions/enchanted-rock.jpg",
+    cat: "ibogaine addiction",
+  },
+  {
+    source: "Casa da Nova Vida",
+    title: "The neuroscience of plant medicine",
+    meta: "Placeholder — add content",
+    body: "Neuroplasticity, the nervous system, and why the days after treatment matter most.",
+    href: "/our-approach",
+    img: "/images/photos/cards/gallery-porch.jpg",
+    cat: "neuroplasticity",
+  },
+  {
+    source: "Casa da Nova Vida",
+    title: "Integration: turning insight into a new life",
+    meta: "Placeholder — add content",
+    body: "Practices that help the breakthroughs of ceremony become a lived, sustainable reality.",
+    href: "/ibogaine-aftercare",
+    img: "/images/photos/attractions/barton-springs.jpg",
+    cat: "integration blog",
+  },
+  {
+    source: "Casa da Nova Vida",
+    title: "Trauma, the body, and the roots of addiction",
+    meta: "Placeholder — add content",
+    body: "Why lasting recovery begins with the wounds beneath the behavior.",
+    href: "/our-approach",
+    img: "/images/photos/cards/welcome-grow.jpg",
+    cat: "trauma addiction",
+  },
+  {
+    source: "Casa da Nova Vida",
+    title: "Ayahuasca and emotional healing",
+    meta: "Placeholder — add content",
+    body: "Working with grief, fear, and suppressed emotion in a supported setting.",
+    href: "/our-program",
+    img: "/images/photos/attractions/san-marcos-river.jpg",
+    cat: "ayahuasca trauma",
+  },
+  {
+    source: "Casa da Nova Vida",
+    title: "Building a life after Ibogaine",
+    meta: "Placeholder — add content",
+    body: "Structure, community, and embodiment in the vulnerable weeks that follow.",
+    href: "/ibogaine-aftercare",
+    img: "/images/photos/cards/welcome-path.jpg",
+    cat: "ibogaine integration",
   },
 ];
 ---
 
 <Layout
   title="Resources · Casa da Nova Vida"
-  description="Reading and references on harm reduction, trauma and addiction, and the importance of integration — the ideas that shape our approach to healing."
+  description="A library of articles, research, and stories on healing, harm reduction, plant medicine, and integration from Casa da Nova Vida."
 >
-  <PageHero
-    eyebrow="Resources"
-    title="Reading for the path"
-    intro="A few of the ideas and references that shape our approach to healing, harm reduction, and integration. We hope they offer grounding and clarity, wherever you are in your journey."
-    image="/images/photos/forest-light-rays.png"
-    imageAlt="Sunlight breaking through a forest canopy"
-  />
-
-  <section class="px-6 py-20 lg:px-10 lg:py-24">
-    <div class="mx-auto max-w-4xl space-y-6">
-      {
-        resources.map((r) => (
-          <article class="rounded-3xl border border-sand bg-parchment p-8 lg:p-10">
-            <p class="eyebrow">{r.eyebrow}</p>
-            <h2 class="mt-4 text-2xl text-forest sm:text-3xl">{r.title}</h2>
-            <p class="mt-4 leading-relaxed text-cocoa">{r.body}</p>
-            {r.links.length > 0 && (
-              <ul class="prose-links mt-6 space-y-3">
-                {r.links.map((l) => (
-                  <li class="flex items-start gap-3">
-                    <span class="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-moss" />
-                    <a
-                      href={l.href}
-                      target="_blank"
-                      rel="noopener"
-                      class="leading-relaxed text-forest"
-                    >
-                      {l.label}
-                      <span aria-hidden="true" class="ml-1 text-clay">↗</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </article>
-        ))
-      }
+  <!-- ===================== HERO ===================== -->
+  <section class="bg-pine px-6 pb-20 pt-32 text-linen lg:px-10 lg:pb-24 lg:pt-40">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow rise text-gold">Resources</p>
+      <h1 class="rise rise-2 mt-5 text-4xl leading-[1.1] sm:text-5xl">Resources</h1>
+      <p class="rise rise-3 mx-auto mt-5 font-display text-xl italic text-sagelight sm:text-2xl">
+        Articles, guides, and stories.
+      </p>
+      <p class="rise rise-3 mx-auto mt-6 max-w-2xl leading-relaxed text-cream/90">
+        A growing library of reading on healing, harm reduction, plant medicine,
+        and integration — curated to support you wherever you are on the path.
+      </p>
     </div>
   </section>
 
-  <div class="pb-20 lg:pb-28">
-    <CTABand
-      heading="Have questions about the path ahead?"
-      body="If anything here resonates and you'd like to talk it through, we're here. Reach out — there's no pressure, only a conversation."
-    />
-  </div>
+  <!-- ===================== LIBRARY + FILTERS ===================== -->
+  <section class="px-6 pt-16 lg:px-10 lg:pt-24">
+    <div class="mx-auto max-w-6xl">
+      <p class="eyebrow">Library</p>
+      <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Articles, research &amp; stories</h2>
+      <p class="mt-5 max-w-2xl leading-relaxed text-cocoa">
+        A curated collection to help you understand the path of healing — from
+        the science of recovery to first-hand stories of transformation.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-2.5">
+        {
+          filters.map((f, i) => (
+            <button
+              type="button"
+              data-filter={f.slug}
+              class:list={["filter-pill rounded-full border px-4 py-2 text-sm transition-colors", i === 0 && "is-active"]}
+            >
+              {f.label}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURED ===================== -->
+  <section class="px-6 pt-12 lg:px-10 lg:pt-16">
+    <div class="mx-auto max-w-6xl">
+      <a
+        href={withBase(featured.href)}
+        class="group grid overflow-hidden rounded-[1.75rem] border border-sand bg-parchment shadow-sm transition-shadow duration-300 hover:shadow-[0_24px_60px_-28px_rgba(43,54,70,0.4)] md:grid-cols-2"
+      >
+        <div class="overflow-hidden">
+          <img
+            src={withBase(featured.img)}
+            alt=""
+            class="h-64 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105 md:h-full"
+            loading="lazy"
+          />
+        </div>
+        <div class="flex flex-col justify-center p-8 lg:p-12">
+          <p class="eyebrow text-clay">{featured.label}</p>
+          <h3 class="mt-4 text-2xl text-pine sm:text-3xl">{featured.title}</h3>
+          <p class="mt-4 leading-relaxed text-cocoa">{featured.body}</p>
+          <span class="mt-6 inline-flex items-center gap-2 font-medium text-forest">
+            Read article <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+          </span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== BROWSE BY TOPIC ===================== -->
+  <section class="px-6 py-16 lg:px-10 lg:py-24">
+    <div class="mx-auto max-w-6xl">
+      <p class="eyebrow">Browse by topic</p>
+      <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Where you are on the path</h2>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+        {
+          topics.map((t) => (
+            <article class="group overflow-hidden rounded-2xl border border-sand bg-parchment transition-shadow duration-300 hover:shadow-[0_16px_40px_-22px_rgba(43,54,70,0.4)]">
+              <div class="overflow-hidden">
+                <img src={withBase(t.img)} alt="" class="h-32 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105" loading="lazy" />
+              </div>
+              <div class="p-5">
+                <p class="text-[0.7rem] uppercase tracking-[0.16em] text-clay">Topic</p>
+                <h3 class="mt-1.5 text-lg text-forest">{t.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-cocoa">{t.body}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RESOURCE LIBRARY GRID ===================== -->
+  <section class="border-t border-sand bg-cream px-6 py-16 lg:px-10 lg:py-24">
+    <div class="mx-auto max-w-6xl">
+      <p class="eyebrow">The library</p>
+      <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Reading &amp; references</h2>
+
+      <div id="library-grid" class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          library.map((r) => (
+            <a
+              href={withBase(r.href)}
+              target={r.href.startsWith("http") ? "_blank" : undefined}
+              rel={r.href.startsWith("http") ? "noopener" : undefined}
+              data-cat={r.cat}
+              class="group flex flex-col overflow-hidden rounded-2xl border border-sand bg-parchment shadow-sm transition-shadow duration-300 hover:shadow-[0_18px_50px_-24px_rgba(43,54,70,0.35)]"
+            >
+              <div class="overflow-hidden">
+                <img src={withBase(r.img)} alt="" class="h-44 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105" loading="lazy" />
+              </div>
+              <div class="flex flex-1 flex-col p-6">
+                <p class="text-[0.7rem] uppercase tracking-[0.16em] text-clay">{r.source}</p>
+                <h3 class="mt-2 text-xl leading-snug text-forest">{r.title}</h3>
+                <p class="mt-2 flex-1 text-sm leading-relaxed text-cocoa">
+                  <span class="text-stone">{r.meta}</span> — {r.body}
+                </p>
+                <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-forest">
+                  Read <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+      <p id="library-empty" class="mt-10 hidden text-center text-cocoa">
+        More on this topic coming soon.
+      </p>
+    </div>
+  </section>
+
+  <div class="py-20 lg:py-28"><CTABand /></div>
 </Layout>
+
+<script>
+  const pills = Array.from(document.querySelectorAll<HTMLButtonElement>(".filter-pill"));
+  const cards = Array.from(document.querySelectorAll<HTMLElement>("#library-grid [data-cat]"));
+  const empty = document.getElementById("library-empty");
+
+  pills.forEach((pill) =>
+    pill.addEventListener("click", () => {
+      const f = pill.dataset.filter || "all";
+      pills.forEach((p) => p.classList.toggle("is-active", p === pill));
+      let shown = 0;
+      cards.forEach((c) => {
+        const cats = (c.dataset.cat || "").split(" ");
+        const show = f === "all" || cats.includes(f);
+        c.style.display = show ? "" : "none";
+        if (show) shown++;
+      });
+      empty?.classList.toggle("hidden", shown > 0);
+    }),
+  );
+</script>
+
+<style>
+  .filter-pill {
+    border-color: var(--color-sand);
+    color: var(--color-cocoa);
+    background-color: var(--color-parchment);
+  }
+  .filter-pill:hover {
+    border-color: var(--color-moss);
+    color: var(--color-pine);
+  }
+  .filter-pill.is-active {
+    background-color: var(--color-pine);
+    border-color: var(--color-pine);
+    color: var(--color-linen);
+  }
+</style>
