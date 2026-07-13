@@ -10,22 +10,26 @@ interface Props {
 const { eyebrow, title, intro, image, imageAlt } = Astro.props;
 ---
 
-<section class="relative isolate overflow-hidden bg-pine">
+<section class="relative isolate flex min-h-[58vh] items-end overflow-hidden bg-pine lg:min-h-[66vh]">
   <img
     src={withBase(image)}
     alt={imageAlt}
-    class="absolute inset-0 -z-10 h-full w-full object-cover opacity-60"
+    class="absolute inset-0 -z-20 h-full w-full object-cover"
     loading="eager"
   />
-  <div class="absolute inset-0 -z-10 bg-gradient-to-br from-pine/70 via-pine/50 to-forest/65"></div>
-  <div class="mx-auto max-w-7xl px-6 pb-24 pt-32 lg:px-10 lg:pb-32 lg:pt-44">
-    <p class="eyebrow rise text-gold">{eyebrow}</p>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-bark/85 via-pine/45 to-pine/40"></div>
+  <div
+    class="mx-auto w-full max-w-7xl px-6 pb-16 pt-32 lg:px-10 lg:pb-20 [text-shadow:0_2px_20px_rgba(20,26,36,0.55)]"
+  >
+    <p class="rise text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+      {eyebrow}
+    </p>
     <h1 class="rise rise-2 mt-5 max-w-3xl text-4xl leading-[1.1] text-linen sm:text-5xl">
       {title}
     </h1>
     {
       intro && (
-        <p class="rise rise-3 mt-6 max-w-2xl text-lg leading-relaxed text-cream/90">
+        <p class="rise rise-3 mt-6 max-w-2xl text-lg leading-relaxed text-cream/95">
           {intro}
         </p>
       )
