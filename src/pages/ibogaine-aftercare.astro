@@ -2,38 +2,45 @@
 import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/PageHero.astro";
 import CTABand from "../components/CTABand.astro";
+import { withBase } from "../lib/base";
 
 const opens = [
-  "A quieting of compulsive urges",
-  "A reduction in fear-driven reactivity",
-  "Increased nervous system plasticity",
-  "Greater access to insight and meaning",
+  { text: "A quieting of compulsive urges", icon: "M15.5 9.63a14.2 14.2 0 0 0-3.5 2.63a13.7 13.7 0 0 0-3.5-2.63C8.74 6.86 9.92 4.14 12.06 2c2.12 2.12 3.25 4.84 3.44 7.63M12 15.45C14.15 12.17 17.82 10 22 10c0 10-9.32 11.88-10 12c-.68-.11-10-2-10-12c4.18 0 7.85 2.17 10 5.45m.05-10.26c-.66 1.04-1.12 2.19-1.37 3.39l1.32.97l1.35-.98c-.23-1.2-.67-2.35-1.3-3.38M12 19.97s6-.97 7.74-7.72C14 14 12 19.1 12 19.1S9 13 4.26 12.26C6 19 12 19.97 12 19.97" },
+  { text: "A reduction in fear-driven reactivity", icon: "M21 11c0 5.55-3.84 10.74-9 12c-5.16-1.26-9-6.45-9-12V5l9-4l9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m-2-4l-4-4l1.41-1.41L10 14.17l6.59-6.59L18 9" },
+  { text: "Increased nervous system plasticity", icon: "M3 13h2.79l4.31-8.21l1.18 8.96l3.22-4.09L17.83 13H21v2h-4l-2.33-2.33l-4.75 6.06l-.98-7.42L7 15H3z" },
+  { text: "Greater access to insight and meaning", icon: "M20 11h3v2h-3zM1 11h3v2H1zM13 1v3h-2V1zM4.92 3.5l2.13 2.14l-1.42 1.41L3.5 4.93zm12.03 2.13l2.12-2.13l1.43 1.43l-2.13 2.12zM12 6a6 6 0 0 1 6 6c0 2.22-1.21 4.16-3 5.2V19a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-1.8c-1.79-1.04-3-2.98-3-5.2a6 6 0 0 1 6-6m2 15v1a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-1zm-3-3h2v-2.13c1.73-.44 3-2.01 3-3.87a4 4 0 0 0-4-4a4 4 0 0 0-4 4c0 1.86 1.27 3.43 3 3.87z" },
 ];
 
 const themes = [
   {
     title: "Integration as a Living Process",
-    body: "Insight alone does not create change. Integration is the process of bringing what was seen, felt, and remembered into the body, the nervous system, relationships, and daily rhythms of life. It prevents spiritual bypassing and supports the reorganization of identity after profound experiences. At Casa da Nova Vida, integration is not treated as an add-on. It is central to healing.",
+    icon: "M23 4.1V2.3l-1.8-.2c-.1 0-.7-.1-1.7-.1c-4.1 0-7.1 1.2-8.8 3.3C9.4 4.5 7.6 4 5.5 4c-1 0-1.7.1-1.7.1l-1.9.3l.1 1.7c.1 3 1.6 8.7 6.8 8.7H9v3.4c-3.8.5-7 1.8-7 1.8v2h20v-2s-3.2-1.3-7-1.8V15c6.3-.1 8-7.2 8-10.9M12 18h-1v-5.6S10.8 9 8 9c0 0 1.5.8 1.9 3.7c-.4.1-.8.1-1.1.1C4.2 12.8 4 6.1 4 6.1S4.6 6 5.5 6c1.9 0 5 .4 5.9 3.1C11.9 4.6 17 4 19.5 4c.9 0 1.5.1 1.5.1s0 9-6.3 9H14c0-2 2-5 2-5c-3 1-3 4.9-3 4.9v5z",
+    body: "Insight alone does not create change. Integration brings what you saw and felt into the body, relationships, and daily life. Here it is central to healing, not an add-on.",
   },
   {
     title: "A Nervous System-Informed Approach",
-    body: "Addiction and compulsive behaviors are not failures of will. They are often expressions of a nervous system shaped by threat. After ibogaine, the nervous system must learn how to live without constant vigilance. Regulation practices help establish a new baseline of safety, allowing the body to trust calm rather than seek stimulation or relief. Stability is what allows healing to last.",
+    icon: "M3 13h2.79l4.31-8.21l1.18 8.96l3.22-4.09L17.83 13H21v2h-4l-2.33-2.33l-4.75 6.06l-.98-7.42L7 15H3z",
+    body: "Compulsion is not a failure of will; it is a nervous system shaped by threat. Regulation practices help the body trust calm again, so healing can last.",
   },
   {
-    title: "Spiritual Integration: Remembering Who You Are",
-    body: "Many who work with ibogaine report a reconnection to spirit, meaning, and inner truth. These experiences can be profound, but without grounding, they can feel distant or difficult to sustain. Spiritual integration is about embodiment, not escape. It supports living in alignment with what was revealed, rather than chasing peak experiences. Through gentle discipline, reflection, and practice, spiritual insight becomes part of everyday life.",
+    title: "Spiritual Integration",
+    icon: "m3.55 19.09l1.41 1.41l1.8-1.79l-1.42-1.42M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6s6-2.69 6-6c0-3.32-2.69-6-6-6m8 7h3v-2h-3m-2.76 7.71l1.8 1.79l1.41-1.41l-1.79-1.8M20.45 5l-1.41-1.4l-1.8 1.79l1.42 1.42M13 1h-2v3h2M6.76 5.39L4.96 3.6L3.55 5l1.79 1.81zM1 13h3v-2H1m12 9h-2v3h2",
+    body: "Ibogaine can reconnect you to spirit and inner truth. Integration grounds that insight into everyday life, rather than chasing peak experiences.",
   },
   {
-    title: "Community and Relational Healing",
-    body: "Healing does not happen in isolation. Connection, when safe and attuned, helps rewire trust and restores a sense of belonging. Community offers reflection, accountability, and support during periods of vulnerability and change. At Casa da Nova Vida, we recognize relational repair as a cornerstone of lasting recovery.",
+    title: "Community & Relational Healing",
+    icon: "M16 3.23Q17.065 2 18.7 2c.91 0 1.67.33 2.3 1s.96 1.43 1 2.3c0 .7-.33 1.51-1 2.46s-1.32 1.74-1.97 2.39q-.975.96-3.03 2.85q-2.085-1.89-3.06-2.85c-.975-.96-1.31-1.44-1.97-2.39S10 6 10 5.3c0-.91.32-1.67.97-2.3s1.43-.96 2.34-1c1.07 0 1.96.41 2.69 1.23M22 19v1l-8 2.5l-7-1.94V22H1V11h7.97l6.16 2.3A2.89 2.89 0 0 1 17 16h2c1.66 0 3 1.34 3 3M5 20v-7H3v7zm14.9-1.43c-.16-.33-.51-.57-.9-.57h-5.35c-.54 0-1.07-.08-1.58-.25l-2.38-.79l.63-1.9l2.38.79c.3.1 2.3.15 2.3.15c0-.37-.23-.7-.57-.83L8.61 13H7v5.5l6.97 1.91z",
+    body: "Healing does not happen in isolation. Safe, attuned connection rewires trust and restores a sense of belonging through change.",
   },
   {
-    title: "Structure, Routine, and Embodiment",
-    body: "After profound inner change, the nervous system benefits from gentle structure. Daily rhythms, nourishing food, rest, movement, and time in nature create a container that supports consistency without rigidity. The body is not separate from healing, it is central to it. Embodiment is what turns intention into lived reality.",
+    title: "Structure, Routine & Embodiment",
+    icon: "M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h14c1.11 0 2-.89 2-2V5a2 2 0 0 0-2-2m0 16H5V9h14zM5 7V5h14v2zm5.56 10.46l5.94-5.93l-1.07-1.06l-4.87 4.87l-2.11-2.11l-1.06 1.06z",
+    body: "Gentle daily rhythm, nourishing food, rest, movement, and nature give the nervous system a steady container. Embodiment turns intention into lived reality.",
   },
   {
-    title: "Emotional Processing and Identity Integration",
-    body: "Ibogaine can dissolve long-held identities tied to addiction, trauma, or coping. While liberating, this can also feel disorienting. Aftercare provides support as a new sense of self emerges. Emotional processing helps prevent repression, while values-based living helps rebuild identity in a grounded and authentic way. The question becomes not “Who was I?” but “Who am I becoming?”",
+    title: "Emotional Processing & Identity",
+    icon: "m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3",
+    body: "Ibogaine can dissolve identities tied to addiction and trauma. We support the new self as it emerges: not “Who was I?” but “Who am I becoming?”",
   },
 ];
 ---
@@ -42,65 +49,106 @@ const themes = [
   title="Ibogaine Aftercare · Casa da Nova Vida"
   description="Ibogaine is a doorway, not a destination. Casa da Nova Vida offers grounded aftercare and integration so insight becomes embodied and healing becomes lived."
 >
+  <!-- ===================== HERO (image + title only) ===================== -->
   <PageHero
     eyebrow="Ibogaine Aftercare"
     title="Integration, Regulation, and the Path Forward"
-    intro="Ibogaine is not the end of the journey. It is a powerful interruption, an opening, a clearing. What follows is what determines whether that opening becomes a lasting transformation. At Casa da Nova Vida, we understand ibogaine as a doorway, not a destination. Aftercare is the process by which insight becomes embodied, safety becomes familiar, and healing becomes lived."
     image="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2000&q=80"
     imageAlt="Light breaking through a forest canopy"
   />
 
-  <!-- Why aftercare matters -->
-  <section class="px-6 py-20 lg:px-10 lg:py-24">
-    <div class="mx-auto max-w-3xl">
-      <p class="eyebrow">Why Aftercare Matters</p>
-      <p class="mt-6 leading-relaxed text-cocoa">
-        Ibogaine can quiet compulsive loops, reduce withdrawal, and temporarily
-        soften the nervous system's grip on survival-based patterns. For many, it
-        offers relief, clarity, and a sense of neutrality that may not have been
-        felt in years. But without integration, these changes can fade. Aftercare
-        is what allows the nervous system, the psyche, and the spirit to
-        reorganize around truth rather than habit. It is how insight is
-        translated into daily life, and how freedom becomes sustainable.
+  <!-- ===================== LEAD ===================== -->
+  <section class="px-6 py-16 lg:px-10 lg:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="font-display text-3xl leading-[1.2] text-pine sm:text-4xl">
+        Ibogaine is a doorway, not a destination.
+      </p>
+      <p class="mx-auto mt-6 max-w-2xl leading-relaxed text-cocoa">
+        It is a powerful interruption, an opening, a clearing. What follows is
+        what determines whether that opening becomes a lasting transformation.
+        Aftercare is the process by which insight becomes embodied, safety
+        becomes familiar, and healing becomes lived.
       </p>
     </div>
   </section>
 
-  <!-- What ibogaine opens -->
-  <section class="bg-cream px-6 py-20 lg:px-10 lg:py-24">
-    <div class="mx-auto max-w-3xl">
-      <p class="eyebrow">What Ibogaine Opens</p>
-      <p class="mt-6 leading-relaxed text-cocoa">
-        Ibogaine often creates a unique window of opportunity. During this time,
-        many experience:
-      </p>
-      <ul class="mt-6 space-y-3">
+  <!-- ===================== WHY AFTERCARE MATTERS (two-column) ===================== -->
+  <section class="px-6 pb-8 lg:px-10">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <div class="overflow-hidden rounded-[1.75rem] shadow-lg">
+        <img
+          src={withBase("/images/photos/cards/welcome-path.jpg")}
+          alt="Ancient cypress roots along clear, spring-fed water"
+          class="h-72 w-full object-cover sm:h-96 lg:h-full"
+          loading="lazy"
+        />
+      </div>
+      <div>
+        <p class="eyebrow">Why aftercare matters</p>
+        <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Change that takes root</h2>
+        <p class="mt-6 leading-relaxed text-cocoa">
+          Ibogaine can quiet compulsive loops, reduce withdrawal, and temporarily
+          soften the nervous system's grip on survival-based patterns. For many,
+          it offers relief and clarity not felt in years. But without
+          integration, these changes can fade. Aftercare is what allows the
+          nervous system, the psyche, and the spirit to reorganize around truth
+          rather than habit, so freedom becomes sustainable.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WHAT IBOGAINE OPENS ===================== -->
+  <section class="mt-12 border-y border-sand bg-cream px-6 py-20 lg:mt-20 lg:px-10 lg:py-24">
+    <div class="mx-auto max-w-6xl">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">What ibogaine opens</p>
+        <h2 class="mt-3 text-3xl text-pine sm:text-4xl">A window of opportunity</h2>
+        <p class="mt-5 leading-relaxed text-cocoa">
+          Ibogaine often creates a unique, temporary window. During this time,
+          many experience:
+        </p>
+      </div>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {
           opens.map((o) => (
-            <li class="flex items-start gap-3 text-cocoa">
-              <span class="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-moss" />
-              <span class="leading-relaxed">{o}</span>
-            </li>
+            <div class="rounded-2xl border border-sand bg-linen p-6 text-center">
+              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cream to-sage/40 text-pine ring-1 ring-sand">
+                <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor" aria-hidden="true">
+                  <path d={o.icon} />
+                </svg>
+              </div>
+              <p class="mt-4 text-sm leading-relaxed text-cocoa">{o.text}</p>
+            </div>
           ))
         }
-      </ul>
-      <p class="mt-6 leading-relaxed text-cocoa">
+      </div>
+      <p class="mx-auto mt-10 max-w-2xl text-center leading-relaxed text-cocoa">
         This window is both sacred and temporary. Aftercare helps stabilize what
-        has been opened, allowing new patterns to take root before old survival
-        strategies return.
+        has opened, letting new patterns take root before old survival strategies
+        return.
       </p>
     </div>
   </section>
 
-  <!-- Themes of aftercare -->
+  <!-- ===================== THE WORK OF AFTERCARE (themes) ===================== -->
   <section class="px-6 py-20 lg:px-10 lg:py-28">
     <div class="mx-auto max-w-6xl">
-      <div class="grid gap-6 lg:grid-cols-2">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">The work of aftercare</p>
+        <h2 class="mt-3 text-3xl text-pine sm:text-4xl">How healing becomes lived</h2>
+      </div>
+      <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
           themes.map((t) => (
-            <div class="rounded-2xl border border-sand bg-parchment p-8">
-              <h3 class="text-xl text-forest">{t.title}</h3>
-              <p class="mt-3 leading-relaxed text-cocoa">{t.body}</p>
+            <div class="rounded-2xl border border-sand bg-parchment p-7 transition-shadow duration-300 hover:shadow-[0_16px_40px_-24px_rgba(43,54,70,0.35)]">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cream to-sage/40 text-pine ring-1 ring-sand">
+                <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor" aria-hidden="true">
+                  <path d={t.icon} />
+                </svg>
+              </div>
+              <h3 class="mt-5 text-lg text-forest">{t.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-cocoa">{t.body}</p>
             </div>
           ))
         }
@@ -108,22 +156,24 @@ const themes = [
     </div>
   </section>
 
-  <!-- Our philosophy of aftercare -->
+  <!-- ===================== OUR PHILOSOPHY ===================== -->
   <section class="bg-forest px-6 py-20 text-linen lg:px-10 lg:py-28">
-    <div class="mx-auto max-w-3xl">
-      <p class="eyebrow text-gold">Our Philosophy of Aftercare</p>
-      <p class="mt-6 text-lg leading-relaxed text-sagelight">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow text-gold">Our philosophy of aftercare</p>
+      <p class="mt-6 font-display text-2xl leading-[1.5] text-sagelight sm:text-3xl sm:leading-[1.45]">
         Healing is not linear. Aftercare is not time-limited. Recovery is not
-        perfection. At Casa da Nova Vida, aftercare is understood as a way of
-        living, one rooted in coherence, responsibility, and connection. Support
-        adapts as the individual grows, honoring both the fragility and strength
-        that follow deep transformation.
+        perfection.
+      </p>
+      <p class="mx-auto mt-6 max-w-2xl leading-relaxed text-sagelight">
+        Aftercare is a way of living, rooted in coherence, responsibility, and
+        connection. Our support adapts as you grow, honoring both the fragility
+        and the strength that follow deep transformation.
       </p>
     </div>
   </section>
 
   <div class="py-20 lg:py-28"><CTABand
-    heading="Interested in Learning More?"
+    heading="Interested in learning more?"
     body="Reach out to learn how aftercare and integration at Casa da Nova Vida can help your Ibogaine experience become a lasting new life."
   /></div>
 </Layout>
