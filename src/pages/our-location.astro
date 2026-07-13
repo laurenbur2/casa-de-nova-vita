@@ -7,23 +7,39 @@ import { withBase } from "../lib/base";
 const nearby = [
   {
     name: "Barton Springs",
+    img: "/images/photos/attractions/barton-springs.jpg",
+    alt: "The clear, spring-fed water of Barton Springs in Austin",
     body: "The jewel of Austin: Barton Springs. This local watering hole is spring-fed and maintains a consistent 68 degrees year round.",
   },
   {
+    name: "Zilker Park",
+    img: "/images/photos/attractions/zilker-park.jpg",
+    alt: "The green lawn of Zilker Park with the Austin skyline beyond",
+    body: "A 350-acre park in the heart of Austin — home to Barton Springs Pool, botanical gardens, and wide green lawns along the river.",
+  },
+  {
+    name: "Enchanted Rock",
+    img: "/images/photos/attractions/enchanted-rock.jpg",
+    alt: "The pink granite dome of Enchanted Rock",
+    body: "Enchanted Rock State Natural Area, part of the Texas state park system, spans 1,644 acres around a massive dome of pink granite.",
+  },
+  {
     name: "San Marcos River",
+    img: "/images/photos/attractions/san-marcos-river.jpg",
+    alt: "The clear, tree-lined San Marcos River",
     body: "The San Marcos River rises from the San Marcos Springs, the location of the Meadows Center for Water and the Environment, in San Marcos, Texas.",
   },
   {
-    name: "Enchanted Rock State Park",
-    body: "Enchanted Rock State Natural Area, a part of the Texas state park system, includes 1,644 acres. Enchanted Rock is a pink granite mountain.",
+    name: "Jacob's Well",
+    img: "/images/photos/attractions/jacobs-well.jpg",
+    alt: "The deep blue spring of Jacob's Well",
+    body: "Jacob's Well is a perennial spring in the Texas Hill Country flowing from the bed of Cypress Creek, located northwest of Wimberley, Texas.",
   },
   {
     name: "Krause Springs",
-    body: "The 115-acre property has 32 springs, and several feed the man-made pool and the natural pool which flow into Lake Travis. Two springs feed the swimming pool as well.",
-  },
-  {
-    name: "Jacob's Well",
-    body: "Jacob's Well is a perennial spring in the Texas Hill Country flowing from the bed of Cypress Creek, located northwest of Wimberley, Texas.",
+    img: "/images/photos/attractions/krause-springs.jpg",
+    alt: "The lush green swimming hole at Krause Springs",
+    body: "The 115-acre property has 32 springs, several feeding the man-made and natural pools that flow into Lake Travis.",
   },
 ];
 
@@ -83,16 +99,27 @@ const gallery = [
       <div class="max-w-2xl">
         <p class="eyebrow">Other local attractions</p>
       </div>
-      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {
           nearby.map((n) => (
-            <div class="rounded-2xl border border-sand bg-parchment p-7">
-              <h3 class="text-lg text-forest">{n.name}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-cocoa">{n.body}</p>
-            </div>
+            <article class="group overflow-hidden rounded-3xl border border-sand bg-parchment shadow-sm transition-shadow duration-300 hover:shadow-[0_18px_50px_-24px_rgba(43,54,70,0.35)]">
+              <div class="overflow-hidden">
+                <img
+                  src={withBase(n.img)}
+                  alt={n.alt}
+                  class="h-52 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <div class="p-7">
+                <h3 class="text-lg text-forest">{n.name}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-cocoa">{n.body}</p>
+              </div>
+            </article>
           ))
         }
       </div>
+      <p class="mt-8 text-xs text-stone">Attraction photography via Wikimedia Commons.</p>
     </div>
   </section>
 
