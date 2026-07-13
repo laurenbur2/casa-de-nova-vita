@@ -1,0 +1,89 @@
+---
+const year = new Date().getFullYear();
+const links = [
+  { href: "/our-story", label: "Our Story" },
+  { href: "/our-approach", label: "Our Approach" },
+  { href: "/our-program", label: "Our Program" },
+  { href: "/ibogaine-aftercare", label: "Ibogaine Aftercare" },
+  { href: "/our-location", label: "Our Location" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<footer class="relative mt-24 overflow-hidden bg-pine text-linen">
+  <img
+    src="/images/logo/mark-cream.png"
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none absolute -bottom-16 right-0 w-80 opacity-[0.05]"
+  />
+  <div class="relative mx-auto max-w-7xl px-6 py-16 lg:px-10">
+    <div class="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div>
+        <div class="flex items-center gap-3">
+          <img
+            src="/images/logo/mark-cream.png"
+            alt="Casa da Nova Vida hummingbird emblem"
+            class="h-12 w-12 object-contain"
+            width="512"
+            height="506"
+          />
+          <span class="font-display text-xl">Casa da Nova Vida</span>
+        </div>
+        <p class="mt-5 max-w-sm text-sm leading-relaxed text-sagelight">
+          A sanctuary for healing and integration in the Texas Hill Country,
+          grounding the teachings of the medicine into a new life, one honest
+          day at a time.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-xs uppercase tracking-[0.2em] text-sage">Explore</h3>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          {
+            links.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  class="text-sagelight transition-colors hover:text-linen"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xs uppercase tracking-[0.2em] text-sage">Reach Us</h3>
+        <ul class="mt-4 space-y-2.5 text-sm text-sagelight">
+          <li>
+            <a href="tel:+15122227752" class="transition-colors hover:text-linen"
+              >(512) 222-7752</a
+            >
+          </li>
+          <li>
+            <a
+              href="mailto:info@casadanovavida.com"
+              class="transition-colors hover:text-linen"
+              >info@casadanovavida.com</a
+            >
+          </li>
+          <li class="pt-1 leading-relaxed">Texas Hill Country<br />Outside Austin, TX</li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="mt-14 flex flex-col gap-3 border-t border-sage/25 pt-6 text-xs text-sage sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>&copy; {year} Casa da Nova Vida. All rights reserved.</p>
+      <p class="max-w-xl leading-relaxed">
+        Casa da Nova Vida is a residential integration sanctuary and does not
+        administer Ibogaine or provide medical treatment. Nothing here is
+        medical advice.
+      </p>
+    </div>
+  </div>
+</footer>

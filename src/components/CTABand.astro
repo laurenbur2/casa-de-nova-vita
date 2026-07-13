@@ -1,0 +1,47 @@
+---
+interface Props {
+  heading?: string;
+  body?: string;
+}
+const {
+  heading = "Ready to begin the next chapter?",
+  body = "Whether you are preparing for medicine work or looking for a grounded place to integrate afterward, we would be honored to talk with you.",
+} = Astro.props;
+---
+
+<section class="px-6 lg:px-10">
+  <div
+    class="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-sage/40 bg-gradient-to-b from-cream to-sage/35 px-8 py-16 text-center sm:px-16"
+  >
+    <img
+      src="/images/logo/mark-navy.png"
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute -right-10 -top-10 w-56 opacity-[0.05]"
+    />
+    <img
+      src="/images/logo/mark-navy.png"
+      alt="Casa da Nova Vida hummingbird emblem"
+      class="mx-auto mb-6 w-14 opacity-90"
+    />
+    <p class="eyebrow">A New Life</p>
+    <h2 class="mx-auto mt-4 max-w-2xl text-3xl leading-tight text-pine sm:text-4xl">
+      {heading}
+    </h2>
+    <p class="mx-auto mt-5 max-w-xl text-cocoa">{body}</p>
+    <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <a
+        href="/contact"
+        class="rounded-full bg-pine px-7 py-3.5 font-medium text-linen transition-colors hover:bg-forest"
+      >
+        Begin the Conversation
+      </a>
+      <a
+        href="tel:+15122227752"
+        class="rounded-full border border-moss/50 px-7 py-3.5 font-medium text-pine transition-colors hover:border-moss hover:bg-cream"
+      >
+        Call (512) 222-7752
+      </a>
+    </div>
+  </div>
+</section>

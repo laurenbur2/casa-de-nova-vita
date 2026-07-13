@@ -1,0 +1,119 @@
+---
+const links = [
+  { href: "/our-story", label: "Our Story" },
+  { href: "/our-approach", label: "Our Approach" },
+  { href: "/our-program", label: "Our Program" },
+  { href: "/ibogaine-aftercare", label: "Ibogaine Aftercare" },
+  { href: "/our-location", label: "Our Location" },
+];
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path === href + "/";
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-40 border-b border-transparent transition-colors duration-300"
+>
+  <nav
+    class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4 lg:px-10"
+    aria-label="Primary"
+  >
+    <a href="/" class="group flex items-center gap-3">
+      <img
+        class="logo-light h-12 w-12 object-contain"
+        src="/images/logo/mark-cream.png"
+        alt="Casa da Nova Vida hummingbird emblem"
+        width="512"
+        height="506"
+      />
+      <img
+        class="logo-dark hidden h-12 w-12 object-contain"
+        src="/images/logo/mark-navy.png"
+        alt=""
+        aria-hidden="true"
+        width="512"
+        height="506"
+      />
+      <span class="flex flex-col leading-none">
+        <span class="brand font-display text-lg text-linen">Casa da Nova Vida</span>
+        <span class="brand-sub text-[0.66rem] uppercase tracking-[0.22em] text-cream/70"
+          >House of Healing</span
+        >
+      </span>
+    </a>
+
+    <div class="hidden items-center gap-7 lg:flex">
+      {
+        links.map((l) => (
+          <a
+            href={l.href}
+            class:list={["nav-link text-sm transition-colors", isActive(l.href) && "is-current"]}
+          >
+            {l.label}
+          </a>
+        ))
+      }
+      <a
+        href="/contact"
+        class="header-cta rounded-full px-5 py-2.5 text-sm font-medium transition-colors"
+      >
+        Begin the Conversation
+      </a>
+    </div>
+
+    <button
+      id="menu-toggle"
+      class="menu-btn lg:hidden -mr-2 p-2 text-linen"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    </button>
+  </nav>
+
+  <div
+    id="mobile-menu"
+    class="hidden border-t border-sand bg-linen px-6 pb-6 pt-2 lg:hidden"
+  >
+    {
+      links.map((l) => (
+        <a
+          href={l.href}
+          class="block border-b border-sand/60 py-3 text-cocoa hover:text-pine"
+        >
+          {l.label}
+        </a>
+      ))
+    }
+    <a
+      href="/contact"
+      class="mt-4 block rounded-full bg-pine px-5 py-3 text-center font-medium text-linen"
+    >
+      Begin the Conversation
+    </a>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("site-header");
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  let menuOpen = false;
+  const syncHeader = () => {
+    const solid = window.scrollY > 12 || menuOpen;
+    header?.classList.toggle("is-scrolled", solid);
+  };
+
+  window.addEventListener("scroll", syncHeader, { passive: true });
+  syncHeader();
+
+  toggle?.addEventListener("click", () => {
+    menuOpen = menu?.classList.toggle("hidden") === false;
+    toggle.setAttribute("aria-expanded", String(menuOpen));
+    syncHeader();
+  });
+</script>

@@ -1,0 +1,99 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import CTABand from "../components/CTABand.astro";
+
+const nearby = [
+  {
+    name: "Barton Springs",
+    body: "The jewel of Austin: Barton Springs. This local watering hole is spring-fed and maintains a consistent 68 degrees year round.",
+  },
+  {
+    name: "San Marcos River",
+    body: "The San Marcos River rises from the San Marcos Springs, the location of the Meadows Center for Water and the Environment, in San Marcos, Texas.",
+  },
+  {
+    name: "Enchanted Rock State Park",
+    body: "Enchanted Rock State Natural Area, a part of the Texas state park system, includes 1,644 acres. Enchanted Rock is a pink granite mountain.",
+  },
+  {
+    name: "Krause Springs",
+    body: "The 115-acre property has 32 springs, and several feed the man-made pool and the natural pool which flow into Lake Travis. Two springs feed the swimming pool as well.",
+  },
+  {
+    name: "Jacob's Well",
+    body: "Jacob's Well is a perennial spring in the Texas Hill Country flowing from the bed of Cypress Creek, located northwest of Wimberley, Texas.",
+  },
+];
+
+const gallery = [
+  {
+    src: "/images/photos/property-sunset-hills.png",
+    alt: "Golden-hour sun setting over the rolling hills",
+  },
+  {
+    src: "/images/photos/property-porch-firepit.png",
+    alt: "Covered porch with a fire pit overlooking the rolling hills",
+  },
+  {
+    src: "/images/photos/property-interior-dining.png",
+    alt: "Light-filled dining room with wide windows onto the land",
+  },
+  {
+    src: "/images/photos/property-meadow-view.jpeg",
+    alt: "The house resting beyond a golden meadow at dusk",
+  },
+];
+---
+
+<Layout
+  title="Our Location · Casa da Nova Vida"
+  description="A serene recovery house in the Texas Hill Country near Austin: spring-fed waters, hiking trails, and rivers that play a key role in the experience we offer."
+>
+  <PageHero
+    eyebrow="Our Location"
+    title="Our Location"
+    intro="Our recovery house is located in the Texas Hill County in Austin, Texas, known for its clear, spring-fed waters and scenic surroundings. The broader Central Texas area, with its hiking trails, natural swimming holes, and rivers play a key role in the experience we offer. This serene environment supports our guests on their journeys toward integration and healing, providing a peaceful setting that encourages reflection and rejuvenation."
+    image="/images/photos/property-front.png"
+    imageAlt="The stone sanctuary house framed by hill country oaks"
+  />
+
+  <section class="px-6 py-20 lg:px-10 lg:py-24">
+    <div class="mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:gap-6">
+      {
+        gallery.map((g, i) => (
+          <img
+            src={g.src}
+            alt={g.alt}
+            class:list={[
+              "h-56 w-full rounded-2xl object-cover sm:h-72",
+              i % 2 === 1 ? "mt-8" : "",
+            ]}
+            loading="lazy"
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Other local attractions -->
+  <section class="bg-cream px-6 py-20 lg:px-10 lg:py-28">
+    <div class="mx-auto max-w-6xl">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Other local attractions</p>
+      </div>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          nearby.map((n) => (
+            <div class="rounded-2xl border border-sand bg-parchment p-7">
+              <h3 class="text-lg text-forest">{n.name}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-cocoa">{n.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <div class="py-20 lg:py-28"><CTABand /></div>
+</Layout>

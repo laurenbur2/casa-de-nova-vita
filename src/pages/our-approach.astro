@@ -1,0 +1,128 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import CTABand from "../components/CTABand.astro";
+
+const pillars = [
+  {
+    n: "01",
+    title: "Spiritual Development",
+    body: "At Nova Vida, our primary focus is to help individuals cultivate an intuitive, spiritual awareness of their Creator. We help facilitate their own spiritual insights, the study of esoteric wisdom traditions, and embark on the path to self knowledge. We believe that spirituality is a cornerstone for recovering from addiction and building a life of true, balanced well-being. Our program encourages the exploration of virtue and tradition, fostering contemplation of one's divinity and the eternal nature of life. We believe that discovering one's purpose and aligning one's life with that purpose is essential. Together with a commitment to holistic wellness, this forms the foundation and ultimate goal of our program. Our work includes:",
+    points: [
+      "Guided spiritual works with sacrament",
+      "Integration of spiritual traditions",
+      "Study of spiritual philosophy",
+      "Instruction and development in spiritual practice",
+      "Integration of spirituality into daily life",
+    ],
+  },
+  {
+    n: "02",
+    title: "Mental Development",
+    body: "A vital aspect of well-being is achieving sovereignty over one's thoughts and mental space. Our thoughts profoundly influence our physical reality and the outcomes we manifest in life. At Nova Vida, we emphasize the importance of meditation and mindfulness as essential tools for healing and cultivating new, healthier mental habits. By learning to calm the mind and regulate the nervous system, individuals can make decisions that align with their goals and well-being, rather than those that lead to negative consequences. In so doing, they are empowered to create a more intentional, balanced, and fulfilling life. We teach our guests foundational practices for mental development, including:",
+    points: [
+      "Meditation",
+      "Mindfulness",
+      "Self Reflection",
+      "Self Coaching",
+    ],
+  },
+  {
+    n: "03",
+    title: "Emotional Development",
+    body: "While healing from trauma and emotional wounds can be a lengthy process, our practitioners and coaches provide a safe, supportive environment to help guests take those critical first steps. They also equip guests with practical tools to continue the healing journey long after their time with us. Our guests engage in both group and private therapeutic sessions with skilled practitioners. The goal is to begin uncovering and addressing suppressed feelings and trauma, which are often the root causes of destructive behaviors such as addiction. Guests practice new, healthy communication skills and authentic self-expression daily, supported by their peers and coaches. These practices foster a foundation of authenticity and healthy communication, both of which are vital for emotional healing, maintaining emotional well-being, and building strong, healthy relationships. Modalities include:",
+    points: [
+      "Therapeutic Sessions",
+      "Energetic Clearing",
+      "Emotional Regulation",
+      "Healthy Communication Strategies",
+    ],
+  },
+  {
+    n: "04",
+    title: "Physical Development",
+    body: "Addiction and societal pressures often lead individuals to neglect their physical well-being. Many recovering addicts arrive at the start of their healing journey in need of guidance to cleanse, balance, and recalibrate their bodies. At Nova Vida, we support our guests in developing new, healthy habits tailored to their unique needs and interests. These habits include personalized approaches to movement, diet, and sleep, forming the foundation for sustained physical health. Additionally, our guests benefit from holistic treatments, such as acupuncture and consultations with herbalists, who recommend appropriate herbs and dietary adjustments to support each individual's healing process. Modalities include:",
+    points: [
+      "Fitness & Nutrition",
+      "Acupuncture & Herbalism",
+      "Yoga & Other Movement Modalities",
+      "Massage Therapy and Other Somatic Practices",
+    ],
+  },
+];
+---
+
+<Layout
+  title="Our Approach · Casa da Nova Vida"
+  description="Heal the spirit, mind, emotions and the body to holistically treat addiction."
+>
+  <PageHero
+    eyebrow="Our Approach"
+    title="To find healing, one must embrace a New Life in every aspect of self: spiritually, mentally, emotionally, and physically."
+    intro="Heal the spirit, mind, emotions and the body to holistically treat addiction. Learn more about our approach:"
+    image="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=2000&q=80"
+    imageAlt="Sunlight through green leaves"
+  />
+
+  <section class="px-6 py-20 lg:px-10 lg:py-24">
+    <div class="mx-auto grid max-w-6xl gap-6 lg:grid-cols-2">
+      {
+        pillars.map((p) => (
+          <div class="rounded-3xl border border-sand bg-parchment p-9">
+            <div class="flex items-baseline gap-4">
+              <span class="font-display text-2xl text-clay">{p.n}</span>
+              <h3 class="text-2xl text-forest">{p.title}</h3>
+            </div>
+            <p class="mt-4 leading-relaxed text-cocoa">{p.body}</p>
+            <ul class="mt-6 space-y-3">
+              {p.points.map((pt) => (
+                <li class="flex items-start gap-3 text-cocoa">
+                  <span class="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-moss" />
+                  <span class="leading-relaxed">{pt}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Harm reduction -->
+  <section class="bg-cream px-6 py-20 lg:px-10 lg:py-24">
+    <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-center">
+      <div>
+        <p class="eyebrow">Our philosophy of care</p>
+        <h2 class="mt-4 text-3xl text-pine sm:text-4xl">Harm Reduction</h2>
+      </div>
+      <div class="prose-links space-y-5 text-cocoa">
+        <p class="leading-relaxed">
+          At Nova Vida, we embrace a harm reduction philosophy as a compassionate,
+          realistic approach to healing. We recognize that each person's journey
+          is unique, and transformation doesn't always follow a straight line.
+          Rather than enforcing rigid expectations, we offer a supportive
+          environment that encourages honesty, agency, and self-awareness. Harm
+          reduction allows space for individuals to build trust with themselves
+          and others while exploring sustainable lifestyle changes at their own
+          pace. By meeting guests where they are—without judgment—we help lay the
+          foundation for authentic, long-term healing rooted in choice,
+          connection, and community.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-16 lg:px-10 lg:py-20">
+    <figure class="mx-auto max-w-3xl text-center">
+      <blockquote class="font-display text-2xl leading-relaxed text-pine sm:text-3xl">
+        “Love without firmness<br />Is a fire without heat<br />It is a weak
+        thought<br />And a body without worth”
+      </blockquote>
+      <figcaption class="mt-6 text-sm uppercase tracking-[0.18em] text-stone">
+        Padrinho Sebastião
+      </figcaption>
+    </figure>
+  </section>
+
+  <div class="pb-20 lg:pb-28"><CTABand /></div>
+</Layout>

@@ -1,0 +1,186 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const inputClass =
+  "mt-2 w-full rounded-xl border border-sand bg-parchment px-4 py-3 text-bark placeholder-stone/60 outline-none transition-colors focus:border-moss focus:ring-2 focus:ring-moss/20";
+---
+
+<Layout
+  title="Contact · Casa da Nova Vida"
+  description="Begin the conversation. Reach Casa da Nova Vida by phone, email, or our confidential inquiry form to learn about integration and Ibogaine aftercare."
+>
+  <section class="bg-pine px-6 pb-24 pt-32 text-linen lg:px-10 lg:pb-28 lg:pt-40">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow rise text-gold">Contact</p>
+      <h1 class="rise rise-2 mt-5 text-4xl leading-tight sm:text-5xl">
+        Contact Us
+      </h1>
+      <p class="rise rise-3 mx-auto mt-6 max-w-xl text-lg leading-relaxed text-cream/90">
+        If you have questions about our program or want to determine if we would
+        be a good fit for you or your loved one, please fill out the form below
+        and we'll be in touch with you shortly.
+      </p>
+    </div>
+  </section>
+
+  <section class="px-6 py-20 lg:px-10 lg:py-24">
+    <div class="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[0.8fr_1.2fr]">
+      <!-- Direct contact -->
+      <div>
+        <h2 class="text-2xl text-pine">Reach us directly</h2>
+        <p class="mt-4 leading-relaxed text-cocoa">
+          Prefer to talk with a person? We'd love that. Call or email and a
+          member of our community will personally respond.
+        </p>
+
+        <dl class="mt-8 space-y-6">
+          <div>
+            <dt class="text-xs uppercase tracking-[0.18em] text-stone">Phone</dt>
+            <dd class="mt-1">
+              <a
+                href="tel:+15122227752"
+                class="font-display text-2xl text-forest hover:text-pine"
+                >(512) 222-7752</a
+              >
+            </dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-[0.18em] text-stone">Email</dt>
+            <dd class="mt-1">
+              <a
+                href="mailto:info@casadanovavida.com"
+                class="text-lg text-forest hover:text-pine"
+                >info@casadanovavida.com</a
+              >
+            </dd>
+          </div>
+          <div>
+            <dt class="text-xs uppercase tracking-[0.18em] text-stone">
+              Location
+            </dt>
+            <dd class="mt-1 leading-relaxed text-cocoa">
+              Texas Hill Country<br />Outside Austin, TX<br />
+              <span class="text-sm text-stone"
+                >Exact address shared once we connect</span
+              >
+            </dd>
+          </div>
+        </dl>
+
+        <div class="mt-10 rounded-2xl border border-sand bg-cream p-6">
+          <p class="text-sm leading-relaxed text-cocoa">
+            Everything you share with us is held in strict confidence. Whether
+            you're inquiring for yourself or someone you love, we're here to
+            listen without judgment.
+          </p>
+        </div>
+      </div>
+
+      <!-- Inquiry form -->
+      <div class="rounded-3xl border border-sand bg-parchment p-8 lg:p-10">
+        <h2 class="text-2xl text-pine">Send a confidential inquiry</h2>
+        <p class="mt-3 text-sm text-cocoa">
+          Tell us a little about where you are. Fields marked
+          <span class="text-clay">*</span> are required.
+        </p>
+
+        <form
+          action="https://formspree.io/f/your-form-id"
+          method="POST"
+          class="mt-8 space-y-5"
+        >
+          <div class="grid gap-5 sm:grid-cols-2">
+            <label class="block text-sm font-medium text-cocoa">
+              Name <span class="text-clay">*</span>
+              <input
+                type="text"
+                name="name"
+                required
+                placeholder="Your name"
+                class={inputClass}
+              />
+            </label>
+            <label class="block text-sm font-medium text-cocoa">
+              Email <span class="text-clay">*</span>
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="you@email.com"
+                class={inputClass}
+              />
+            </label>
+          </div>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <label class="block text-sm font-medium text-cocoa">
+              Phone
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Optional"
+                class={inputClass}
+              />
+            </label>
+            <label class="block text-sm font-medium text-cocoa">
+              This inquiry is for
+              <select name="inquiry_for" class={inputClass}>
+                <option>Myself</option>
+                <option>A family member or loved one</option>
+                <option>A client or patient</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="block text-sm font-medium text-cocoa">
+            Where are you in your journey?
+            <select name="journey_stage" class={inputClass}>
+              <option>Exploring Ibogaine / considering treatment</option>
+              <option>Preparing for an upcoming treatment or retreat</option>
+              <option>Recently completed treatment, seeking integration</option>
+              <option>Some time has passed, seeking support</option>
+              <option>Not sure yet</option>
+            </select>
+          </label>
+
+          <label class="block text-sm font-medium text-cocoa">
+            How can we support you? <span class="text-clay">*</span>
+            <textarea
+              name="message"
+              required
+              rows="5"
+              placeholder="Share as much or as little as you'd like."
+              class={inputClass}></textarea>
+          </label>
+
+          <button
+            type="submit"
+            class="w-full rounded-full bg-pine px-7 py-4 font-medium text-linen transition-colors hover:bg-forest"
+          >
+            Send Inquiry
+          </button>
+          <p class="text-center text-xs text-stone">
+            We typically respond within one business day.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guest application -->
+  <section class="border-t border-sand bg-cream px-6 py-16 lg:px-10 lg:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-2xl text-pine sm:text-3xl">
+        Interested in becoming a guest? Fill out the application and we will be in
+        touch
+      </h2>
+      <a
+        href="/contact"
+        class="mt-8 inline-flex rounded-full bg-pine px-8 py-4 font-medium text-linen transition-colors hover:bg-forest"
+      >
+        Apply Here
+      </a>
+    </div>
+  </section>
+</Layout>

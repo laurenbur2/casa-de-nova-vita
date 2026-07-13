@@ -1,1 +1,150 @@
 @import "tailwindcss";
+
+/* ============================================================
+   Casa da Nova Vida — Design System
+   Palette copied from the live site: calm blues on warm cream.
+   Hummingbird emblem is the signature motif.
+   Token names are kept stable (pine/forest/moss/sage/clay/gold)
+   so the whole site re-skins from this one block.
+   ============================================================ */
+
+@theme {
+  /* Fonts */
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Inter", "Helvetica Neue", system-ui, sans-serif;
+
+  /* Warm neutrals — cream / linen backgrounds (match the live site) */
+  --color-linen: #faf7ef;
+  --color-cream: #f3ecdd;
+  --color-sand: #e7ddc8;
+  --color-parchment: #fffdf7;
+
+  /* Ink — soft slate-blue text (kept lighter so the page breathes) */
+  --color-bark: #2b3646;
+  --color-cocoa: #55637a;
+  --color-stone: #8791a0;
+
+  /* Blues — softer, airier slate-blues (was heavy navy) */
+  --color-pine: #33506a;     /* muted slate-blue — primary */
+  --color-forest: #3a627c;   /* mid slate-blue — secondary */
+  --color-moss: #5f8095;     /* slate blue — accent */
+  --color-sage: #9db4bd;     /* dusty blue — light accent */
+  --color-sagelight: #d3dee2;
+
+  /* Accents — marine blue for detail, muted gold as the single warm note */
+  --color-clay: #4a7290;       /* marine blue — eyebrows / links on light */
+  --color-terracotta: #5f88a2; /* lighter marine — hover */
+  --color-gold: #c9ad63;       /* muted gold — eyebrows / dots on dark */
+
+  /* Radii */
+  --radius-sm: 0.375rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.75rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-linen);
+  color: var(--color-bark);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display headings */
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Fraunces optical settings for a soft, organic feel */
+.font-display,
+h1, h2, h3 {
+  font-variation-settings: "opsz" 40, "SOFT" 40, "WONK" 0;
+}
+
+/* Reusable eyebrow / kicker label */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-clay);
+}
+
+/* Refined link underline for prose */
+.prose-links a {
+  color: var(--color-forest);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-sage);
+}
+.prose-links a:hover {
+  text-decoration-color: var(--color-forest);
+}
+
+/* ============================================================
+   Floating header — transparent over the hero, solid on scroll
+   ============================================================ */
+#site-header .nav-link { color: color-mix(in srgb, var(--color-cream) 88%, transparent); }
+#site-header .nav-link:hover,
+#site-header .nav-link.is-current { color: var(--color-linen); }
+#site-header .header-cta {
+  border: 1px solid color-mix(in srgb, var(--color-cream) 55%, transparent);
+  color: var(--color-linen);
+}
+#site-header .header-cta:hover {
+  background-color: color-mix(in srgb, var(--color-linen) 14%, transparent);
+  border-color: var(--color-cream);
+}
+
+#site-header.is-scrolled {
+  background-color: color-mix(in srgb, var(--color-linen) 85%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--color-sand) 70%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+#site-header.is-scrolled .logo-light { display: none; }
+#site-header.is-scrolled .logo-dark { display: block; }
+#site-header.is-scrolled .brand { color: var(--color-pine); }
+#site-header.is-scrolled .brand-sub { color: var(--color-stone); }
+#site-header.is-scrolled .menu-btn { color: var(--color-pine); }
+#site-header.is-scrolled .nav-link { color: var(--color-cocoa); }
+#site-header.is-scrolled .nav-link:hover,
+#site-header.is-scrolled .nav-link.is-current { color: var(--color-pine); }
+#site-header.is-scrolled .header-cta {
+  background-color: var(--color-pine);
+  border-color: transparent;
+  color: var(--color-linen);
+}
+#site-header.is-scrolled .header-cta:hover { background-color: var(--color-forest); }
+
+/* Scroll cue — gentle bob */
+@keyframes scroll-bob {
+  0%, 100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, 6px); }
+}
+.scroll-cue { animation: scroll-bob 2.4s ease-in-out infinite; }
+
+/* Soft entrance animation */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.rise-2 { animation-delay: 0.12s; }
+.rise-3 { animation-delay: 0.24s; }
+.rise-4 { animation-delay: 0.36s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; }
+  .scroll-cue { animation: none; }
+  html { scroll-behavior: auto; }
+}

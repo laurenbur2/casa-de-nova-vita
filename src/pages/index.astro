@@ -1,17 +1,232 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import CTABand from "../components/CTABand.astro";
 
+const program = [
+  {
+    title: "Healing Modalities",
+    body: "Entheogenic plant medicines, integration coaching, CBT, acupuncture and herbalism, craniosacral therapy, sound healing, and massage.",
+  },
+  {
+    title: "Integration",
+    body: "1-on-1 coaching, meditation and mindfulness, prayer practice, nutrition, and healthy lifestyle instruction for lasting growth.",
+  },
+  {
+    title: "Supportive Community",
+    body: "Experienced mentors, guides, practitioners, and therapists holding a nurturing environment built for healing and recovery.",
+  },
+];
+
+const who = [
+  {
+    title: "Post Plant Medicine Treatment",
+    body: "A grounded place to land after Iboga or Ayahuasca, and integrate those profound experiences into long-lasting change.",
+  },
+  {
+    title: "Seeking an Alternative Path",
+    body: "For those conventional 12-step programs haven't served, an earth-medicine path to the root cause of addiction.",
+  },
+  {
+    title: "Otherwise Ready to Heal",
+    body: "It's not only those in addiction who need healing. Our doors are open to anyone seeking space and time to grow.",
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <!-- ===================== HERO ===================== -->
+  <section
+    class="relative isolate flex min-h-screen items-center justify-end overflow-hidden bg-bark"
+  >
+    <video
+      class="absolute inset-0 -z-20 h-full w-full object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="/videos/casa-hero-poster.jpg"
+    >
+      <source src="/videos/casa-hero.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 -z-10 bg-bark/25"></div>
+    <div
+      class="absolute inset-0 -z-10 bg-gradient-to-b from-bark/50 via-bark/10 to-bark/60"
+    >
+    </div>
+
+    <div
+      class="mx-auto max-w-2xl px-6 pt-[18vh] text-center [text-shadow:0_2px_24px_rgba(20,26,36,0.45)]"
+    >
+      <p class="eyebrow rise text-gold">Casa da Nova Vida</p>
+      <h1
+        class="rise rise-2 mt-5 text-balance text-3xl font-light leading-[1.1] text-linen sm:text-4xl lg:text-5xl"
+      >
+        House of Healing &amp; <span class="italic text-sagelight">Integration</span>
+      </h1>
+      <p
+        class="rise rise-3 mx-auto mt-5 max-w-lg text-sm leading-relaxed text-cream/90 sm:text-base"
+      >
+        A recovery house for those on an alternative path of healing and
+        integration through spiritual realization.
+      </p>
+      <div
+        class="rise rise-4 mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
+      >
+        <a
+          href="/contact"
+          class="w-full rounded-full bg-linen px-6 py-3 text-center text-sm font-medium text-pine transition-colors hover:bg-cream sm:w-auto"
+        >
+          Begin the Conversation
+        </a>
+        <a
+          href="/our-approach"
+          class="w-full rounded-full border border-cream/50 px-6 py-3 text-center text-sm font-medium text-linen backdrop-blur-sm transition-colors hover:border-cream hover:bg-linen/10 sm:w-auto"
+        >
+          Explore Our Approach
+        </a>
+      </div>
+    </div>
+
+    <a
+      href="#intro"
+      aria-label="Scroll to explore"
+      class="scroll-cue absolute bottom-8 left-1/2 hidden h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full border border-dotted border-cream/50 text-cream/80 transition-colors hover:border-cream hover:text-linen sm:flex"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14M6 13l6 6 6-6" />
+      </svg>
+    </a>
+  </section>
+
+  <!-- ===================== INTRO STATEMENT ===================== -->
+  <section id="intro" class="scroll-mt-24 px-6 py-24 lg:px-10 lg:py-32">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow">Because we've been there</p>
+      <p
+        class="mt-8 font-display text-2xl leading-[1.5] text-cocoa sm:text-3xl sm:leading-[1.5]"
+      >
+        We understand the pain and hopelessness that accompany addiction. At Nova
+        Vida, we offer an alternative, holistic path to recovery, with a deep
+        emphasis on <span class="text-pine">spiritual development</span> and working
+        with sacrament.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== THE PLACE (image band) ===================== -->
+  <section class="relative isolate overflow-hidden">
+    <img
+      src="/images/photos/property-porch-firepit.png"
+      alt="Covered porch with a fire pit overlooking the Texas Hill Country"
+      class="absolute inset-0 -z-10 h-full w-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 -z-10 bg-bark/55"></div>
+    <div
+      class="mx-auto flex min-h-[70vh] max-w-6xl flex-col justify-center px-6 py-28 text-linen lg:px-10"
+    >
+      <div class="max-w-xl [text-shadow:0_2px_20px_rgba(20,26,36,0.5)]">
+        <p class="eyebrow text-gold">Just outside Austin, TX</p>
+        <h2 class="mt-5 text-3xl leading-tight sm:text-4xl lg:text-5xl">
+          A serene home in the Texas Hill Country
+        </h2>
+        <p class="mt-6 max-w-md leading-relaxed text-cream/90">
+          Spring-fed waters, hiking trails, and wide open skies aren't a backdrop
+          to the healing here. They're part of it.
+        </p>
+        <a
+          href="/our-location"
+          class="mt-8 inline-flex items-center gap-2 rounded-full border border-cream/60 px-6 py-3 text-sm font-medium text-linen backdrop-blur-sm transition-colors hover:border-cream hover:bg-linen/10"
+        >
+          See our location
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OUR PROGRAM ===================== -->
+  <section class="px-6 py-24 lg:px-10 lg:py-32">
+    <div class="mx-auto max-w-7xl">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Our Program</p>
+        <h2 class="mt-4 text-3xl text-pine sm:text-4xl">
+          A comprehensive path, tended with care
+        </h2>
+      </div>
+      <div class="mt-16 grid gap-8 md:grid-cols-3">
+        {
+          program.map((p, i) => (
+            <div>
+              <span class="font-display text-sm text-clay">0{i + 1}</span>
+              <h3 class="mt-3 text-xl text-forest">{p.title}</h3>
+              <p class="mt-3 leading-relaxed text-cocoa">{p.body}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="mt-16 text-center">
+        <a
+          href="/our-program"
+          class="inline-flex rounded-full bg-pine px-8 py-4 font-medium text-linen transition-colors hover:bg-forest"
+        >
+          Explore the program
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WHO WE RECEIVE ===================== -->
+  <section class="border-y border-sand bg-parchment px-6 py-24 lg:px-10 lg:py-32">
+    <div class="mx-auto max-w-7xl">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Who we welcome</p>
+        <h2 class="mt-4 text-3xl text-pine sm:text-4xl">
+          A home for those the medicine has called forward
+        </h2>
+      </div>
+      <div class="mt-16 grid gap-6 md:grid-cols-3">
+        {
+          who.map((c) => (
+            <div class="rounded-2xl border border-sand bg-linen p-8">
+              <h3 class="text-xl text-forest">{c.title}</h3>
+              <p class="mt-3 leading-relaxed text-cocoa">{c.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AFTERCARE (image band) ===================== -->
+  <section class="relative isolate overflow-hidden">
+    <img
+      src="/images/photos/forest-light-rays.png"
+      alt="Sunlight breaking through a forest canopy"
+      class="absolute inset-0 -z-10 h-full w-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 -z-10 bg-pine/75"></div>
+    <div
+      class="mx-auto max-w-3xl px-6 py-28 text-center text-linen lg:px-10 lg:py-36 [text-shadow:0_2px_20px_rgba(20,26,36,0.5)]"
+    >
+      <p class="eyebrow text-gold">The Importance of Aftercare</p>
+      <p class="mt-8 font-display text-2xl leading-[1.5] sm:text-3xl sm:leading-[1.5]">
+        The days after treatment are a critical, vulnerable window. Aftercare
+        isn't an afterthought. It's the bridge between revelation and a truly
+        renewed way of being.
+      </p>
+      <a
+        href="/ibogaine-aftercare"
+        class="mt-10 inline-flex rounded-full bg-linen px-8 py-4 font-medium text-pine transition-colors hover:bg-cream"
+      >
+        Ibogaine Aftercare
+      </a>
+    </div>
+  </section>
+
+  <div class="py-24 lg:py-32">
+    <CTABand />
+  </div>
+</Layout>

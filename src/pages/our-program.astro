@@ -1,0 +1,225 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import CTABand from "../components/CTABand.astro";
+
+const curriculum = [
+  {
+    title: "Establishing a Foundation for Healing & Integration",
+    body: "Upon arrival, we help our guests establish a sense of safety and stability through grounding practices, support for physical health, and a thoughtful assessment of their current circumstances. This foundation allows them to feel secure, free, and empowered to begin the deeper work of healing and integration.",
+  },
+  {
+    title: "Self-Examination",
+    body: "Guests are guided through a process of honest self-reflection—examining their conscience, identifying root causes of harmful behavioral patterns, and beginning to understand the inner dynamics that have shaped their past.",
+  },
+  {
+    title: "Spiritual Development",
+    body: "We offer opportunities for guests to explore and cultivate a personal connection with the divine and the creative forces of life. This includes spiritual disciplines, guided work with sacrament, and the study of various wisdom traditions that encourage inner growth and transformation.",
+  },
+  {
+    title: "Acceptance & The Will to Heal",
+    body: "At this stage, guests begin to accept their past and connect with their innate capacity to create a new, meaningful life. This shift marks a powerful turning point—one rooted in integrity, self-compassion, and the will to heal.",
+  },
+  {
+    title: "Inner Healing",
+    body: "With the support of our licensed therapists and experienced coaches, guests engage in 1-1 and group healing practices. These practices provide essential tools and a clear framework for sustained personal transformation.",
+  },
+  {
+    title: "Reconciliation",
+    body: "We support our guests in rebuilding and healing relationships with loved ones, offering guidance and, when needed, facilitate processes to help restore trust, connection, and mutual understanding.",
+  },
+  {
+    title: "Life Planning & Preparation",
+    body: "As our guests prepare to re-enter the world, they leave with a grounded spiritual practice, an embodied orientation to healing work, and a clear, personalized plan to begin their new life with purpose and clarity.",
+  },
+];
+
+const activities = [
+  {
+    title: "Physical Fitness",
+    body: "Movement is a key component of healing, helping to release stored tension, regulate emotions, and rebuild strength. Our program incorporates various forms of exercise to support physical and mental well-being.",
+  },
+  {
+    title: "Art and Music",
+    body: "Creative expression offers a powerful outlet for processing emotions and reconnecting with the self. Through pottery, wood working, music, and other artistic practices, guests explore their inner world in a safe and therapeutic way.",
+  },
+  {
+    title: "Outdoor Activities",
+    body: "Nature plays a vital role in healing, grounding individuals in the present moment while providing fresh air, movement, and connection. Hikes, swimming, and time in natural settings help restore balance and clarity.",
+  },
+  {
+    title: "Yoga and Qi Gong",
+    body: "These ancient practices integrate breath, movement, and mindfulness to cultivate inner peace and physical vitality. They promote emotional regulation, flexibility, and a deep sense of presence.",
+  },
+  {
+    title: "Massage Therapy",
+    body: "Touch is a powerful tool for releasing stored tension, promoting relaxation, and restoring the nervous system. Therapeutic massage helps guests reconnect with their bodies in a nurturing way.",
+  },
+  {
+    title: "Rest and Reflection",
+    body: "True healing requires moments of stillness. Dedicated time for rest, journaling, and contemplation allows guests to process their experiences and integrate personal insights.",
+  },
+  {
+    title: "Sound Healing",
+    body: "Vibrational therapy using instruments like singing bowls and gongs helps calm the mind, release emotional blockages, and promote deep relaxation and energetic alignment.",
+  },
+  {
+    title: "Acupuncture",
+    body: "This time-honored healing practice balances the body's energy flow, alleviating stress, improving circulation, and supporting overall well-being on a deep level.",
+  },
+  {
+    title: "Meditation and Mindfulness",
+    body: "Cultivating present-moment awareness is central to recovery. Through guided meditation and mindfulness practices, guests develop the ability to observe thoughts and emotions without attachment, fostering greater inner peace and clarity.",
+  },
+];
+---
+
+<Layout
+  title="Our Program · Casa da Nova Vida"
+  description="A personalized residential healing program for 3–5 guests at a time, uncovering root causes and building a foundation for lasting transformation."
+>
+  <PageHero
+    eyebrow="Our Program"
+    title="What to Expect"
+    intro="We emphasize the importance of not overwhelming our guests—recognizing that healing requires a conscious breath. Our guests receive sufficient time and space outside their “everyday” environment where they reflect and integrate the therapeutic experiences through spiritual work with sacrament, therapy and community."
+    image="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&w=2000&q=80"
+    imageAlt="A calm natural landscape at golden hour"
+  />
+
+  <!-- Facts strip -->
+  <section class="border-b border-sand px-6 py-14 lg:px-10">
+    <div
+      class="mx-auto grid max-w-5xl gap-8 text-center sm:grid-cols-3 sm:divide-x sm:divide-sand"
+    >
+      <div>
+        <p class="font-display text-4xl text-clay">3–5</p>
+        <p class="mt-2 text-sm uppercase tracking-[0.16em] text-stone">
+          Guests at a time
+        </p>
+      </div>
+      <div>
+        <p class="font-display text-4xl text-clay">4–6</p>
+        <p class="mt-2 text-sm uppercase tracking-[0.16em] text-stone">
+          Weeks, with room to extend
+        </p>
+      </div>
+      <div>
+        <p class="font-display text-4xl text-clay">1:1</p>
+        <p class="mt-2 text-sm uppercase tracking-[0.16em] text-stone">
+          Integration coaching
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What to expect continued -->
+  <section class="px-6 pt-16 lg:px-10 lg:pt-20">
+    <div class="mx-auto max-w-3xl text-cocoa leading-relaxed">
+      <p>
+        We serve 3-5 guests at a time, allowing for a very personalized healing
+        journey with our support team. Days consist of healing the spiritual,
+        mental, emotional, and physical bodies through a wide variety of group
+        and individual sessions facilitated by our team of practitioners and
+        coaches. Our guests typically stay with us for 4-6 weeks, though the
+        opportunity to extend one's stay is available.
+      </p>
+    </div>
+  </section>
+
+  <!-- Our Curriculum -->
+  <section class="px-6 py-20 lg:px-10 lg:py-28">
+    <div class="mx-auto max-w-7xl">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Our Curriculum</p>
+        <p class="mt-6 text-cocoa leading-relaxed">
+          At Nova Vida, our recovery program is built on the understanding that
+          true healing begins with identifying the root causes of destructive
+          behaviors. This journey requires deep self-reflection, commitment, and
+          time. We support our guests in uncovering past trauma and developing a
+          personalized healing plan that integrates therapeutic work, holistic
+          practices, and sustainable healthy habits. Our approach is designed to
+          foster lasting transformation, ensuring that each individual leaves
+          with the tools and strategies needed to continue their healing journey
+          long after their stay.
+        </p>
+      </div>
+
+      <div class="mt-14 grid gap-6 sm:grid-cols-2">
+        {
+          curriculum.map((c, i) => (
+            <div class="rounded-2xl border border-sand bg-parchment p-8">
+              <span class="font-display text-sm text-clay">0{i + 1}</span>
+              <h3 class="mt-2 text-xl text-forest">{c.title}</h3>
+              <p class="mt-3 text-cocoa leading-relaxed">{c.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Activities -->
+  <section class="bg-cream px-6 py-20 lg:px-10 lg:py-28">
+    <div class="mx-auto max-w-7xl">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Activities</p>
+        <h2 class="mt-4 text-3xl text-pine sm:text-4xl">
+          The daily practices that carry the work
+        </h2>
+      </div>
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          activities.map((a) => (
+            <div class="rounded-2xl border border-sand bg-linen p-7">
+              <h3 class="text-lg text-forest">{a.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-cocoa">{a.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Nutrition -->
+  <section class="bg-forest px-6 py-20 text-linen lg:px-10 lg:py-28">
+    <div class="mx-auto max-w-3xl">
+      <p class="eyebrow text-gold">Nutrition at Nova Vida</p>
+      <p class="mt-6 text-sagelight leading-relaxed">
+        At our recovery house, we believe that true healing starts from the
+        inside out. That's why we prioritize serving our guests healthy, organic,
+        and seasonal meals designed to support stabilization and promote deep
+        healing—mentally, emotionally, and physically. Our meals are thoughtfully
+        prepared to nourish the body, calm the mind, and restore balance. Beyond
+        just providing wholesome food, we also empower our guests with the
+        knowledge and skills to maintain a healthy lifestyle after they leave.
+        Through hands-on guidance, we teach the fundamentals of smart shopping,
+        nutritious cooking, and intentional eating, helping them build a
+        sustainable relationship with food that supports long-term recovery and
+        overall well-being.
+      </p>
+      <blockquote class="mt-8 font-display text-2xl italic leading-relaxed text-gold">
+        “Let food be thy medicine and medicine be thy food”
+        <cite class="mt-3 block font-sans text-sm not-italic uppercase tracking-[0.18em] text-sage">
+          Hippocrates
+        </cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Applying -->
+  <section class="px-6 py-20 lg:px-10 lg:py-28">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-3xl text-pine sm:text-4xl">
+        Interested in learning more or becoming a guest?
+      </h2>
+      <a
+        href="/contact"
+        class="mt-9 inline-flex rounded-full bg-pine px-8 py-4 font-medium text-linen transition-colors hover:bg-forest"
+      >
+        Fill out interest form
+      </a>
+    </div>
+  </section>
+
+  <div class="pb-20 lg:pb-28"><CTABand /></div>
+</Layout>
