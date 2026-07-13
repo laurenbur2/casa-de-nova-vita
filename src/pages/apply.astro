@@ -1,0 +1,117 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { withBase } from "../lib/base";
+
+// Replace with your Formspree form ID (or another form endpoint).
+// Create a form at https://formspree.io and paste its endpoint here.
+const FORM_ACTION = "https://formspree.io/f/your-apply-form-id";
+
+const inputClass =
+  "mt-2 w-full rounded-xl border border-sand bg-parchment px-4 py-3 text-bark placeholder-stone/60 outline-none transition-colors focus:border-moss focus:ring-2 focus:ring-moss/20";
+---
+
+<Layout
+  title="Apply to Become a Guest · Casa da Nova Vida"
+  description="Apply to become a guest at Casa da Nova Vida, a Texas Hill Country recovery house for healing, integration, and Ibogaine aftercare."
+>
+  <!-- ===================== HERO ===================== -->
+  <section class="bg-pine px-6 pb-16 pt-32 text-linen lg:px-10 lg:pb-20 lg:pt-40">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow rise text-gold">Become a Guest</p>
+      <h1 class="rise rise-2 mt-5 text-4xl leading-tight sm:text-5xl">
+        Apply to become a guest
+      </h1>
+      <p class="rise rise-3 mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-cream/90">
+        Casa da Nova Vida is for those seeking deep healing and transformation.
+        If you are interested in becoming a guest, please take your time with the
+        application below. We look forward to connecting with you and exploring
+        the possibilities of your journey with us.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== APPLICATION FORM ===================== -->
+  <section class="px-6 py-16 lg:px-10 lg:py-24">
+    <div class="mx-auto max-w-2xl rounded-3xl border border-sand bg-linen p-8 shadow-sm lg:p-10">
+      <form action={FORM_ACTION} method="POST" class="space-y-6">
+        <input
+          type="hidden"
+          name="_subject"
+          value="New guest application - Casa da Nova Vida"
+        />
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <label class="block text-sm font-medium text-cocoa">
+            First name <span class="text-clay">*</span>
+            <input type="text" name="first_name" required placeholder="First name" class={inputClass} />
+          </label>
+          <label class="block text-sm font-medium text-cocoa">
+            Last name <span class="text-clay">*</span>
+            <input type="text" name="last_name" required placeholder="Last name" class={inputClass} />
+          </label>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <label class="block text-sm font-medium text-cocoa">
+            Email <span class="text-clay">*</span>
+            <input type="email" name="email" required placeholder="you@email.com" class={inputClass} />
+          </label>
+          <label class="block text-sm font-medium text-cocoa">
+            Phone <span class="text-clay">*</span>
+            <input type="tel" name="phone" required placeholder="(000) 000-0000" class={inputClass} />
+          </label>
+        </div>
+
+        <label class="block text-sm font-medium text-cocoa">
+          Date of birth <span class="text-clay">*</span>
+          <input type="date" name="birthday" required class={inputClass} />
+        </label>
+
+        <label class="block text-sm font-medium text-cocoa">
+          This application is for
+          <select name="application_for" class={inputClass}>
+            <option>Myself</option>
+            <option>A family member or loved one</option>
+            <option>Other</option>
+          </select>
+        </label>
+
+        <label class="block text-sm font-medium text-cocoa">
+          Where are you in your journey?
+          <select name="journey_stage" class={inputClass}>
+            <option>Exploring Ibogaine or considering treatment</option>
+            <option>Preparing for an upcoming treatment or retreat</option>
+            <option>Recently completed treatment, seeking integration</option>
+            <option>Some time has passed, seeking support</option>
+            <option>Not sure yet</option>
+          </select>
+        </label>
+
+        <label class="block text-sm font-medium text-cocoa">
+          Tell us about yourself and what you are seeking <span class="text-clay">*</span>
+          <textarea
+            name="message"
+            required
+            rows="6"
+            placeholder="Share as much or as little as you'd like about where you are and what brings you here."
+            class={inputClass}></textarea>
+        </label>
+
+        <button
+          type="submit"
+          class="w-full rounded-full bg-pine px-7 py-4 font-medium text-linen transition-colors hover:bg-forest"
+        >
+          Submit application
+        </button>
+        <p class="text-center text-xs leading-relaxed text-stone">
+          Everything you share is held in strict confidence. We typically respond
+          within one business day.
+        </p>
+      </form>
+    </div>
+
+    <p class="mx-auto mt-8 max-w-2xl text-center text-sm text-cocoa">
+      Prefer to talk first? <a href={withBase("/contact")} class="text-forest underline decoration-sage underline-offset-2 hover:decoration-forest">Reach out to us</a> and a member of our community will personally respond.
+    </p>
+  </section>
+</Layout>
