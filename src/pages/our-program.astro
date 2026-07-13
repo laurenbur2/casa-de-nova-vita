@@ -152,20 +152,32 @@ const activities = [
 
   <!-- ===================== NUTRITION ===================== -->
   <section class="bg-forest px-6 py-20 text-linen lg:px-10 lg:py-28">
-    <div class="mx-auto max-w-3xl text-center">
-      <p class="eyebrow text-gold">Nutrition</p>
-      <p class="mt-6 text-lg leading-relaxed text-sagelight">
-        We serve healthy, organic, seasonal meals designed to stabilize and
-        nourish body, mind, and emotions. And we teach the fundamentals of
-        shopping, cooking, and intentional eating, so a healthy relationship with
-        food continues long after you leave.
-      </p>
-      <blockquote class="mt-8 font-display text-2xl italic leading-relaxed text-gold sm:text-3xl">
-        “Let food be thy medicine and medicine be thy food”
-        <cite class="mt-3 block font-sans text-sm not-italic uppercase tracking-[0.18em] text-sage">
-          Hippocrates
-        </cite>
-      </blockquote>
+    <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div class="overflow-hidden rounded-[1.75rem] shadow-xl">
+        <img
+          src={withBase("/images/photos/cards/food.jpg")}
+          alt="A spread of fresh, seasonal whole foods on a wooden table"
+          class="h-72 w-full object-cover sm:h-96 lg:h-[30rem]"
+          loading="lazy"
+          width="1024"
+          height="768"
+        />
+      </div>
+      <div>
+        <p class="eyebrow text-gold">Nutrition</p>
+        <p class="mt-6 text-lg leading-relaxed text-sagelight">
+          We serve healthy, organic, seasonal meals designed to stabilize and
+          nourish body, mind, and emotions. And we teach the fundamentals of
+          shopping, cooking, and intentional eating, so a healthy relationship
+          with food continues long after you leave.
+        </p>
+        <blockquote class="mt-8 border-l-2 border-gold/60 pl-6 font-display text-2xl italic leading-relaxed text-gold sm:text-3xl">
+          “Let food be thy medicine and medicine be thy food”
+          <cite class="mt-3 block font-sans text-sm not-italic uppercase tracking-[0.18em] text-sage">
+            Hippocrates
+          </cite>
+        </blockquote>
+      </div>
     </div>
   </section>
 
