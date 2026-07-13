@@ -6,124 +6,240 @@ import { withBase } from "../lib/base";
 // ── Filter tags (wired to the library grid via data-cat below) ─────────────
 const filters = [
   { slug: "all", label: "All" },
-  { slug: "news", label: "In the News" },
-  { slug: "blog", label: "Blog" },
-  { slug: "addiction", label: "Addiction" },
-  { slug: "trauma", label: "Trauma & PTSD" },
   { slug: "ibogaine", label: "Ibogaine" },
   { slug: "ayahuasca", label: "Ayahuasca" },
   { slug: "integration", label: "Integration" },
+  { slug: "addiction", label: "Addiction & Trauma" },
   { slug: "harm-reduction", label: "Harm Reduction" },
   { slug: "neuroplasticity", label: "Neuroplasticity" },
+  { slug: "spirituality", label: "Spirituality" },
+  { slug: "research", label: "Research" },
 ];
 
 // ── Featured resource ──────────────────────────────────────────────────────
 const featured = {
-  label: "Featured · Casa da Nova Vida",
-  title: "The importance of integration after plant medicine",
-  body: "Insight alone does not create lasting change. Integration is how the breakthroughs of Ibogaine and Ayahuasca take root in the body, the nervous system, relationships, and daily life. A grounding place to begin.",
-  href: "/ibogaine-aftercare",
-  img: "/images/photos/cards/story-hero.jpg",
+  label: "Featured · Stanford Medicine",
+  title: "Ibogaine reduces PTSD and depression in veterans",
+  body: "A landmark 2024 Stanford study found ibogaine led to dramatic, rapid reductions in PTSD, depression, and anxiety in veterans with traumatic brain injury, alongside gains in cognition, with no serious side effects.",
+  href: "https://med.stanford.edu/news/all-news/2024/01/ibogaine-ptsd.html",
+  img: "/images/photos/cards/welcome-iboga.jpg",
 };
 
-// ── Browse-by-topic cards ──────────────────────────────────────────────────
-const topics = [
-  { title: "Addiction", body: "Understanding addiction as a response to pain, not a moral failing.", img: "/images/photos/cards/welcome-path.jpg" },
-  { title: "Trauma & PTSD", body: "How stored trauma shapes the nervous system, and how it heals.", img: "/images/photos/cards/gallery-sunset.jpg" },
-  { title: "Depression", body: "Alternative, holistic paths toward relief and renewed meaning.", img: "/images/photos/attractions/jacobs-well.jpg" },
-  { title: "Anxiety", body: "Regulation, presence, and calming a threat-shaped nervous system.", img: "/images/photos/cards/welcome-grow.jpg" },
-  { title: "Grief", body: "Meeting loss with space, ritual, and gentle, honest support.", img: "/images/photos/attractions/san-marcos-river.jpg" },
-];
-
-// ── Resource library (real links + SEO placeholders) ───────────────────────
+// ── Resource library ───────────────────────────────────────────────────────
 const library = [
+  // Ibogaine
   {
-    source: "National Harm Reduction Coalition",
-    title: "Principles of Harm Reduction",
-    meta: "Guide",
-    body: "Dignity, respect, and self-determination on the path of recovery, the principles that shape how we hold space.",
-    href: "https://harmreduction.org/about-us/principles-of-harm-reduction/",
-    img: "/images/photos/cards/gallery-meadow.jpg",
-    cat: "harm-reduction news",
+    source: "Nature Medicine",
+    title: "Magnesium-ibogaine therapy in veterans with traumatic brain injuries",
+    meta: "Study · 2024",
+    body: "The peer-reviewed Stanford study behind the headlines, published in Nature Medicine.",
+    href: "https://www.nature.com/articles/s41591-023-02705-w",
+    cat: "ibogaine research",
   },
+  {
+    source: "MindScape Retreat",
+    title: "Integration therapy after ibogaine: why the first 90 days matter",
+    meta: "Article",
+    body: "Why the window right after ibogaine is decisive, and how aftercare turns relief into lasting recovery.",
+    href: "https://www.mindscaperetreat.com/news/integration-therapy-after-ibogaine-treatment-why-the-first-90-days-determine-long-term-recovery",
+    cat: "ibogaine integration",
+  },
+  {
+    source: "Psychable",
+    title: "Ibogaine integration and aftercare for addiction",
+    meta: "Guide",
+    body: "A practical overview of the integration and aftercare that follows ibogaine treatment for addiction.",
+    href: "https://psychable.com/addiction/ibogaine-integration-and-aftercare-for-addiction",
+    cat: "ibogaine integration addiction",
+  },
+  {
+    source: "PubMed",
+    title: "Persisting effects following ibogaine detoxification",
+    meta: "Research",
+    body: "A mixed-method study of the lasting effects, and the integration needs, people report after ibogaine.",
+    href: "https://pubmed.ncbi.nlm.nih.gov/30020025/",
+    cat: "ibogaine research addiction",
+  },
+  // Ayahuasca
+  {
+    source: "Psychedelic Support",
+    title: "Integrating ayahuasca experiences",
+    meta: "Guide",
+    body: "Common themes and grounded practices for bringing ayahuasca insights into everyday life.",
+    href: "https://psychedelic.support/resources/integrating-ayahuasca-experiences/",
+    cat: "ayahuasca integration",
+  },
+  {
+    source: "Psychedelic Support",
+    title: "Emotional healing with ayahuasca",
+    meta: "Article",
+    body: "How ayahuasca can surface and help process grief, fear, and long-held emotion.",
+    href: "https://psychedelic.support/resources/emotional-healing-with-ayahuasca/",
+    cat: "ayahuasca",
+  },
+  {
+    source: "Ayahuasca Foundation",
+    title: "Ayahuasca integration: counseling, support, and practices",
+    meta: "Guide",
+    body: "Counseling, community, and daily practices that help ayahuasca work take root.",
+    href: "https://www.ayahuascafoundation.org/information/preparation-integration/ayahuasca-integration/",
+    cat: "ayahuasca integration",
+  },
+  {
+    source: "Psychotherapy Networker",
+    title: "Inside the ayahuasca experience",
+    meta: "Article · 2018",
+    body: "A close, thoughtful look at the ayahuasca experience and its place in emotional healing.",
+    href: "https://www.psychotherapynetworker.org/article/inside-ayahuasca-experience-septemberoctober-2018/",
+    cat: "ayahuasca integration",
+  },
+  // Integration
+  {
+    source: "Frontiers in Psychology",
+    title: "Psychedelic integration: an analysis of the concept and its practice",
+    meta: "Research",
+    body: "A scholarly look at what integration actually is, and how it is practiced.",
+    href: "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2022.824077/full",
+    cat: "integration research",
+  },
+  {
+    source: "ADAA",
+    title: "Your psychedelic therapy journey continues: integration 101",
+    meta: "Primer",
+    body: "An accessible primer on why integration, not the experience alone, is where lasting change is made.",
+    href: "https://adaa.org/learn-from-us/from-the-experts/blog-posts/consumer-professional/your-psychedelic-therapy-journey",
+    cat: "integration",
+  },
+  {
+    source: "Psychology Today",
+    title: "The art of integration after a psychedelic experience",
+    meta: "Article",
+    body: "On turning insight into embodied, durable change once the ceremony ends.",
+    href: "https://www.psychologytoday.com/us/blog/truth-medicine/202604/the-art-of-integration-after-a-psychedelic-experience",
+    cat: "integration",
+  },
+  {
+    source: "MAPS",
+    title: "The six domains of psychedelic integration",
+    meta: "Framework",
+    body: "A framework for integrating across mind, body, spirit, relationships, and daily life.",
+    href: "https://maps.org/integration/the-6-domains-of-psychedelic-integration/",
+    cat: "integration",
+  },
+  {
+    source: "Frontiers in Psychology",
+    title: "Coping and support strategies for extended difficulties after psychedelics",
+    meta: "Research",
+    body: "A qualitative study of how people move through hard, lingering effects after a psychedelic experience.",
+    href: "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2024.1369715/full",
+    cat: "integration research",
+  },
+  {
+    source: "Psychedelic Support",
+    title: "What to do after you've taken psychedelics",
+    meta: "Guide",
+    body: "Concrete, grounding steps for the vulnerable days and weeks that follow.",
+    href: "https://psychedelic.support/resources/now-that-its-over-what-to-do-after-youve-taken-psychedelics/",
+    cat: "integration",
+  },
+  // Addiction & trauma
   {
     source: "Dr. Gabor Maté",
     title: "In the Realm of Hungry Ghosts",
     meta: "Book",
-    body: "Reframing addiction not as a moral failing, but as an understandable response to trauma and pain.",
-    href: "https://drgabormate.com/",
-    img: "/images/photos/cards/welcome-iboga.jpg",
-    cat: "addiction blog",
+    body: "Maté's landmark work reframing addiction not as a moral failing, but as a response to pain and trauma.",
+    href: "https://drgabormate.com/book/in-the-realm-of-hungry-ghosts/",
+    cat: "addiction",
   },
   {
-    source: "Psychotherapy Networker",
-    title: "Inside the Ayahuasca Experience",
-    meta: "Article · 2018",
-    body: "A close look at the ayahuasca experience and its place in emotional healing and recovery.",
-    href: "https://www.psychotherapynetworker.org/article/inside-ayahuasca-experience-septemberoctober-2018/",
-    img: "/images/photos/attractions/krause-springs.jpg",
-    cat: "ayahuasca news",
+    source: "Recovery.com",
+    title: "Abstinence vs. harm reduction in addiction recovery",
+    meta: "Guide",
+    body: "How the two approaches compare, and how meeting people where they are can become a bridge to healing.",
+    href: "https://recovery.com/resources/abstinence-vs-harm-reduction-in-addiction-recovery/",
+    cat: "harm-reduction addiction",
   },
   {
-    source: "Casa da Nova Vida",
-    title: "Ibogaine and the interruption of addiction",
-    meta: "Placeholder: add content",
-    body: "How Ibogaine can quiet compulsive loops and open a window for lasting change.",
-    href: "/ibogaine-aftercare",
-    img: "/images/photos/attractions/enchanted-rock.jpg",
-    cat: "ibogaine addiction",
+    source: "National Harm Reduction Coalition",
+    title: "Principles of harm reduction",
+    meta: "Guide",
+    body: "The foundational principles: dignity, respect, and self-determination on each person's path.",
+    href: "https://harmreduction.org/about-us/principles-of-harm-reduction/",
+    cat: "harm-reduction",
   },
   {
-    source: "Casa da Nova Vida",
-    title: "The neuroscience of plant medicine",
-    meta: "Placeholder: add content",
-    body: "Neuroplasticity, the nervous system, and why the days after treatment matter most.",
-    href: "/our-approach",
-    img: "/images/photos/cards/gallery-porch.jpg",
+    source: "PMC",
+    title: "Psilocybin-assisted therapy for relapse prevention in alcohol use disorder",
+    meta: "Trial",
+    body: "A phase 2 randomized clinical trial on psilocybin therapy for preventing relapse.",
+    href: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11937691/",
+    cat: "addiction research",
+  },
+  // Neuroplasticity
+  {
+    source: "Frontiers in Psychiatry",
+    title: "Psychedelics and neuroplasticity: a systematic review",
+    meta: "Research",
+    body: "A systematic review of how psychedelics stimulate neuroplasticity, the brain's capacity to rewire.",
+    href: "https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2021.724606/full",
+    cat: "neuroplasticity research",
+  },
+  {
+    source: "Fireside Project",
+    title: "Psychedelics and neuroplasticity: unlocking the healing brain",
+    meta: "Article",
+    body: "A plain-language look at the window of plasticity psychedelics open, and why it matters for recovery.",
+    href: "https://firesideproject.org/blog/psychedelics-amp-neuroplasticity-unlocking-the-healing-brain",
     cat: "neuroplasticity",
   },
+  // Spirituality
   {
-    source: "Casa da Nova Vida",
-    title: "Integration: turning insight into a new life",
-    meta: "Placeholder: add content",
-    body: "Practices that help the breakthroughs of ceremony become a lived, sustainable reality.",
-    href: "/ibogaine-aftercare",
-    img: "/images/photos/attractions/barton-springs.jpg",
-    cat: "integration blog",
+    source: "Int'l Society of Addiction Medicine",
+    title: "The role of spirituality in addiction medicine",
+    meta: "Position statement",
+    body: "How spirituality can be meaningfully incorporated into addiction care and research.",
+    href: "https://www.tandfonline.com/doi/full/10.1080/08897077.2021.1941514",
+    cat: "spirituality addiction research",
   },
   {
-    source: "Casa da Nova Vida",
-    title: "Trauma, the body, and the roots of addiction",
-    meta: "Placeholder: add content",
-    body: "Why lasting recovery begins with the wounds beneath the behavior.",
-    href: "/our-approach",
-    img: "/images/photos/cards/welcome-grow.jpg",
-    cat: "trauma addiction",
+    source: "PMC",
+    title: "Spirituality, life meaning, and quality of life in recovery",
+    meta: "Research",
+    body: "On how spirituality, meaning, and social support relate to well-being in long-term recovery.",
+    href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC1526775/",
+    cat: "spirituality addiction research",
+  },
+  // Research centers & support
+  {
+    source: "Johns Hopkins",
+    title: "Center for Psychedelic and Consciousness Research",
+    meta: "Research center",
+    body: "The largest psychedelic research center of its kind, with 150+ peer-reviewed studies.",
+    href: "https://www.hopkinspsychedelic.org/",
+    cat: "research integration",
   },
   {
-    source: "Casa da Nova Vida",
-    title: "Ayahuasca and emotional healing",
-    meta: "Placeholder: add content",
-    body: "Working with grief, fear, and suppressed emotion in a supported setting.",
-    href: "/our-program",
-    img: "/images/photos/attractions/san-marcos-river.jpg",
-    cat: "ayahuasca trauma",
+    source: "MAPS",
+    title: "Psychedelic education and support resources",
+    meta: "Organization",
+    body: "The Multidisciplinary Association for Psychedelic Studies' hub of research and integration resources.",
+    href: "https://maps.org/take-action/resources/",
+    cat: "integration research",
   },
   {
-    source: "Casa da Nova Vida",
-    title: "Building a life after Ibogaine",
-    meta: "Placeholder: add content",
-    body: "Structure, community, and embodiment in the vulnerable weeks that follow.",
-    href: "/ibogaine-aftercare",
-    img: "/images/photos/cards/welcome-path.jpg",
-    cat: "ibogaine integration",
+    source: "Fireside Project",
+    title: "Psychedelic peer support line",
+    meta: "Support",
+    body: "Free, confidential peer support during and after psychedelic experiences. Call or text 62-FIRESIDE.",
+    href: "https://firesideproject.org/",
+    cat: "integration",
   },
 ];
 ---
 
 <Layout
   title="Resources · Casa da Nova Vida"
-  description="A library of articles, research, and stories on healing, harm reduction, plant medicine, and integration from Casa da Nova Vida."
+  description="A library of research, articles, and stories on integration and recovery after ibogaine, ayahuasca, and plant medicine, from Casa da Nova Vida."
 >
   <!-- ===================== HERO ===================== -->
   <section class="bg-pine px-6 pb-20 pt-32 text-linen lg:px-10 lg:pb-24 lg:pt-40">
@@ -131,46 +247,23 @@ const library = [
       <p class="eyebrow rise text-gold">Resources</p>
       <h1 class="rise rise-2 mt-5 text-4xl leading-[1.1] sm:text-5xl">Resources</h1>
       <p class="rise rise-3 mx-auto mt-5 font-display text-xl italic text-sagelight sm:text-2xl">
-        Articles, guides, and stories.
+        Research, articles, and stories.
       </p>
       <p class="rise rise-3 mx-auto mt-6 max-w-2xl leading-relaxed text-cream/90">
-        A growing library of reading on healing, harm reduction, plant medicine,
-        and integration, curated to support you wherever you are on the path.
+        A growing library on healing and integration after ibogaine, ayahuasca,
+        and other plant medicines. Curated to support you as you carry the work
+        into a lasting new life, without relapse.
       </p>
-    </div>
-  </section>
-
-  <!-- ===================== LIBRARY + FILTERS ===================== -->
-  <section class="px-6 pt-16 lg:px-10 lg:pt-24">
-    <div class="mx-auto max-w-6xl">
-      <p class="eyebrow">Library</p>
-      <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Articles, research &amp; stories</h2>
-      <p class="mt-5 max-w-2xl leading-relaxed text-cocoa">
-        A curated collection to help you understand the path of healing, from
-        the science of recovery to first-hand stories of transformation.
-      </p>
-
-      <div class="mt-8 flex flex-wrap gap-2.5">
-        {
-          filters.map((f, i) => (
-            <button
-              type="button"
-              data-filter={f.slug}
-              class:list={["filter-pill rounded-full border px-4 py-2 text-sm transition-colors", i === 0 && "is-active"]}
-            >
-              {f.label}
-            </button>
-          ))
-        }
-      </div>
     </div>
   </section>
 
   <!-- ===================== FEATURED ===================== -->
-  <section class="px-6 pt-12 lg:px-10 lg:pt-16">
+  <section class="px-6 pt-16 lg:px-10 lg:pt-20">
     <div class="mx-auto max-w-6xl">
       <a
-        href={withBase(featured.href)}
+        href={featured.href}
+        target="_blank"
+        rel="noopener"
         class="group grid overflow-hidden rounded-[1.75rem] border border-sand bg-parchment shadow-sm transition-shadow duration-300 hover:shadow-[0_24px_60px_-28px_rgba(43,54,70,0.4)] md:grid-cols-2"
       >
         <div class="overflow-hidden">
@@ -186,66 +279,57 @@ const library = [
           <h3 class="mt-4 text-2xl text-pine sm:text-3xl">{featured.title}</h3>
           <p class="mt-4 leading-relaxed text-cocoa">{featured.body}</p>
           <span class="mt-6 inline-flex items-center gap-2 font-medium text-forest">
-            Read article <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+            Read the study <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
           </span>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- ===================== BROWSE BY TOPIC ===================== -->
+  <!-- ===================== LIBRARY + FILTERS ===================== -->
   <section class="px-6 py-16 lg:px-10 lg:py-24">
     <div class="mx-auto max-w-6xl">
-      <p class="eyebrow">Browse by topic</p>
-      <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Where you are on the path</h2>
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+      <p class="eyebrow">The library</p>
+      <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Reading &amp; research</h2>
+      <p class="mt-5 max-w-2xl leading-relaxed text-cocoa">
+        Filter by topic to find what meets you where you are, from the science of
+        recovery to the practice of integration.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-2.5">
         {
-          topics.map((t) => (
-            <article class="group overflow-hidden rounded-2xl border border-sand bg-parchment transition-shadow duration-300 hover:shadow-[0_16px_40px_-22px_rgba(43,54,70,0.4)]">
-              <div class="overflow-hidden">
-                <img src={withBase(t.img)} alt="" class="h-32 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105" loading="lazy" />
-              </div>
-              <div class="p-5">
-                <p class="text-[0.7rem] uppercase tracking-[0.16em] text-clay">Topic</p>
-                <h3 class="mt-1.5 text-lg text-forest">{t.title}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-cocoa">{t.body}</p>
-              </div>
-            </article>
+          filters.map((f, i) => (
+            <button
+              type="button"
+              data-filter={f.slug}
+              class:list={["filter-pill rounded-full border px-4 py-2 text-sm transition-colors", i === 0 && "is-active"]}
+            >
+              {f.label}
+            </button>
           ))
         }
       </div>
-    </div>
-  </section>
-
-  <!-- ===================== RESOURCE LIBRARY GRID ===================== -->
-  <section class="border-t border-sand bg-cream px-6 py-16 lg:px-10 lg:py-24">
-    <div class="mx-auto max-w-6xl">
-      <p class="eyebrow">The library</p>
-      <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Reading &amp; references</h2>
 
       <div id="library-grid" class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {
           library.map((r) => (
             <a
-              href={withBase(r.href)}
-              target={r.href.startsWith("http") ? "_blank" : undefined}
-              rel={r.href.startsWith("http") ? "noopener" : undefined}
+              href={r.href}
+              target="_blank"
+              rel="noopener"
               data-cat={r.cat}
-              class="group flex flex-col overflow-hidden rounded-2xl border border-sand bg-parchment shadow-sm transition-shadow duration-300 hover:shadow-[0_18px_50px_-24px_rgba(43,54,70,0.35)]"
+              class="group flex flex-col rounded-2xl border border-sand bg-parchment p-6 shadow-sm transition-shadow duration-300 hover:shadow-[0_18px_50px_-24px_rgba(43,54,70,0.35)]"
             >
-              <div class="overflow-hidden">
-                <img src={withBase(r.img)} alt="" class="h-44 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105" loading="lazy" />
-              </div>
-              <div class="flex flex-1 flex-col p-6">
-                <p class="text-[0.7rem] uppercase tracking-[0.16em] text-clay">{r.source}</p>
-                <h3 class="mt-2 text-xl leading-snug text-forest">{r.title}</h3>
-                <p class="mt-2 flex-1 text-sm leading-relaxed text-cocoa">
-                  <span class="text-stone">{r.meta}</span>. {r.body}
-                </p>
-                <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-forest">
-                  Read <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
-                </span>
-              </div>
+              <p class="text-[0.7rem] uppercase tracking-[0.16em] text-clay">{r.source}</p>
+              <h3 class="mt-2 text-lg leading-snug text-forest transition-colors group-hover:text-pine">
+                {r.title}
+              </h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-cocoa">
+                <span class="text-stone">{r.meta}</span> · {r.body}
+              </p>
+              <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-forest">
+                Read <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+              </span>
             </a>
           ))
         }
@@ -256,7 +340,7 @@ const library = [
     </div>
   </section>
 
-  <div class="py-20 lg:py-28"><CTABand /></div>
+  <div class="pb-20 lg:pb-28"><CTABand /></div>
 </Layout>
 
 <script>
