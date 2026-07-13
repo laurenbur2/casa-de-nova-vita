@@ -48,6 +48,29 @@ const supports = [
     body: "Gifts help maintain the facilities and grounds in the Texas Hill Country that make this work of integration possible.",
   },
 ];
+
+const faqs = [
+  {
+    q: "Is my donation tax-deductible?",
+    a: "Yes. Casa da Nova Vida is a religious church that qualifies as tax-exempt under Section 501(c)(3) of the Internal Revenue Code (EIN 41-2320036). Contributions are generally tax-deductible to the extent allowed by law, and we provide a receipt for your records. Donations are not payments for goods or services; please consult your tax professional regarding deductibility.",
+  },
+  {
+    q: "Where does my donation go?",
+    a: "Your gift funds program costs, community support services, facilities, and financial assistance that helps make participation accessible to those in need, supporting the charitable and religious operations of the church.",
+  },
+  {
+    q: "Can I volunteer or get more involved?",
+    a: "Yes. We welcome those who wish to share their time and skills. Reach out to drew@casadanovavida.com and we will find a way to plug you in.",
+  },
+  {
+    q: "Do you accept in-kind donations?",
+    a: "We do, and gratefully. If you would like to contribute goods or services rather than a financial gift, email drew@casadanovavida.com to coordinate.",
+  },
+  {
+    q: "Can I donate in honor or in memory of someone?",
+    a: "Yes. You are welcome to make a gift in honor or in memory of a loved one. Just let us know at drew@casadanovavida.com and we will make sure it is recognized.",
+  },
+];
 ---
 
 <Layout
@@ -236,6 +259,35 @@ const supports = [
       </a>
     </div>
   </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="border-t border-sand bg-cream px-6 py-20 lg:px-10 lg:py-24">
+    <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.3fr] lg:gap-16">
+      <div>
+        <p class="eyebrow">FAQ</p>
+        <h2 class="mt-4 text-3xl text-pine sm:text-4xl">
+          Frequently asked questions
+        </h2>
+      </div>
+      <div class="border-t border-sand">
+        {
+          faqs.map((f) => (
+            <details class="faq border-b border-sand">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 py-5 text-lg text-forest">
+                {f.q}
+                <span class="faq-plus flex-none text-pine transition-transform duration-300">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                </span>
+              </summary>
+              <p class="pb-5 leading-relaxed text-cocoa">{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <script>
@@ -311,4 +363,8 @@ const supports = [
     color: var(--color-pine);
     box-shadow: 0 1px 2px rgba(43, 54, 70, 0.12);
   }
+
+  .faq summary { list-style: none; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq[open] .faq-plus { transform: rotate(45deg); }
 </style>
