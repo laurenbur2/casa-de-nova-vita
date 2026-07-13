@@ -118,6 +118,18 @@ h1, h2, h3, .font-display {
 }
 #site-header.is-scrolled .header-cta:hover { background-color: var(--color-forest); }
 
+/* Donate — always a filled pill, high-contrast in both states */
+#site-header .donate-cta {
+  background-color: var(--color-linen);
+  color: var(--color-pine);
+}
+#site-header .donate-cta:hover { background-color: var(--color-cream); }
+#site-header.is-scrolled .donate-cta {
+  background-color: var(--color-pine);
+  color: var(--color-linen);
+}
+#site-header.is-scrolled .donate-cta:hover { background-color: var(--color-forest); }
+
 /* Scroll cue — gentle bob */
 @keyframes scroll-bob {
   0%, 100% { transform: translate(-50%, 0); }
