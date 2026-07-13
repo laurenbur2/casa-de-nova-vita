@@ -10,7 +10,7 @@
 
 @theme {
   /* Fonts */
-  --font-display: "Fraunces", "Georgia", serif;
+  --font-display: "Cormorant", "Georgia", serif;
   --font-body: "Inter", "Helvetica Neue", system-ui, sans-serif;
 
   /* Warm neutrals — cream / linen backgrounds (match the live site) */
@@ -54,17 +54,11 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Display headings */
+/* Display headings — Cormorant: elegant, high-contrast serif */
 h1, h2, h3, .font-display {
   font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-}
-
-/* Fraunces optical settings for a soft, organic feel */
-.font-display,
-h1, h2, h3 {
-  font-variation-settings: "opsz" 40, "SOFT" 40, "WONK" 0;
+  font-weight: 500;
+  letter-spacing: 0;
 }
 
 /* Reusable eyebrow / kicker label */

@@ -1,0 +1,309 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import { withBase } from "../lib/base";
+
+// ============================================================
+//  Stripe Payment Links
+//  Create one Payment Link per amount in the Stripe Dashboard
+//  (Payments → Payment Links → New). Paste each URL below.
+//  - "custom" should be a link where the donor names their own
+//    amount ("Let customers choose what they pay").
+//  - "monthly" links should use a recurring price.
+//  Until these are replaced, buttons point to the Stripe docs so
+//  nothing 404s. Search for STRIPE_PLACEHOLDER to find them all.
+// ============================================================
+const STRIPE_PLACEHOLDER = "https://dashboard.stripe.com/payment-links";
+
+const STRIPE = {
+  once: {
+    "20": STRIPE_PLACEHOLDER,
+    "50": STRIPE_PLACEHOLDER,
+    "100": STRIPE_PLACEHOLDER,
+    "500": STRIPE_PLACEHOLDER,
+    custom: STRIPE_PLACEHOLDER,
+  },
+  monthly: {
+    "20": STRIPE_PLACEHOLDER,
+    "50": STRIPE_PLACEHOLDER,
+    "100": STRIPE_PLACEHOLDER,
+    "500": STRIPE_PLACEHOLDER,
+    custom: STRIPE_PLACEHOLDER,
+  },
+};
+
+const amounts = ["20", "50", "100", "500"];
+
+const supports = [
+  {
+    title: "Subsidizing a stay",
+    body: "Your gift helps cover the cost of a guest's stay, making healing accessible to those who could not otherwise afford it.",
+  },
+  {
+    title: "Community & program",
+    body: "Donations fund program costs, community support services, and the day-to-day care that holds each guest's journey.",
+  },
+  {
+    title: "The home itself",
+    body: "Gifts help maintain the facilities and grounds in the Texas Hill Country that make this work of integration possible.",
+  },
+];
+---
+
+<Layout
+  title="Donate · Casa da Nova Vida"
+  description="Support Casa da Nova Vida. Your tax-deductible donation helps subsidize the cost of a person's stay and makes healing accessible to those in need."
+>
+  <PageHero
+    eyebrow="Support Our Work"
+    title="Help someone begin a new life"
+    intro="Your donation helps impact the lives of those we serve. Every gift helps subsidize the cost of a person's stay at Casa da Nova Vida, making this path of healing and integration accessible to those who need it most."
+    image="/images/photos/property-sunset-hills.png"
+    imageAlt="Golden-hour sun setting over the rolling Texas Hill Country"
+  />
+
+  <!-- ===================== DONATION FORM ===================== -->
+  <section class="px-6 py-20 lg:px-10 lg:py-24">
+    <div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
+      <!-- Left: the ask -->
+      <div>
+        <p class="eyebrow">Why give</p>
+        <h2 class="mt-4 text-3xl text-pine sm:text-4xl">
+          A gift that lands where it's needed most
+        </h2>
+        <p class="mt-6 leading-relaxed text-cocoa">
+          Casa da Nova Vida is a registered non-profit. We keep our doors open to
+          people walking an alternative path of healing, regardless of what they
+          can pay. Your generosity is often the difference between someone facing
+          the vulnerable days after treatment alone, or being held by a
+          community.
+        </p>
+
+        <div class="mt-10 space-y-6">
+          {
+            supports.map((s) => (
+              <div class="flex gap-4">
+                <span class="mt-1.5 h-2 w-2 flex-none rounded-full bg-clay" />
+                <div>
+                  <h3 class="text-lg text-forest">{s.title}</h3>
+                  <p class="mt-1 leading-relaxed text-cocoa">{s.body}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Right: donation card -->
+      <div
+        id="donate-card"
+        class="rounded-3xl border border-sand bg-parchment p-8 shadow-sm lg:p-10"
+        data-once-custom={STRIPE.once.custom}
+        data-monthly-custom={STRIPE.monthly.custom}
+      >
+        <h2 class="text-2xl text-pine">Make a donation</h2>
+
+        <!-- Frequency toggle -->
+        <div class="mt-6">
+          <span class="text-xs uppercase tracking-[0.18em] text-stone">Frequency</span>
+          <div
+            id="freq-group"
+            class="mt-3 grid grid-cols-2 gap-2 rounded-full border border-sand bg-cream p-1"
+            role="tablist"
+            aria-label="Donation frequency"
+          >
+            <button
+              type="button"
+              data-freq="once"
+              class="freq-btn is-active rounded-full py-2.5 text-sm font-medium transition-colors"
+              aria-selected="true"
+            >
+              One-time
+            </button>
+            <button
+              type="button"
+              data-freq="monthly"
+              class="freq-btn rounded-full py-2.5 text-sm font-medium transition-colors"
+              aria-selected="false"
+            >
+              Monthly
+            </button>
+          </div>
+        </div>
+
+        <!-- Amount grid -->
+        <div class="mt-7">
+          <span class="text-xs uppercase tracking-[0.18em] text-stone">Amount</span>
+          <div class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {
+              amounts.map((a, i) => (
+                <button
+                  type="button"
+                  data-amount={a}
+                  data-once={STRIPE.once[a as keyof typeof STRIPE.once]}
+                  data-monthly={STRIPE.monthly[a as keyof typeof STRIPE.monthly]}
+                  class:list={[
+                    "amount-btn rounded-xl border py-3.5 text-lg font-medium transition-colors",
+                    i === 1
+                      ? "is-active border-pine bg-pine text-linen"
+                      : "border-sand bg-linen text-forest hover:border-moss",
+                  ]}
+                  aria-pressed={i === 1 ? "true" : "false"}
+                >
+                  ${a}
+                </button>
+              ))
+            }
+          </div>
+          <button
+            type="button"
+            id="custom-btn"
+            data-amount="custom"
+            class="amount-btn mt-3 w-full rounded-xl border border-dashed border-sand bg-linen py-3.5 text-base font-medium text-forest transition-colors hover:border-moss"
+            aria-pressed="false"
+          >
+            Choose a custom amount
+          </button>
+        </div>
+
+        <!-- Cover the fee note -->
+        <label class="mt-6 flex items-start gap-3 text-sm text-cocoa">
+          <input
+            type="checkbox"
+            id="cover-fee"
+            class="mt-0.5 h-4 w-4 flex-none rounded border-sand text-pine focus:ring-moss/30"
+          />
+          <span>
+            Add a little extra to cover the ~3% processing fee, so your full gift
+            reaches our guests. You can adjust the total on the next screen.
+          </span>
+        </label>
+
+        <!-- CTA -->
+        <a
+          id="donate-cta"
+          href={STRIPE.once["50"]}
+          target="_blank"
+          rel="noopener"
+          class="mt-7 flex w-full items-center justify-center rounded-full bg-pine px-7 py-4 font-medium text-linen transition-colors hover:bg-forest"
+        >
+          <span id="donate-cta-label">Donate $50</span>
+        </a>
+        <p class="mt-4 text-center text-xs leading-relaxed text-stone">
+          Secure checkout via Stripe. You'll be able to review your gift before
+          confirming.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TAX / TRUST BAND ===================== -->
+  <section class="border-y border-sand bg-cream px-6 py-16 lg:px-10 lg:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow">Tax-deductible</p>
+      <p class="mt-6 leading-relaxed text-cocoa">
+        Casa da Nova Vida is a non-profit organization exempt under{" "}
+        <span class="text-pine">Section 501(c)(3)</span> of the Internal Revenue
+        Code. Our EIN is <span class="whitespace-nowrap text-pine">41-2320036</span>.
+        Your donation is tax-deductible to the fullest extent allowed by law, and
+        a receipt will be provided for your records.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== OTHER WAYS TO GIVE ===================== -->
+  <section class="px-6 py-20 lg:px-10 lg:py-24">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow">Other ways to give</p>
+      <h2 class="mt-4 text-3xl text-pine sm:text-4xl">
+        Not every gift is financial
+      </h2>
+      <p class="mt-6 leading-relaxed text-cocoa">
+        We gratefully accept in-kind donations, and we welcome those who wish to
+        offer their time and skills as volunteers. If you'd like to contribute in
+        another way, we'd love to hear from you.
+      </p>
+      <a
+        href="mailto:drew@casadanovavida.com"
+        class="mt-8 inline-flex rounded-full border border-moss/50 px-8 py-4 font-medium text-pine transition-colors hover:border-moss hover:bg-cream"
+      >
+        Email drew@casadanovavida.com
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const card = document.getElementById("donate-card");
+  const cta = document.getElementById("donate-cta") as HTMLAnchorElement | null;
+  const ctaLabel = document.getElementById("donate-cta-label");
+  const freqBtns = Array.from(document.querySelectorAll<HTMLButtonElement>(".freq-btn"));
+  const amountBtns = Array.from(document.querySelectorAll<HTMLButtonElement>(".amount-btn"));
+
+  if (card && cta && ctaLabel) {
+    const onceCustom = card.getAttribute("data-once-custom") || "#";
+    const monthlyCustom = card.getAttribute("data-monthly-custom") || "#";
+
+    let freq: "once" | "monthly" = "once";
+    let amount = "50";
+
+    const setActive = (list: HTMLButtonElement[], match: (b: HTMLButtonElement) => boolean, on: string, off: string) => {
+      list.forEach((b) => {
+        const active = match(b);
+        on.split(" ").forEach((c) => b.classList.toggle(c, active));
+        off.split(" ").forEach((c) => b.classList.toggle(c, !active));
+      });
+    };
+
+    const sync = () => {
+      const isCustom = amount === "custom";
+      const activeAmountBtn = amountBtns.find((b) => b.dataset.amount === amount);
+      const link = isCustom
+        ? freq === "once" ? onceCustom : monthlyCustom
+        : activeAmountBtn?.dataset[freq] || "#";
+
+      cta.href = link;
+      const suffix = freq === "monthly" ? "/mo" : "";
+      ctaLabel.textContent = isCustom
+        ? `Continue to donate${freq === "monthly" ? " monthly" : ""}`
+        : `Donate $${amount}${suffix}`;
+    };
+
+    freqBtns.forEach((b) =>
+      b.addEventListener("click", () => {
+        freq = (b.dataset.freq as "once" | "monthly") || "once";
+        freqBtns.forEach((x) => {
+          const active = x === b;
+          x.classList.toggle("is-active", active);
+          x.setAttribute("aria-selected", String(active));
+        });
+        sync();
+      }),
+    );
+
+    amountBtns.forEach((b) =>
+      b.addEventListener("click", () => {
+        amount = b.dataset.amount || "50";
+        setActive(
+          amountBtns,
+          (x) => x.dataset.amount === amount,
+          "is-active border-pine bg-pine text-linen",
+          "border-sand bg-linen text-forest",
+        );
+        amountBtns.forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.amount === amount)));
+        sync();
+      }),
+    );
+
+    sync();
+  }
+</script>
+
+<style>
+  .freq-btn { color: var(--color-cocoa); }
+  .freq-btn.is-active {
+    background-color: var(--color-linen);
+    color: var(--color-pine);
+    box-shadow: 0 1px 2px rgba(43, 54, 70, 0.12);
+  }
+</style>

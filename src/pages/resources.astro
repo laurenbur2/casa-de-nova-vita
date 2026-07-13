@@ -1,0 +1,92 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import CTABand from "../components/CTABand.astro";
+
+const resources = [
+  {
+    eyebrow: "Harm Reduction",
+    title: "Principles of Harm Reduction",
+    body: "Harm reduction meets people where they are, honoring dignity, respect, and self-determination on the path of recovery. These principles shape how we hold space at Casa da Nova Vida.",
+    links: [
+      {
+        label: "Principles of Harm Reduction — National Harm Reduction Coalition",
+        href: "https://harmreduction.org/about-us/principles-of-harm-reduction/",
+      },
+    ],
+  },
+  {
+    eyebrow: "Trauma & Addiction",
+    title: "Understanding addiction as a response to trauma",
+    body: "Dr. Gabor Maté's work reframes addiction not as a moral failing, but as an understandable response to pain and trauma. This lens is foundational to how we understand and support each guest.",
+    links: [
+      {
+        label: "Dr. Gabor Maté",
+        href: "https://drgabormate.com/",
+      },
+      {
+        label: "Inside the Ayahuasca Experience — Psychotherapy Networker",
+        href: "https://www.psychotherapynetworker.org/article/inside-ayahuasca-experience-septemberoctober-2018/",
+      },
+    ],
+  },
+  {
+    eyebrow: "Integration",
+    title: "The importance of integration",
+    body: "Insight alone does not create lasting change. Integration and aftercare are what allow the breakthroughs of plant medicine and ibogaine to take root and become a lived, sustainable new life.",
+    links: [],
+  },
+];
+---
+
+<Layout
+  title="Resources · Casa da Nova Vida"
+  description="Reading and references on harm reduction, trauma and addiction, and the importance of integration — the ideas that shape our approach to healing."
+>
+  <PageHero
+    eyebrow="Resources"
+    title="Reading for the path"
+    intro="A few of the ideas and references that shape our approach to healing, harm reduction, and integration. We hope they offer grounding and clarity, wherever you are in your journey."
+    image="/images/photos/forest-light-rays.png"
+    imageAlt="Sunlight breaking through a forest canopy"
+  />
+
+  <section class="px-6 py-20 lg:px-10 lg:py-24">
+    <div class="mx-auto max-w-4xl space-y-6">
+      {
+        resources.map((r) => (
+          <article class="rounded-3xl border border-sand bg-parchment p-8 lg:p-10">
+            <p class="eyebrow">{r.eyebrow}</p>
+            <h2 class="mt-4 text-2xl text-forest sm:text-3xl">{r.title}</h2>
+            <p class="mt-4 leading-relaxed text-cocoa">{r.body}</p>
+            {r.links.length > 0 && (
+              <ul class="prose-links mt-6 space-y-3">
+                {r.links.map((l) => (
+                  <li class="flex items-start gap-3">
+                    <span class="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-moss" />
+                    <a
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener"
+                      class="leading-relaxed text-forest"
+                    >
+                      {l.label}
+                      <span aria-hidden="true" class="ml-1 text-clay">↗</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <div class="pb-20 lg:pb-28">
+    <CTABand
+      heading="Have questions about the path ahead?"
+      body="If anything here resonates and you'd like to talk it through, we're here. Reach out — there's no pressure, only a conversation."
+    />
+  </div>
+</Layout>
