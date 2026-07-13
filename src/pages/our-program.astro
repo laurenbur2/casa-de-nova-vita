@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/PageHero.astro";
 import CTABand from "../components/CTABand.astro";
+import { withBase } from "../lib/base";
 
 const curriculum = [
   {
@@ -213,7 +214,7 @@ const activities = [
         Interested in learning more or becoming a guest?
       </h2>
       <a
-        href="/contact"
+        href={withBase("/contact")}
         class="mt-9 inline-flex rounded-full bg-pine px-8 py-4 font-medium text-linen transition-colors hover:bg-forest"
       >
         Fill out interest form

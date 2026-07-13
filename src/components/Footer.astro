@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../lib/base";
 const year = new Date().getFullYear();
 const links = [
   { href: "/our-story", label: "Our Story" },
@@ -12,7 +13,7 @@ const links = [
 
 <footer class="relative mt-24 overflow-hidden bg-pine text-linen">
   <img
-    src="/images/logo/mark-cream.png"
+    src={withBase("/images/logo/mark-cream.png")}
     alt=""
     aria-hidden="true"
     class="pointer-events-none absolute -bottom-16 right-0 w-80 opacity-[0.05]"
@@ -22,7 +23,7 @@ const links = [
       <div>
         <div class="flex items-center gap-3">
           <img
-            src="/images/logo/mark-cream.png"
+            src={withBase("/images/logo/mark-cream.png")}
             alt="Casa da Nova Vida hummingbird emblem"
             class="h-12 w-12 object-contain"
             width="512"
@@ -44,7 +45,7 @@ const links = [
             links.map((l) => (
               <li>
                 <a
-                  href={l.href}
+                  href={withBase(l.href)}
                   class="text-sagelight transition-colors hover:text-linen"
                 >
                   {l.label}

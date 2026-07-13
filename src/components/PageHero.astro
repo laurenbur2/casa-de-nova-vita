@@ -1,4 +1,5 @@
 ---
+import { withBase } from "../lib/base";
 interface Props {
   eyebrow: string;
   title: string;
@@ -11,7 +12,7 @@ const { eyebrow, title, intro, image, imageAlt } = Astro.props;
 
 <section class="relative isolate overflow-hidden bg-pine">
   <img
-    src={image}
+    src={withBase(image)}
     alt={imageAlt}
     class="absolute inset-0 -z-10 h-full w-full object-cover opacity-60"
     loading="eager"

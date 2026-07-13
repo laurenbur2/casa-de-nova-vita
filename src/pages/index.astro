@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CTABand from "../components/CTABand.astro";
+import { withBase } from "../lib/base";
 
 const program = [
   {
@@ -45,9 +46,9 @@ const who = [
       loop
       playsinline
       preload="metadata"
-      poster="/videos/casa-hero-poster.jpg"
+      poster={withBase("/videos/casa-hero-poster.jpg")}
     >
-      <source src="/videos/casa-hero.mp4" type="video/mp4" />
+      <source src={withBase("/videos/casa-hero.mp4")} type="video/mp4" />
     </video>
     <div class="absolute inset-0 -z-10 bg-bark/25"></div>
     <div
@@ -74,13 +75,13 @@ const who = [
         class="rise rise-4 mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
       >
         <a
-          href="/contact"
+          href={withBase("/contact")}
           class="w-full rounded-full bg-linen px-6 py-3 text-center text-sm font-medium text-pine transition-colors hover:bg-cream sm:w-auto"
         >
           Begin the Conversation
         </a>
         <a
-          href="/our-approach"
+          href={withBase("/our-approach")}
           class="w-full rounded-full border border-cream/50 px-6 py-3 text-center text-sm font-medium text-linen backdrop-blur-sm transition-colors hover:border-cream hover:bg-linen/10 sm:w-auto"
         >
           Explore Our Approach
@@ -117,7 +118,7 @@ const who = [
   <!-- ===================== THE PLACE (image band) ===================== -->
   <section class="relative isolate overflow-hidden">
     <img
-      src="/images/photos/property-porch-firepit.png"
+      src={withBase("/images/photos/property-porch-firepit.png")}
       alt="Covered porch with a fire pit overlooking the Texas Hill Country"
       class="absolute inset-0 -z-10 h-full w-full object-cover"
       loading="lazy"
@@ -136,7 +137,7 @@ const who = [
           to the healing here. They're part of it.
         </p>
         <a
-          href="/our-location"
+          href={withBase("/our-location")}
           class="mt-8 inline-flex items-center gap-2 rounded-full border border-cream/60 px-6 py-3 text-sm font-medium text-linen backdrop-blur-sm transition-colors hover:border-cream hover:bg-linen/10"
         >
           See our location
@@ -168,7 +169,7 @@ const who = [
       </div>
       <div class="mt-16 text-center">
         <a
-          href="/our-program"
+          href={withBase("/our-program")}
           class="inline-flex rounded-full bg-pine px-8 py-4 font-medium text-linen transition-colors hover:bg-forest"
         >
           Explore the program
@@ -202,7 +203,7 @@ const who = [
   <!-- ===================== AFTERCARE (image band) ===================== -->
   <section class="relative isolate overflow-hidden">
     <img
-      src="/images/photos/forest-light-rays.png"
+      src={withBase("/images/photos/forest-light-rays.png")}
       alt="Sunlight breaking through a forest canopy"
       class="absolute inset-0 -z-10 h-full w-full object-cover"
       loading="lazy"
@@ -218,7 +219,7 @@ const who = [
         renewed way of being.
       </p>
       <a
-        href="/ibogaine-aftercare"
+        href={withBase("/ibogaine-aftercare")}
         class="mt-10 inline-flex rounded-full bg-linen px-8 py-4 font-medium text-pine transition-colors hover:bg-cream"
       >
         Ibogaine Aftercare
