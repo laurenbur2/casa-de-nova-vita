@@ -9,18 +9,63 @@ const C = "/images/photos/cards/";
 // ── Filter tags (wired to the library grid via data-cat below) ─────────────
 const filters = [
   { slug: "all", label: "All" },
-  { slug: "ibogaine", label: "Ibogaine" },
-  { slug: "ayahuasca", label: "Ayahuasca" },
-  { slug: "integration", label: "Integration" },
-  { slug: "addiction", label: "Addiction & Trauma" },
-  { slug: "harm-reduction", label: "Harm Reduction" },
-  { slug: "neuroplasticity", label: "Neuroplasticity" },
-  { slug: "spirituality", label: "Spirituality" },
-  { slug: "research", label: "Research" },
+  { slug: "blog", label: "Our Blog" },
+  { slug: "resources", label: "Resources" },
 ];
 
 // ── Resource library ───────────────────────────────────────────────────────
 const library = [
+  // Our own reflections
+  {
+    source: "Casa da Nova Vida",
+    tag: "Reflection",
+    title: "Real healing requires awakening to Spirit",
+    body: "Why spiritual awakening became the cornerstone of our founder's recovery, and the heart of our work.",
+    href: "https://www.instagram.com/novavidahoh/",
+    img: C + "story-hero.jpg",
+    read: "View on Instagram",
+    cat: "blog",
+  },
+  {
+    source: "Casa da Nova Vida",
+    tag: "Reflection",
+    title: "At our core, we are seekers of remembrance",
+    body: "A reflection on remembrance, understanding, and the truth we are always returning to.",
+    href: "https://www.instagram.com/novavidahoh/",
+    img: C + "gallery-sunset.jpg",
+    read: "View on Instagram",
+    cat: "blog",
+  },
+  {
+    source: "Casa da Nova Vida",
+    tag: "Reflection",
+    title: "The foundation of lasting healing is an awareness of Spirit",
+    body: "How an awareness of Spirit grounds every other kind of healing we do here.",
+    href: "https://www.instagram.com/novavidahoh/",
+    img: "/images/photos/attractions/jacobs-well.jpg",
+    read: "View on Instagram",
+    cat: "blog",
+  },
+  {
+    source: "Casa da Nova Vida",
+    tag: "Reflection",
+    title: "I am small, and that is not insignificant",
+    body: "On humility as the doorway through which transformation quietly enters.",
+    href: "https://www.instagram.com/novavidahoh/",
+    img: "/images/photos/attractions/enchanted-rock.jpg",
+    read: "View on Instagram",
+    cat: "blog",
+  },
+  {
+    source: "Casa da Nova Vida",
+    tag: "Reflection",
+    title: "I am free to dictate what goes on in my own mind",
+    body: "On reclaiming sovereignty over your inner world, one honest day at a time.",
+    href: "https://www.instagram.com/novavidahoh/",
+    img: C + "gallery-meadow.jpg",
+    read: "View on Instagram",
+    cat: "blog",
+  },
   {
     source: "Stanford Medicine",
     tag: "Ibogaine",
@@ -28,7 +73,8 @@ const library = [
     body: "A landmark 2024 study found ibogaine led to rapid, dramatic reductions in PTSD, depression, and anxiety in veterans with traumatic brain injury, with no serious side effects.",
     href: "https://med.stanford.edu/news/all-news/2024/01/ibogaine-ptsd.html",
     img: C + "welcome-iboga.jpg",
-    cat: "ibogaine research",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Nature Medicine",
@@ -37,7 +83,8 @@ const library = [
     body: "The peer-reviewed Stanford study behind the headlines, published in Nature Medicine.",
     href: "https://www.nature.com/articles/s41591-023-02705-w",
     img: R + "14314636.jpg",
-    cat: "ibogaine research",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "MindScape Retreat",
@@ -46,7 +93,8 @@ const library = [
     body: "Why the window right after ibogaine is decisive, and how aftercare turns relief into lasting recovery.",
     href: "https://www.mindscaperetreat.com/news/integration-therapy-after-ibogaine-treatment-why-the-first-90-days-determine-long-term-recovery",
     img: R + "2883087.jpg",
-    cat: "ibogaine integration",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Psychable",
@@ -55,7 +103,8 @@ const library = [
     body: "A practical overview of the integration and aftercare that follows ibogaine treatment for addiction.",
     href: "https://psychable.com/addiction/ibogaine-integration-and-aftercare-for-addiction",
     img: R + "1092183.jpg",
-    cat: "ibogaine integration addiction",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "PubMed",
@@ -64,7 +113,8 @@ const library = [
     body: "A mixed-method study of the lasting effects, and the integration needs, people report after ibogaine.",
     href: "https://pubmed.ncbi.nlm.nih.gov/30020025/",
     img: C + "welcome-path.jpg",
-    cat: "ibogaine research addiction",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Psychedelic Support",
@@ -73,7 +123,8 @@ const library = [
     body: "Common themes and grounded practices for bringing ayahuasca insights into everyday life.",
     href: "https://psychedelic.support/resources/integrating-ayahuasca-experiences/",
     img: R + "29152688.jpg",
-    cat: "ayahuasca integration",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Psychedelic Support",
@@ -82,7 +133,8 @@ const library = [
     body: "How ayahuasca can surface and help process grief, fear, and long-held emotion.",
     href: "https://psychedelic.support/resources/emotional-healing-with-ayahuasca/",
     img: R + "37812265.jpg",
-    cat: "ayahuasca",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Ayahuasca Foundation",
@@ -91,7 +143,8 @@ const library = [
     body: "Counseling, community, and daily practices that help ayahuasca work take root.",
     href: "https://www.ayahuascafoundation.org/information/preparation-integration/ayahuasca-integration/",
     img: R + "17025853.jpg",
-    cat: "ayahuasca integration",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Psychotherapy Networker",
@@ -100,7 +153,8 @@ const library = [
     body: "A close, thoughtful look at the ayahuasca experience and its place in emotional healing.",
     href: "https://www.psychotherapynetworker.org/article/inside-ayahuasca-experience-septemberoctober-2018/",
     img: R + "14189966.jpg",
-    cat: "ayahuasca integration",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Frontiers in Psychology",
@@ -109,7 +163,8 @@ const library = [
     body: "A scholarly look at what integration actually is, and how it is practiced.",
     href: "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2022.824077/full",
     img: R + "5357086.jpg",
-    cat: "integration research",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "ADAA",
@@ -118,7 +173,8 @@ const library = [
     body: "An accessible primer on why integration, not the experience alone, is where lasting change is made.",
     href: "https://adaa.org/learn-from-us/from-the-experts/blog-posts/consumer-professional/your-psychedelic-therapy-journey",
     img: R + "1051838.jpg",
-    cat: "integration",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Psychology Today",
@@ -127,7 +183,8 @@ const library = [
     body: "On turning insight into embodied, durable change once the ceremony ends.",
     href: "https://www.psychologytoday.com/us/blog/truth-medicine/202604/the-art-of-integration-after-a-psychedelic-experience",
     img: R + "3363111.jpg",
-    cat: "integration",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "MAPS",
@@ -136,7 +193,8 @@ const library = [
     body: "A framework for integrating across mind, body, spirit, relationships, and daily life.",
     href: "https://maps.org/integration/the-6-domains-of-psychedelic-integration/",
     img: R + "1198171.jpg",
-    cat: "integration",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Frontiers in Psychology",
@@ -145,7 +203,8 @@ const library = [
     body: "A qualitative study of how people move through hard, lingering effects after a psychedelic experience.",
     href: "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2024.1369715/full",
     img: R + "9601212.jpg",
-    cat: "integration research",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Psychedelic Support",
@@ -154,7 +213,8 @@ const library = [
     body: "Concrete, grounding steps for the vulnerable days and weeks that follow.",
     href: "https://psychedelic.support/resources/now-that-its-over-what-to-do-after-youve-taken-psychedelics/",
     img: R + "4709903.jpg",
-    cat: "integration",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Dr. Gabor Maté",
@@ -163,7 +223,8 @@ const library = [
     body: "Maté's landmark work reframing addiction not as a moral failing, but as a response to pain and trauma.",
     href: "https://drgabormate.com/book/in-the-realm-of-hungry-ghosts/",
     img: R + "1205693.jpg",
-    cat: "addiction",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Recovery.com",
@@ -172,7 +233,8 @@ const library = [
     body: "How the two approaches compare, and how meeting people where they are can become a bridge to healing.",
     href: "https://recovery.com/resources/abstinence-vs-harm-reduction-in-addiction-recovery/",
     img: R + "6340694.jpg",
-    cat: "harm-reduction addiction",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "National Harm Reduction Coalition",
@@ -181,7 +243,8 @@ const library = [
     body: "The foundational principles: dignity, respect, and self-determination on each person's path.",
     href: "https://harmreduction.org/about-us/principles-of-harm-reduction/",
     img: R + "17010855.jpg",
-    cat: "harm-reduction",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "PMC",
@@ -190,7 +253,8 @@ const library = [
     body: "A phase 2 randomized clinical trial on psilocybin therapy for preventing relapse.",
     href: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11937691/",
     img: R + "10827984.jpg",
-    cat: "addiction research",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Frontiers in Psychiatry",
@@ -199,7 +263,8 @@ const library = [
     body: "A systematic review of how psychedelics stimulate neuroplasticity, the brain's capacity to rewire.",
     href: "https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2021.724606/full",
     img: R + "14314636.jpg",
-    cat: "neuroplasticity research",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Fireside Project",
@@ -208,7 +273,8 @@ const library = [
     body: "A plain-language look at the window of plasticity psychedelics open, and why it matters for recovery.",
     href: "https://firesideproject.org/blog/psychedelics-amp-neuroplasticity-unlocking-the-healing-brain",
     img: R + "10827984.jpg",
-    cat: "neuroplasticity",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Int'l Society of Addiction Medicine",
@@ -217,7 +283,8 @@ const library = [
     body: "How spirituality can be meaningfully incorporated into addiction care and research.",
     href: "https://www.tandfonline.com/doi/full/10.1080/08897077.2021.1941514",
     img: R + "8564615.jpg",
-    cat: "spirituality addiction research",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "PMC",
@@ -226,7 +293,8 @@ const library = [
     body: "On how spirituality, meaning, and social support relate to well-being in long-term recovery.",
     href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC1526775/",
     img: R + "2563040.jpg",
-    cat: "spirituality addiction research",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Johns Hopkins",
@@ -235,7 +303,8 @@ const library = [
     body: "The largest psychedelic research center of its kind, with 150+ peer-reviewed studies.",
     href: "https://www.hopkinspsychedelic.org/",
     img: R + "9501978.jpg",
-    cat: "research integration",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "MAPS",
@@ -244,7 +313,8 @@ const library = [
     body: "The Multidisciplinary Association for Psychedelic Studies' hub of research and integration resources.",
     href: "https://maps.org/take-action/resources/",
     img: C + "welcome-grow.jpg",
-    cat: "integration research",
+    cat: "resources",
+    read: "Read the article",
   },
   {
     source: "Fireside Project",
@@ -253,7 +323,8 @@ const library = [
     body: "Free, confidential peer support during and after psychedelic experiences. Call or text 62-FIRESIDE.",
     href: "https://firesideproject.org/",
     img: R + "17010855.jpg",
-    cat: "integration",
+    cat: "resources",
+    read: "Read the article",
   },
 ];
 ---
@@ -284,7 +355,7 @@ const library = [
       <p class="eyebrow">The library</p>
       <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Reading &amp; research</h2>
       <p class="mt-5 max-w-2xl leading-relaxed text-cocoa">
-        Filter by topic to find what meets you where you are, from the science of
+        Our own reflections, plus a curated library of research and articles, from the science of
         recovery to the practice of integration.
       </p>
 
@@ -329,7 +400,7 @@ const library = [
                 </h3>
                 <p class="mt-2 flex-1 text-sm leading-relaxed text-cocoa">{r.body}</p>
                 <span class="mt-5 inline-flex items-center gap-1.5 border-t border-sand pt-4 text-sm font-medium text-forest">
-                  Read the article
+                  {r.read}
                   <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">↗</span>
                 </span>
               </div>
