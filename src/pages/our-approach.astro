@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/PageHero.astro";
 import CTABand from "../components/CTABand.astro";
+import { withBase } from "../lib/base";
 
 const pillars = [
   {
@@ -141,15 +142,25 @@ const pillars = [
 
   <!-- ===================== QUOTE ===================== -->
   <section class="bg-cream px-6 py-16 lg:px-10 lg:py-24">
-    <figure class="mx-auto max-w-3xl text-center">
-      <blockquote class="font-display text-2xl leading-relaxed text-pine sm:text-3xl">
-        “Love without firmness<br />Is a fire without heat<br />It is a weak
-        thought<br />And a body without worth”
-      </blockquote>
-      <figcaption class="mt-6 text-sm uppercase tracking-[0.18em] text-stone">
-        Padrinho Sebastião
-      </figcaption>
-    </figure>
+    <div class="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <div class="overflow-hidden rounded-[1.75rem] shadow-lg">
+        <img
+          src={withBase("/images/photos/life/cross.jpg")}
+          alt="A wooden cross draped with prayer beads on the table, guests resting nearby"
+          class="h-72 w-full object-cover sm:h-96 lg:h-[28rem]"
+          loading="lazy"
+        />
+      </div>
+      <figure class="text-center lg:text-left">
+        <blockquote class="font-display text-2xl leading-relaxed text-pine sm:text-3xl">
+          “Love without firmness<br />Is a fire without heat<br />It is a weak
+          thought<br />And a body without worth”
+        </blockquote>
+        <figcaption class="mt-6 text-sm uppercase tracking-[0.18em] text-stone">
+          Padrinho Sebastião
+        </figcaption>
+      </figure>
+    </div>
   </section>
 
   <div class="py-20 lg:py-28"><CTABand /></div>
