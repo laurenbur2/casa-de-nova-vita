@@ -1,0 +1,13 @@
+{
+  "name": "casadanovavida-forms-worker",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Cloudflare Worker that relays website form submissions to email via Resend.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  }
+}
