@@ -1,118 +1,203 @@
 /**
- * Casa da Nova Vida — form relay Worker
+ * Casa da Nova Vida — website backend Worker
  * ------------------------------------------------------------
- * Receives submissions from the contact and apply forms and emails
- * them via Resend. The Resend API key lives here as a secret so it is
- * never exposed to the browser (which is why forms cannot call Resend
- * directly from the static GitHub Pages site).
+ * Two jobs, routed by path:
+ *   POST /donate  → create a Stripe Checkout Session and return its URL
+ *   POST /        → relay a contact/apply form submission via Resend
  *
- * Config (see wrangler.toml [vars] and secrets):
- *   RESEND_API_KEY  — secret,  `wrangler secret put RESEND_API_KEY`
- *   FROM_EMAIL      — var, e.g. "Casa da Nova Vida <forms@casadanovavida.com>"
- *                     (domain must be verified in Resend)
- *   TO_EMAIL        — var, comma-separated list of recipients
- *   ALLOWED_ORIGINS — var, comma-separated list of allowed site origins
+ * Both need secrets the static GitHub Pages site can't safely hold, which
+ * is why they live here.
+ *
+ * Secrets (wrangler secret put ...):
+ *   STRIPE_SECRET_KEY  — sk_test_... (sandbox) / sk_live_... (live)
+ *   RESEND_API_KEY     — re_...
+ * Vars (wrangler.toml [vars]):
+ *   FROM_EMAIL, TO_EMAIL, ALLOWED_ORIGINS
  */
+
+// Keep this in sync with the client (donate.astro): the extra a donor adds
+// when they opt to "cover the processing fee".
+const FEE_RATE = 0.03;
 
 export default {
   async fetch(request, env) {
-    const origin = request.headers.get("Origin") || "";
-    const allowed = (env.ALLOWED_ORIGINS || "")
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-    const allowOrigin = allowed.includes(origin) ? origin : allowed[0] || "*";
+    const cors = corsHeaders(request, env);
 
-    const cors = {
-      "Access-Control-Allow-Origin": allowOrigin,
-      "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-      Vary: "Origin",
-    };
-
-    // Preflight
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: cors });
     }
-
     if (request.method !== "POST") {
       return json({ ok: false, error: "Method not allowed" }, 405, cors);
     }
 
-    // Parse either JSON (fetch) or urlencoded/multipart (no-JS <form> POST).
-    let fields = {};
-    const ct = request.headers.get("Content-Type") || "";
-    try {
-      if (ct.includes("application/json")) {
-        fields = await request.json();
-      } else {
-        const form = await request.formData();
-        for (const [k, v] of form.entries()) fields[k] = v;
-      }
-    } catch {
-      return json({ ok: false, error: "Could not read submission" }, 400, cors);
+    const path = new URL(request.url).pathname.replace(/\/+$/, "");
+    if (path.endsWith("/donate")) {
+      return handleDonate(request, env, cors);
     }
-
-    // Honeypot: real users never fill this hidden field. Pretend success.
-    if (fields._gotcha) {
-      return respond(request, cors, true);
-    }
-
-    const email = String(fields.email || "").trim();
-    const looksLikeEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
-    const hasMessage = String(fields.message || "").trim().length > 0;
-    if (!looksLikeEmail || !hasMessage) {
-      return json({ ok: false, error: "Please fill in the required fields." }, 422, cors);
-    }
-
-    const formType = String(fields._formType || "inquiry");
-    const subject =
-      String(fields._subject || "").trim() ||
-      (formType === "application"
-        ? "New guest application — Casa da Nova Vida"
-        : "New inquiry — Casa da Nova Vida");
-
-    const { html, text } = renderEmail(fields, subject);
-
-    const to = (env.TO_EMAIL || "")
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${env.RESEND_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: env.FROM_EMAIL,
-        to,
-        reply_to: email,
-        subject,
-        html,
-        text,
-      }),
-    });
-
-    if (!res.ok) {
-      const detail = await res.text().catch(() => "");
-      console.error("Resend error", res.status, detail);
-      return json(
-        { ok: false, error: "We couldn't send your message. Please email us directly." },
-        502,
-        cors,
-      );
-    }
-
-    return respond(request, cors, true);
+    return handleForm(request, env, cors);
   },
 };
 
-// ---- helpers ---------------------------------------------------------
+// ---- donations -------------------------------------------------------
 
-// Human-friendly labels for known field names; unknown fields fall back
-// to a de-slugged version so the email stays readable if forms change.
+async function handleDonate(request, env, cors) {
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return json({ ok: false, error: "Bad request" }, 400, cors);
+  }
+
+  const amount = Number(body.amount);
+  const frequency = body.frequency === "monthly" ? "monthly" : "once";
+  const coverFee = body.coverFee === true;
+
+  if (!Number.isFinite(amount) || amount < 1 || amount > 100000) {
+    return json({ ok: false, error: "Please enter an amount of $1 or more." }, 422, cors);
+  }
+
+  // Return URL must point back at our own site.
+  const allowed = originList(env);
+  const returnTo = String(body.returnTo || "");
+  if (!allowed.some((o) => returnTo.startsWith(o + "/") || returnTo === o)) {
+    return json({ ok: false, error: "Invalid return URL" }, 400, cors);
+  }
+  const sep = returnTo.includes("?") ? "&" : "?";
+  const successUrl = `${returnTo}${sep}donation=success`;
+  const cancelUrl = `${returnTo}${sep}donation=cancelled`;
+
+  const unitAmount = Math.round((coverFee ? amount * (1 + FEE_RATE) : amount) * 100);
+
+  const params = new URLSearchParams();
+  params.set("cancel_url", cancelUrl);
+  params.set("line_items[0][quantity]", "1");
+  params.set("line_items[0][price_data][currency]", "usd");
+  params.set("line_items[0][price_data][unit_amount]", String(unitAmount));
+  params.set(
+    "line_items[0][price_data][product_data][name]",
+    frequency === "monthly"
+      ? "Monthly donation to Casa da Nova Vida"
+      : "Donation to Casa da Nova Vida",
+  );
+
+  if (frequency === "monthly") {
+    params.set("mode", "subscription");
+    params.set("line_items[0][price_data][recurring][interval]", "month");
+    // Stripe requires success_url; template lets us confirm the session later.
+    params.set("success_url", successUrl);
+  } else {
+    params.set("mode", "payment");
+    params.set("submit_type", "donate"); // shows a "Donate" button at checkout
+    params.set("success_url", successUrl);
+  }
+
+  const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.STRIPE_SECRET_KEY}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: params,
+  });
+
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || !data.url) {
+    console.error("Stripe error", res.status, JSON.stringify(data));
+    return json(
+      { ok: false, error: "We couldn't start checkout. Please try again." },
+      502,
+      cors,
+    );
+  }
+
+  return json({ ok: true, url: data.url }, 200, cors);
+}
+
+// ---- forms (Resend) --------------------------------------------------
+
+async function handleForm(request, env, cors) {
+  let fields = {};
+  const ct = request.headers.get("Content-Type") || "";
+  try {
+    if (ct.includes("application/json")) {
+      fields = await request.json();
+    } else {
+      const form = await request.formData();
+      for (const [k, v] of form.entries()) fields[k] = v;
+    }
+  } catch {
+    return json({ ok: false, error: "Could not read submission" }, 400, cors);
+  }
+
+  // Honeypot: real users never fill this hidden field. Pretend success.
+  if (fields._gotcha) {
+    return respond(request, cors, true);
+  }
+
+  const email = String(fields.email || "").trim();
+  const looksLikeEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+  const hasMessage = String(fields.message || "").trim().length > 0;
+  if (!looksLikeEmail || !hasMessage) {
+    return json({ ok: false, error: "Please fill in the required fields." }, 422, cors);
+  }
+
+  const formType = String(fields._formType || "inquiry");
+  const subject =
+    String(fields._subject || "").trim() ||
+    (formType === "application"
+      ? "New guest application — Casa da Nova Vida"
+      : "New inquiry — Casa da Nova Vida");
+
+  const { html, text } = renderEmail(fields, subject);
+
+  const to = (env.TO_EMAIL || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ from: env.FROM_EMAIL, to, reply_to: email, subject, html, text }),
+  });
+
+  if (!res.ok) {
+    const detail = await res.text().catch(() => "");
+    console.error("Resend error", res.status, detail);
+    return json(
+      { ok: false, error: "We couldn't send your message. Please email us directly." },
+      502,
+      cors,
+    );
+  }
+
+  return respond(request, cors, true);
+}
+
+// ---- shared helpers --------------------------------------------------
+
+function originList(env) {
+  return (env.ALLOWED_ORIGINS || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+function corsHeaders(request, env) {
+  const origin = request.headers.get("Origin") || "";
+  const allowed = originList(env);
+  const allowOrigin = allowed.includes(origin) ? origin : allowed[0] || "*";
+  return {
+    "Access-Control-Allow-Origin": allowOrigin,
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    Vary: "Origin",
+  };
+}
+
 const LABELS = {
   name: "Name",
   first_name: "First name",

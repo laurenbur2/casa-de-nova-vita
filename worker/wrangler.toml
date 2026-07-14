@@ -12,5 +12,6 @@ TO_EMAIL = "info@casadanovavida.com"
 # Add your custom domain here if/when you point one at the site.
 ALLOWED_ORIGINS = "https://laurenbur2.github.io,http://localhost:4321"
 
-# RESEND_API_KEY is a SECRET — do not put it here.
-# Set it with:  wrangler secret put RESEND_API_KEY
+# SECRETS — do not put these here. Set each with `wrangler secret put NAME`:
+#   RESEND_API_KEY     re_...        (forms)
+#   STRIPE_SECRET_KEY  sk_test_...   (donations; use sk_live_... when going live)

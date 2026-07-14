@@ -1,47 +1,45 @@
 # Integrations setup — Stripe & Resend
 
 The website is a static site on GitHub Pages, so it has no server of its own.
-That shapes how each integration connects:
+A tiny **Cloudflare Worker** (in [`worker/`](worker/)) is the server piece that
+holds the secrets. Both integrations run through it:
 
-- **Stripe donations** use **Payment Links** — hosted checkout pages, no server
-  needed. You create the links in Stripe; the site just links to them.
-- **Forms (contact + apply)** send email through **Resend**, but Resend needs a
-  secret key that can't live in a static site. A tiny **Cloudflare Worker**
-  (in [`worker/`](worker/)) holds the key and relays submissions to email.
+- **Stripe donations** → the Worker creates a **Checkout Session** for the exact
+  amount (base, fee-covered, or custom), so the total is always accurate.
+- **Forms (contact + apply)** → the Worker relays submissions to email via
+  **Resend**.
 
 The code is done. What's left are account steps that require logging into your
-own accounts — that's everything below.
+own accounts. **Deploy the Worker first** (§3) — donations and forms both
+depend on it.
 
 ---
 
-## 1. Stripe — donation Payment Links (test first, then live)
+## 1. Stripe — donations via Checkout (test first, then live)
 
-The donate page ([`src/pages/donate.astro`](src/pages/donate.astro)) already has
-a `STRIPE` object with slots for each amount. You create the links, then paste
-the URLs in.
+The donate page posts to the Worker, which creates the Stripe Checkout Session.
+You don't create any Payment Links by hand — you only need to give the Worker a
+**Stripe secret key**.
 
-### Test mode
-1. Sign in at **dashboard.stripe.com** with the account you made yesterday.
-2. Turn on the **Test mode** toggle (top-right).
-3. Go to **Payment Links → + New**. For each amount, create a link:
-   - **One-time $20 / $50 / $100 / $500** — add a product named e.g. "Donation",
-     set a **one-time** price of that amount.
-   - **Monthly** versions — same, but set the price to **recurring → monthly**.
-   - **Custom amount** — when adding the price, choose **"Customers choose what
-     they pay"**. Make one for one-time and one for monthly.
-4. After saving each link, copy its URL (test links look like
-   `https://buy.stripe.com/test_...`).
-5. Paste each URL into the matching slot in `donate.astro`:
-   ```js
-   const STRIPE = {
-     once:    { "20": "...", "50": "...", "100": "...", "500": "...", custom: "..." },
-     monthly: { "20": "...", "50": "...", "100": "...", "500": "...", custom: "..." },
-   };
+### Test mode (sandbox)
+1. Sign in at **dashboard.stripe.com** and stay in the **Sandbox / Test mode**.
+2. Grab the **test secret key** (`sk_test_...`): **Developers → API keys**, or
+   the "API keys" card on the dashboard home → reveal the **Secret key**.
+   *(This is available in the sandbox without the account-owner email.)*
+3. Give it to the Worker (see §3):
+   ```bash
+   cd worker && npx wrangler secret put STRIPE_SECRET_KEY
    ```
-   (Any slot you leave as `STRIPE_PLACEHOLDER` just links to your Stripe
-   dashboard, so nothing breaks while you fill them in.)
-6. **Test a donation:** open the donate page, click through, and pay with test
-   card **4242 4242 4242 4242**, any future expiry, any CVC, any ZIP.
+4. **Test a donation:** on the donate page pick an amount (or a custom one),
+   optionally tick "cover the fee", and pay with test card
+   **4242 4242 4242 4242**, any future expiry, any CVC, any ZIP. The amount you
+   see on the button is exactly what Checkout charges.
+
+### Going live
+- Finish **account activation** (business details + bank account) so Stripe can
+  pay out. This is where the account-owner email (Drew's) will be needed.
+- Get the **live** secret key (`sk_live_...`) and set it on the Worker:
+  `npx wrangler secret put STRIPE_SECRET_KEY` — then redeploy.
 
 ### Getting receipts to donors + notifications to you
 - **Settings → Customer emails** → turn on **"Successful payments"** so donors
@@ -87,9 +85,10 @@ npx wrangler login                     # authorize (or create) your Cloudflare a
    - `TO_EMAIL` — where submissions go, e.g. `info@casadanovavida.com`.
      Comma-separate to send to more than one (e.g. add your Gmail).
    - `ALLOWED_ORIGINS` — already set to your GitHub Pages site + localhost.
-2. Store the Resend key as a secret:
+2. Store the secrets:
    ```bash
-   npx wrangler secret put RESEND_API_KEY   # paste the re_... key
+   npx wrangler secret put STRIPE_SECRET_KEY   # sk_test_... — enables donations
+   npx wrangler secret put RESEND_API_KEY      # re_... — enables forms (add later)
    ```
 3. Deploy:
    ```bash
@@ -98,10 +97,10 @@ npx wrangler login                     # authorize (or create) your Cloudflare a
    Copy the printed URL, e.g.
    `https://casadanovavida-forms.<your-subdomain>.workers.dev`.
 4. Paste that URL into [`src/lib/config.ts`](src/lib/config.ts) as
-   `FORMS_ENDPOINT` (replacing the `REPLACE-ME` placeholder).
+   `WORKER_BASE` (replacing the `REPLACE-ME` placeholder).
 5. Commit + push → GitHub Pages rebuilds.
-6. **Test:** submit the contact form on the live site and confirm the email
-   lands at `TO_EMAIL`.
+6. **Test:** make a test donation on the live site, and (once Resend is set up)
+   submit the contact form and confirm the email lands at `TO_EMAIL`.
 
 ---
 
@@ -109,7 +108,7 @@ npx wrangler login                     # authorize (or create) your Cloudflare a
 
 | Piece | Code | Your account steps |
 |-------|------|--------------------|
-| Donate page (Payment Links) | ✅ ready | Create links, paste URLs, activate account for live |
-| Contact + apply forms | ✅ ready | — |
-| Cloudflare Worker | ✅ written | `wrangler login`, set vars + secret, deploy, paste URL |
+| Cloudflare Worker | ✅ written | `wrangler login`, deploy, paste URL into config |
+| Donate page (Checkout) | ✅ ready | Add `STRIPE_SECRET_KEY` (test) to the Worker |
+| Contact + apply forms | ✅ ready | Add `RESEND_API_KEY` to the Worker |
 | Resend | — | Verify domain, create API key |

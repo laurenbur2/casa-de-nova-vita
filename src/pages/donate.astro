@@ -2,35 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/PageHero.astro";
 import { withBase } from "../lib/base";
+import { DONATE_ENDPOINT } from "../lib/config";
 
-// ============================================================
-//  Stripe Payment Links
-//  Create one Payment Link per amount in the Stripe Dashboard
-//  (Payments → Payment Links → New). Paste each URL below.
-//  - "custom" should be a link where the donor names their own
-//    amount ("Let customers choose what they pay").
-//  - "monthly" links should use a recurring price.
-//  Until these are replaced, buttons point to the Stripe docs so
-//  nothing 404s. Search for STRIPE_PLACEHOLDER to find them all.
-// ============================================================
-const STRIPE_PLACEHOLDER = "https://dashboard.stripe.com/payment-links";
-
-const STRIPE = {
-  once: {
-    "20": STRIPE_PLACEHOLDER,
-    "50": "https://buy.stripe.com/test_fZufZ9aqf1R06oK06Y9oc00",
-    "100": STRIPE_PLACEHOLDER,
-    "500": STRIPE_PLACEHOLDER,
-    custom: STRIPE_PLACEHOLDER,
-  },
-  monthly: {
-    "20": STRIPE_PLACEHOLDER,
-    "50": STRIPE_PLACEHOLDER,
-    "100": STRIPE_PLACEHOLDER,
-    "500": STRIPE_PLACEHOLDER,
-    custom: STRIPE_PLACEHOLDER,
-  },
-};
+// Donations run through Stripe Checkout, created on demand by the Worker
+// (see ../lib/config.ts + ../../worker). This lets the exact amount — a preset,
+// a custom value, or either of those plus the processing fee — show accurately
+// at checkout, for both one-time and monthly gifts. The percent added when a
+// donor opts to cover the fee must match FEE_RATE in the Worker.
+const FEE_RATE = 0.03;
 
 const amounts = ["20", "50", "100", "500"];
 
@@ -121,10 +100,30 @@ const faqs = [
       <div
         id="donate-card"
         class="rounded-3xl border border-sand bg-parchment p-8 shadow-sm lg:p-10"
-        data-once-custom={STRIPE.once.custom}
-        data-monthly-custom={STRIPE.monthly.custom}
+        data-donate-endpoint={DONATE_ENDPOINT}
+        data-fee-rate={FEE_RATE}
       >
         <h2 class="text-2xl text-pine">Make a donation</h2>
+
+        <!-- Return banners (shown after Stripe redirects back) -->
+        <div
+          id="donate-success"
+          hidden
+          role="status"
+          class="mt-6 rounded-2xl border border-sage/40 bg-cream p-5 text-sm leading-relaxed text-forest"
+        >
+          <strong class="text-pine">Thank you for your gift.</strong> Your donation
+          went through — a receipt is on its way. We're grateful for your support.
+        </div>
+        <div
+          id="donate-cancelled"
+          hidden
+          role="status"
+          class="mt-6 rounded-2xl border border-sand bg-cream p-5 text-sm leading-relaxed text-cocoa"
+        >
+          No charge was made — your checkout was cancelled. Whenever you're ready,
+          your gift is welcome.
+        </div>
 
         <!-- Frequency toggle -->
         <div class="mt-6">
@@ -163,8 +162,6 @@ const faqs = [
                 <button
                   type="button"
                   data-amount={a}
-                  data-once={STRIPE.once[a as keyof typeof STRIPE.once]}
-                  data-monthly={STRIPE.monthly[a as keyof typeof STRIPE.monthly]}
                   class:list={[
                     "amount-btn rounded-xl border py-3.5 text-lg font-medium transition-colors",
                     i === 1
@@ -187,9 +184,28 @@ const faqs = [
           >
             Choose a custom amount
           </button>
+
+          <!-- Custom amount input (revealed when "custom" is selected) -->
+          <div id="custom-wrap" hidden class="mt-3">
+            <label class="block text-xs uppercase tracking-[0.18em] text-stone" for="custom-amount">
+              Your amount
+            </label>
+            <div class="mt-2 flex items-center rounded-xl border border-sand bg-linen focus-within:border-moss">
+              <span class="pl-4 text-lg text-stone">$</span>
+              <input
+                id="custom-amount"
+                type="number"
+                inputmode="decimal"
+                min="1"
+                step="1"
+                placeholder="Enter an amount"
+                class="w-full bg-transparent px-2 py-3.5 text-lg text-forest outline-none"
+              />
+            </div>
+          </div>
         </div>
 
-        <!-- Cover the fee note -->
+        <!-- Cover the fee -->
         <label class="mt-6 flex items-start gap-3 text-sm text-cocoa">
           <input
             type="checkbox"
@@ -197,21 +213,27 @@ const faqs = [
             class="mt-0.5 h-4 w-4 flex-none rounded border-sand text-pine focus:ring-moss/30"
           />
           <span>
-            Add a little extra to cover the ~3% processing fee, so your full gift
-            reaches our guests. You can adjust the total on the next screen.
+            Add <span id="fee-pct">3%</span> to cover the card processing fee, so
+            your full gift reaches our guests. The exact total is shown on the
+            button and at checkout.
           </span>
         </label>
 
         <!-- CTA -->
-        <a
+        <button
           id="donate-cta"
-          href={STRIPE.once["50"]}
-          target="_blank"
-          rel="noopener"
-          class="mt-7 flex w-full items-center justify-center rounded-full bg-pine px-7 py-4 font-medium text-linen transition-colors hover:bg-forest"
+          type="button"
+          class="mt-7 flex w-full items-center justify-center rounded-full bg-pine px-7 py-4 font-medium text-linen transition-colors hover:bg-forest disabled:cursor-not-allowed disabled:opacity-60"
         >
           <span id="donate-cta-label">Donate $50</span>
-        </a>
+        </button>
+        <p
+          id="donate-error"
+          hidden
+          role="alert"
+          class="mt-4 rounded-xl border border-clay/40 bg-clay/10 px-4 py-3 text-center text-sm text-clay"
+        >
+        </p>
         <p class="mt-4 text-center text-xs leading-relaxed text-stone">
           Secure checkout via Stripe. You'll be able to review your gift before
           confirming.
@@ -273,17 +295,36 @@ const faqs = [
 
 <script>
   const card = document.getElementById("donate-card");
-  const cta = document.getElementById("donate-cta") as HTMLAnchorElement | null;
+  const cta = document.getElementById("donate-cta") as HTMLButtonElement | null;
   const ctaLabel = document.getElementById("donate-cta-label");
+  const errorEl = document.getElementById("donate-error");
+  const coverFee = document.getElementById("cover-fee") as HTMLInputElement | null;
+  const customWrap = document.getElementById("custom-wrap");
+  const customInput = document.getElementById("custom-amount") as HTMLInputElement | null;
   const freqBtns = Array.from(document.querySelectorAll<HTMLButtonElement>(".freq-btn"));
   const amountBtns = Array.from(document.querySelectorAll<HTMLButtonElement>(".amount-btn"));
 
   if (card && cta && ctaLabel) {
-    const onceCustom = card.getAttribute("data-once-custom") || "#";
-    const monthlyCustom = card.getAttribute("data-monthly-custom") || "#";
+    const endpoint = card.dataset.donateEndpoint || "";
+    const feeRate = Number(card.dataset.feeRate) || 0.03;
+
+    const pctEl = document.getElementById("fee-pct");
+    if (pctEl) pctEl.textContent = `${Math.round(feeRate * 100)}%`;
 
     let freq: "once" | "monthly" = "once";
-    let amount = "50";
+    let amount = "50"; // one of the presets, or "custom"
+
+    // Dollar amount before the optional fee, or null when custom is empty/invalid.
+    const baseAmount = (): number | null => {
+      if (amount !== "custom") return Number(amount);
+      const v = Number(customInput?.value);
+      return Number.isFinite(v) && v >= 1 ? v : null;
+    };
+
+    const fmt = (n: number) => {
+      const r = Math.round(n * 100) / 100;
+      return Number.isInteger(r) ? `$${r}` : `$${r.toFixed(2)}`;
+    };
 
     const setActive = (list: HTMLButtonElement[], match: (b: HTMLButtonElement) => boolean, on: string, off: string) => {
       list.forEach((b) => {
@@ -294,17 +335,19 @@ const faqs = [
     };
 
     const sync = () => {
-      const isCustom = amount === "custom";
-      const activeAmountBtn = amountBtns.find((b) => b.dataset.amount === amount);
-      const link = isCustom
-        ? freq === "once" ? onceCustom : monthlyCustom
-        : activeAmountBtn?.dataset[freq] || "#";
+      if (customWrap) customWrap.hidden = amount !== "custom";
 
-      cta.href = link;
+      const base = baseAmount();
       const suffix = freq === "monthly" ? "/mo" : "";
-      ctaLabel.textContent = isCustom
-        ? `Continue to donate${freq === "monthly" ? " monthly" : ""}`
-        : `Donate $${amount}${suffix}`;
+
+      if (base === null) {
+        ctaLabel.textContent = "Enter an amount";
+        cta.disabled = true;
+        return;
+      }
+      cta.disabled = false;
+      const total = coverFee?.checked ? base * (1 + feeRate) : base;
+      ctaLabel.textContent = `Donate ${fmt(total)}${suffix}`;
     };
 
     freqBtns.forEach((b) =>
@@ -329,11 +372,64 @@ const faqs = [
           "border-sand bg-linen text-forest",
         );
         amountBtns.forEach((x) => x.setAttribute("aria-pressed", String(x.dataset.amount === amount)));
+        if (amount === "custom") customInput?.focus();
         sync();
       }),
     );
 
+    customInput?.addEventListener("input", sync);
+    coverFee?.addEventListener("change", sync);
+
+    cta.addEventListener("click", async () => {
+      const base = baseAmount();
+      if (base === null) {
+        customInput?.focus();
+        return;
+      }
+      if (errorEl) errorEl.hidden = true;
+      cta.disabled = true;
+      const label = ctaLabel.textContent;
+      ctaLabel.textContent = "Redirecting…";
+
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount: base,
+            coverFee: !!coverFee?.checked,
+            frequency: freq,
+            returnTo: location.origin + location.pathname,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.url) throw new Error(data.error || "Could not start checkout.");
+        window.location.href = data.url;
+      } catch (err) {
+        if (errorEl) {
+          errorEl.textContent =
+            err instanceof Error ? err.message : "Something went wrong. Please try again.";
+          errorEl.hidden = false;
+        }
+        cta.disabled = false;
+        ctaLabel.textContent = label || "Donate";
+      }
+    });
+
     sync();
+
+    // Show a banner when Stripe redirects back, then clean the URL.
+    const status = new URLSearchParams(location.search).get("donation");
+    if (status === "success" || status === "cancelled") {
+      const banner = document.getElementById(
+        status === "success" ? "donate-success" : "donate-cancelled",
+      );
+      if (banner) {
+        banner.hidden = false;
+        banner.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      history.replaceState(null, "", location.origin + location.pathname);
+    }
   }
 </script>
 
