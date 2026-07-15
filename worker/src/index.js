@@ -144,7 +144,10 @@ async function handleForm(request, env, cors) {
 
   const email = String(fields.email || "").trim();
   const looksLikeEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
-  const hasMessage = String(fields.message || "").trim().length > 0;
+  // Contact form uses `message`; the application uses `situation` for its
+  // main free-text answer. Accept either as the required message.
+  const hasMessage =
+    String(fields.message || fields.situation || "").trim().length > 0;
   if (!looksLikeEmail || !hasMessage) {
     return json({ ok: false, error: "Please fill in the required fields." }, 422, cors);
   }
