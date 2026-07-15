@@ -54,6 +54,15 @@ const faqs = [
     a: "Yes. You are welcome to make a gift in honor or in memory of a loved one. Just let us know at info@casadanovavida.com and we will make sure it is recognized.",
   },
 ];
+
+// Turn any mention of our email in the FAQ answers into a clickable mailto
+// link, so every email on the site behaves the same way.
+const CONTACT_EMAIL = "info@casadanovavida.com";
+const linkifyEmail = (text: string) =>
+  text.replaceAll(
+    CONTACT_EMAIL,
+    `<a href="mailto:${CONTACT_EMAIL}" class="font-medium text-forest underline decoration-sage underline-offset-2 transition-colors hover:text-pine hover:decoration-forest">${CONTACT_EMAIL}</a>`,
+  );
 ---
 
 <Layout
@@ -268,7 +277,7 @@ const faqs = [
                   </svg>
                 </span>
               </summary>
-              <p class="pb-5 leading-relaxed text-cocoa">{f.a}</p>
+              <p class="pb-5 leading-relaxed text-cocoa" set:html={linkifyEmail(f.a)} />
             </details>
           ))
         }
