@@ -56,5 +56,47 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://casadanovav
       <slot />
     </main>
     <Footer />
+
+    <!-- Email links: copy the address to the clipboard on click and confirm,
+         so a click always does something even when no mail app is configured. -->
+    <script>
+      document.querySelectorAll('a[href^="mailto:"]').forEach((a) => {
+        a.addEventListener("click", async () => {
+          const email = (a.getAttribute("href") || "")
+            .replace(/^mailto:/, "")
+            .split("?")[0];
+          if (!email) return;
+          let copied = false;
+          try {
+            if (navigator.clipboard) {
+              await navigator.clipboard.writeText(email);
+              copied = true;
+            }
+          } catch {}
+          if (!copied) {
+            try {
+              const ta = document.createElement("textarea");
+              ta.value = email;
+              ta.style.position = "fixed";
+              ta.style.opacity = "0";
+              document.body.appendChild(ta);
+              ta.select();
+              copied = document.execCommand("copy");
+              ta.remove();
+            } catch {}
+          }
+          if (!copied) return;
+          const toast = document.createElement("div");
+          toast.textContent = "Email copied to clipboard";
+          toast.className = "email-toast";
+          document.body.appendChild(toast);
+          requestAnimationFrame(() => toast.classList.add("is-visible"));
+          setTimeout(() => {
+            toast.classList.remove("is-visible");
+            setTimeout(() => toast.remove(), 300);
+          }, 1800);
+        });
+      });
+    </script>
   </body>
 </html>
