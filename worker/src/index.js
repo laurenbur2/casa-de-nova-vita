@@ -214,6 +214,16 @@ const LABELS = {
   application_for: "Application is for",
   journey_stage: "Journey stage",
   message: "Message",
+  situation: "Briefly describe your situation and the support you're looking for",
+  substances:
+    "All drugs (street, alcohol, prescription, psychoactive & non-psychoactive) consumed in the last three months, and frequency",
+  begin_stay: "When would you like to begin your stay at Nova Vida?",
+  mental_health: "Ever diagnosed with a mental health disorder? What and when?",
+  physical_health:
+    "Any physical health issues (illness, allergy, limitation, pain, injury)?",
+  how_heard: "How did you hear about us?",
+  motivation: "What motivates you to seek a New Life?",
+  additional_info: "Additional info / comments",
 };
 
 // Brand palette (from the website's global.css)
