@@ -11,8 +11,27 @@ const inputClass =
   title="Contact · Casa da Nova Vida"
   description="Begin the conversation. Reach Casa da Nova Vida by phone, email, or our confidential inquiry form to learn about integration and Ibogaine aftercare."
 >
-  <section class="bg-pine px-6 pb-24 pt-32 text-linen lg:px-10 lg:pb-28 lg:pt-40">
-    <div class="mx-auto max-w-3xl text-center">
+  <section class="relative isolate overflow-hidden bg-pine px-6 pb-24 pt-32 text-linen lg:px-10 lg:pb-28 lg:pt-40">
+    <!-- Soft glow up top so the hero reads with depth, not as a flat block -->
+    <div
+      class="pointer-events-none absolute inset-0 -z-20 bg-gradient-to-b from-forest/55 via-pine to-pine"
+      aria-hidden="true"
+    >
+    </div>
+    <!-- Large hummingbird emblem watermark, echoing the footer -->
+    <img
+      src={withBase("/images/logo/mark-cream.png")}
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute -bottom-24 -right-16 -z-10 w-[26rem] max-w-none opacity-[0.06] sm:w-[34rem]"
+    />
+    <img
+      src={withBase("/images/logo/mark-cream.png")}
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute -left-24 -top-20 -z-10 hidden w-72 opacity-[0.04] lg:block"
+    />
+    <div class="relative mx-auto max-w-3xl text-center [text-shadow:0_2px_24px_rgba(20,26,36,0.35)]">
       <p class="eyebrow rise text-gold">Contact</p>
       <h1 class="rise rise-2 mt-5 text-4xl leading-tight sm:text-5xl">
         Contact Us
@@ -192,11 +211,9 @@ const inputClass =
         A place to heal — for you or someone you love
       </h2>
       <p class="mt-6 leading-relaxed text-cocoa">
-        Casa da Nova Vida is a church devoted to healing and spiritual renewal.
-        Whether you are seeking a grounded place to integrate for yourself, or
-        reaching out on behalf of someone you love, we would be honored to walk
-        alongside you. Our home cares for the whole person — body, mind, and
-        spirit — at a pace that honors where you are.
+        Whether you're seeking a grounded place to integrate for yourself or
+        reaching out for someone you love, we would be honored to walk alongside
+        you, caring for the whole person at a pace that honors where you are.
       </p>
       <a
         href={withBase("/apply")}
