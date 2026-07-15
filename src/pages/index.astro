@@ -140,13 +140,20 @@ const who = [
         emotional, and physical well-being, on our serene property just outside
         Austin, TX.
       </p>
-      <a
-        href={withBase("/our-story")}
-        class="group mt-10 inline-flex items-center gap-1.5 text-sm font-medium text-clay transition-colors hover:text-gold"
-      >
-        Read our story
-        <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">&rarr;</span>
-      </a>
+      <div class="mt-11 flex flex-col items-center justify-center gap-x-8 gap-y-5 sm:flex-row">
+        <a
+          href={withBase("/contact")}
+          class="rounded-full bg-pine px-7 py-3.5 font-medium text-linen transition-colors hover:bg-forest"
+        >
+          Begin the Conversation
+        </a>
+        <a
+          href={withBase("/apply")}
+          class="rounded-full border border-moss/50 px-7 py-3.5 font-medium text-pine transition-colors hover:border-moss hover:bg-cream"
+        >
+          Guest application
+        </a>
+      </div>
     </div>
   </section>
 
