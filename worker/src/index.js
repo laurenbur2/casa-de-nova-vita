@@ -63,8 +63,16 @@ async function handleDonate(request, env, cors) {
     return json({ ok: false, error: "Invalid return URL" }, 400, cors);
   }
   const sep = returnTo.includes("?") ? "&" : "?";
-  const successUrl = `${returnTo}${sep}donation=success`;
   const cancelUrl = `${returnTo}${sep}donation=cancelled`;
+
+  // On success, send the donor to a dedicated thank-you page when the client
+  // provides one (validated against our own origins); otherwise fall back to
+  // the donate page with a success flag.
+  const successTo = String(body.successTo || "");
+  const successUrl =
+    successTo && allowed.some((o) => successTo.startsWith(o + "/") || successTo === o)
+      ? successTo
+      : `${returnTo}${sep}donation=success`;
 
   const unitAmount = Math.round((coverFee ? amount * (1 + FEE_RATE) : amount) * 100);
 
@@ -143,12 +151,9 @@ async function handleForm(request, env, cors) {
 
   const formType = String(fields._formType || "inquiry");
   const subject =
-    String(fields._subject || "").trim() ||
-    (formType === "application"
-      ? "New guest application — Casa da Nova Vida"
-      : "New inquiry — Casa da Nova Vida");
+    formType === "application" ? "Application submission" : "Inquiry form submission";
 
-  const { html, text } = renderEmail(fields, subject);
+  const { html, text } = renderEmail(fields, formType, subject);
 
   const to = (env.TO_EMAIL || "")
     .split(",")
@@ -211,26 +216,106 @@ const LABELS = {
   message: "Message",
 };
 
-function renderEmail(fields, subject) {
-  const rows = Object.entries(fields)
-    .filter(([k]) => !k.startsWith("_"))
-    .map(([k, v]) => [LABELS[k] || deslug(k), String(v)]);
+// Brand palette (from the website's global.css)
+const BRAND = {
+  pine: "#33506a",
+  gold: "#c9ad63",
+  linen: "#faf7ef",
+  cream: "#f3ecdd",
+  sand: "#e7ddc8",
+  parchment: "#fffdf7",
+  bark: "#2b3646",
+  stone: "#8791a0",
+  clay: "#4a7290",
+};
+const LOGO_URL =
+  "https://laurenbur2.github.io/casa-de-nova-vita/images/logo/mark-cream.png";
+const SERIF = "Georgia, 'Times New Roman', serif";
+const SANS = "Arial, Helvetica, sans-serif";
 
-  const text = rows.map(([k, v]) => `${k}: ${v}`).join("\n");
+const HIDE_IN_TABLE = new Set(["name", "first_name", "last_name"]);
+
+function renderEmail(fields, formType, subject) {
+  const rows = Object.entries(fields)
+    .filter(([k]) => !k.startsWith("_") && !HIDE_IN_TABLE.has(k))
+    .map(([k, v]) => [k, LABELS[k] || deslug(k), String(v)]);
+
+  const displayName =
+    String(fields.name || "").trim() ||
+    `${fields.first_name || ""} ${fields.last_name || ""}`.trim() ||
+    "Someone";
+  const firstName = displayName.split(" ")[0];
+  const submitterEmail = String(fields.email || "").trim();
+  const isApp = formType === "application";
+  const eyebrow = isApp ? "New guest application" : "New inquiry";
+  const banner = isApp
+    ? "New application — please review and respond promptly"
+    : "New inquiry — please respond within one business day";
+
+  const text =
+    `${subject.toUpperCase()}\n${banner}\n\nFrom: ${displayName}\n\n` +
+    rows.map(([, label, v]) => `${label}: ${v}`).join("\n") +
+    `\n\nReply to this email to respond directly to ${displayName}.`;
+
+  const linkStyle = `color:${BRAND.clay};font-weight:bold;text-decoration:underline;`;
 
   const htmlRows = rows
-    .map(
-      ([k, v]) =>
-        `<tr><td style="padding:6px 14px 6px 0;color:#5b6470;vertical-align:top;white-space:nowrap">${escapeHtml(
-          k,
-        )}</td><td style="padding:6px 0;color:#1f2933">${escapeHtml(v).replace(/\n/g, "<br>")}</td></tr>`,
-    )
+    .map(([key, label, v]) => {
+      let val = escapeHtml(v).replace(/\n/g, "<br>");
+      if (key === "email") {
+        val = `<a href="mailto:${escapeHtml(v)}" style="${linkStyle}">${escapeHtml(v)}</a>`;
+      } else if (key === "phone") {
+        val = `<a href="tel:${escapeHtml(v.replace(/[^\d+]/g, ""))}" style="${linkStyle}">${escapeHtml(v)}</a>`;
+      }
+      if (key === "message") {
+        return `<tr><td colspan="2" style="padding:16px 0 4px;">
+          <div style="font-family:${SANS};font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:${BRAND.stone};margin-bottom:8px;">${escapeHtml(label)}</div>
+          <div style="font-family:${SANS};font-size:16px;line-height:1.6;color:${BRAND.bark};background:${BRAND.cream};border-left:4px solid ${BRAND.gold};padding:14px 16px;border-radius:6px;">${val}</div>
+        </td></tr>`;
+      }
+      return `<tr>
+        <td style="padding:11px 16px 11px 0;border-bottom:1px solid ${BRAND.sand};font-family:${SANS};font-size:11px;font-weight:bold;letter-spacing:0.6px;text-transform:uppercase;color:${BRAND.stone};vertical-align:top;width:32%;">${escapeHtml(label)}</td>
+        <td style="padding:11px 0;border-bottom:1px solid ${BRAND.sand};font-family:${SANS};font-size:16px;font-weight:bold;line-height:1.5;color:${BRAND.bark};">${val}</td>
+      </tr>`;
+    })
     .join("");
 
-  const html = `<div style="font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:560px;margin:0 auto">
-  <h2 style="color:#274539;font-weight:600;margin:0 0 16px">${escapeHtml(subject)}</h2>
-  <table style="border-collapse:collapse;font-size:15px;line-height:1.5">${htmlRows}</table>
-  <p style="margin-top:24px;font-size:12px;color:#8a929c">Sent from the Casa da Nova Vida website.</p>
+  const replyBtn = submitterEmail
+    ? `<a href="mailto:${escapeHtml(submitterEmail)}" style="display:inline-block;background:${BRAND.pine};color:${BRAND.linen};font-family:${SANS};font-size:15px;font-weight:bold;text-decoration:none;padding:13px 28px;border-radius:9999px;">Reply to ${escapeHtml(firstName)} &rarr;</a>`
+    : "";
+
+  const html = `<div style="margin:0;padding:28px 12px;background:${BRAND.cream};">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;border-collapse:separate;">
+    <tr>
+      <td style="background:${BRAND.pine};padding:30px 24px 24px;text-align:center;border-radius:16px 16px 0 0;">
+        <img src="${LOGO_URL}" width="54" height="54" alt="Casa da Nova Vida" style="display:block;margin:0 auto 10px;border:0;outline:none;" />
+        <div style="font-family:${SERIF};font-size:22px;color:${BRAND.linen};letter-spacing:0.3px;">Casa da Nova Vida</div>
+        <div style="font-family:${SANS};font-size:10px;letter-spacing:3px;text-transform:uppercase;color:${BRAND.gold};margin-top:6px;">House of Healing</div>
+      </td>
+    </tr>
+    <tr>
+      <td style="background:${BRAND.gold};padding:12px 24px;text-align:center;font-family:${SANS};font-size:13px;font-weight:bold;letter-spacing:0.3px;color:${BRAND.bark};">
+        ${escapeHtml(banner)}
+      </td>
+    </tr>
+    <tr>
+      <td style="background:${BRAND.parchment};padding:28px 28px 4px;">
+        <div style="font-family:${SANS};font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:${BRAND.clay};">${escapeHtml(eyebrow)}</div>
+        <div style="font-family:${SANS};font-size:27px;font-weight:bold;line-height:1.15;color:${BRAND.pine};margin:8px 0 18px;">${escapeHtml(displayName)}</div>
+        ${replyBtn ? `<div style="margin-bottom:24px;">${replyBtn}</div>` : ""}
+      </td>
+    </tr>
+    <tr>
+      <td style="background:${BRAND.parchment};padding:0 28px 8px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">${htmlRows}</table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background:${BRAND.parchment};padding:20px 28px 30px;border-radius:0 0 16px 16px;">
+        <div style="font-family:${SANS};font-size:12px;line-height:1.6;color:${BRAND.stone};">Sent from the Casa da Nova Vida website. You can also just hit reply — it goes straight to ${escapeHtml(displayName)}.</div>
+      </td>
+    </tr>
+  </table>
 </div>`;
 
   return { html, text };

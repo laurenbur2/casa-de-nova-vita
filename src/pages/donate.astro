@@ -4,6 +4,10 @@ import PageHero from "../components/PageHero.astro";
 import { withBase } from "../lib/base";
 import { DONATE_ENDPOINT } from "../lib/config";
 
+// Where Stripe sends a donor after a successful gift (a dedicated thank-you
+// page). Passed to the Worker, which uses it for the Checkout success_url.
+const THANK_YOU_PATH = withBase("/thank-you");
+
 // Donations run through Stripe Checkout, created on demand by the Worker
 // (see ../lib/config.ts + ../../worker). This lets the exact amount — a preset,
 // a custom value, or either of those plus the processing fee — show accurately
@@ -101,6 +105,7 @@ const faqs = [
         id="donate-card"
         class="rounded-3xl border border-sand bg-parchment p-8 shadow-sm lg:p-10"
         data-donate-endpoint={DONATE_ENDPOINT}
+        data-thankyou-path={THANK_YOU_PATH}
         data-fee-rate={FEE_RATE}
       >
         <h2 class="text-2xl text-pine">Make a donation</h2>
@@ -306,6 +311,7 @@ const faqs = [
 
   if (card && cta && ctaLabel) {
     const endpoint = card.dataset.donateEndpoint || "";
+    const thankYouPath = card.dataset.thankyouPath || "";
     const feeRate = Number(card.dataset.feeRate) || 0.03;
 
     const pctEl = document.getElementById("fee-pct");
@@ -400,6 +406,7 @@ const faqs = [
             coverFee: !!coverFee?.checked,
             frequency: freq,
             returnTo: location.origin + location.pathname,
+            successTo: thankYouPath ? location.origin + thankYouPath : undefined,
           }),
         });
         const data = await res.json().catch(() => ({}));

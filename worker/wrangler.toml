@@ -7,7 +7,7 @@ compatibility_date = "2024-11-01"
 # The "from" address. The domain MUST be verified in Resend.
 FROM_EMAIL = "Casa da Nova Vida <forms@casadanovavida.com>"
 # Where submissions are delivered. Comma-separated for multiple recipients.
-TO_EMAIL = "info@casadanovavida.com"
+TO_EMAIL = "info@casadanovavida.com,lburandt2@gmail.com"
 # Origins allowed to POST to this Worker (your live site + local dev).
 # Add your custom domain here if/when you point one at the site.
 ALLOWED_ORIGINS = "https://laurenbur2.github.io,http://localhost:4321"

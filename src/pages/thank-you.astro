@@ -1,0 +1,54 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { withBase } from "../lib/base";
+---
+
+<Layout
+  title="Thank you · Casa da Nova Vida"
+  description="Thank you for your donation to Casa da Nova Vida. Your gift helps make healing and spiritual renewal accessible to those who need it most."
+>
+  <section class="px-6 py-24 lg:px-10 lg:py-32">
+    <div
+      class="relative mx-auto max-w-2xl overflow-hidden rounded-[2rem] border border-sage/40 bg-gradient-to-b from-cream to-sage/35 px-8 py-16 text-center sm:px-16"
+    >
+      <img
+        src={withBase("/images/logo/mark-navy.png")}
+        alt=""
+        aria-hidden="true"
+        class="pointer-events-none absolute -right-10 -top-10 w-56 opacity-[0.05]"
+      />
+      <img
+        src={withBase("/images/logo/mark-navy.png")}
+        alt="Casa da Nova Vida hummingbird emblem"
+        class="mx-auto mb-6 w-14 opacity-90"
+      />
+      <p class="eyebrow">With gratitude</p>
+      <h1 class="mx-auto mt-4 max-w-xl text-3xl leading-tight text-pine sm:text-4xl">
+        Thank you for your donation
+      </h1>
+      <p class="mx-auto mt-6 max-w-lg leading-relaxed text-cocoa">
+        Your generosity will help change someone's life — supporting their
+        recovery and spiritual development, and keeping our doors open to those
+        walking this path of healing. A receipt is on its way to your email.
+      </p>
+      <p class="mx-auto mt-4 max-w-lg leading-relaxed text-cocoa">
+        From all of us at Casa da Nova Vida, thank you for being part of this
+        work.
+      </p>
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a
+          href={withBase("/")}
+          class="rounded-full bg-pine px-7 py-3.5 font-medium text-linen transition-colors hover:bg-forest"
+        >
+          Back to home
+        </a>
+        <a
+          href={withBase("/contact")}
+          class="rounded-full border border-moss/50 px-7 py-3.5 font-medium text-pine transition-colors hover:border-moss hover:bg-cream"
+        >
+          Get in touch
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
