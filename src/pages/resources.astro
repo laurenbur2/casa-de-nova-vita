@@ -1,10 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CTABand from "../components/CTABand.astro";
+import { getCollection } from "astro:content";
 import { withBase } from "../lib/base";
 
 const R = "/images/photos/resources/";
 const C = "/images/photos/cards/";
+
+// On-site guides, newest first. These are our own pages (good for SEO and for
+// keeping visitors on the site), shown above the curated external library.
+const guides = (
+  await getCollection("articles", ({ data }) => !data.draft && data.featured)
+).sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 
 // ── Filter tags (wired to the library grid via data-cat below) ─────────────
 const filters = [
@@ -272,7 +279,7 @@ const library = [
   description="A library of research, articles, and stories on integration and recovery after ibogaine, ayahuasca, and plant medicine, from Casa da Nova Vida."
 >
   <!-- ===================== HERO ===================== -->
-  <section class="relative isolate overflow-hidden px-6 pb-20 pt-32 text-linen lg:px-10 lg:pb-24 lg:pt-40">
+  <section class="relative isolate overflow-hidden px-6 pb-20 pt-24 text-linen lg:px-10 lg:pb-16 lg:pt-40">
     <img
       src={withBase(R + "hero.jpg")}
       alt="An open notebook and pen in warm window light"
@@ -294,8 +301,54 @@ const library = [
     </div>
   </section>
 
+  <!-- ===================== OUR GUIDES (on-site articles) ===================== -->
+  {
+    guides.length > 0 && (
+      <section class="border-b border-sand px-6 pt-16 lg:px-10 lg:pt-16">
+        <div class="mx-auto max-w-6xl">
+          <p class="eyebrow">Our guides</p>
+          <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Written by Casa da Nova Vida</h2>
+          <p class="mt-5 max-w-2xl leading-relaxed text-cocoa">
+            In-depth guides to healing and integration after ibogaine, ayahuasca,
+            and other plant medicines, written from our own experience and practice.
+          </p>
+          <div class="mt-10 grid gap-6 pb-16 sm:grid-cols-2 lg:grid-cols-3 lg:pb-16">
+            {guides.map((g) => (
+              <a
+                href={withBase(`/${g.id}`)}
+                class="group flex flex-col overflow-hidden rounded-2xl border border-sand bg-parchment shadow-sm transition-shadow duration-300 hover:shadow-[0_18px_50px_-24px_rgba(43,54,70,0.35)]"
+              >
+                <div class="overflow-hidden">
+                  <img
+                    src={withBase(g.data.heroImage)}
+                    alt=""
+                    class="h-44 w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="flex flex-1 flex-col p-6">
+                  <p class="text-[0.7rem] uppercase tracking-[0.16em] text-clay">
+                    Casa da Nova Vida · {g.data.eyebrow}
+                  </p>
+                  <h3 class="mt-2 text-lg leading-snug text-forest transition-colors group-hover:text-pine">
+                    {g.data.title}
+                  </h3>
+                  <p class="mt-2 flex-1 text-sm leading-relaxed text-cocoa">{g.data.description}</p>
+                  <span class="mt-5 inline-flex items-center gap-1.5 border-t border-sand pt-4 text-sm font-medium text-forest">
+                    Read the guide
+                    <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   <!-- ===================== LIBRARY + FILTERS ===================== -->
-  <section class="px-6 py-16 lg:px-10 lg:py-24">
+  <section class="px-6 py-16 lg:px-10 lg:py-16">
     <div class="mx-auto max-w-6xl">
       <p class="eyebrow">The library</p>
       <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Reading &amp; research</h2>
@@ -359,7 +412,7 @@ const library = [
     </div>
   </section>
 
-  <div class="pb-20 lg:pb-28"><CTABand /></div>
+  <div class="pb-20 lg:pb-20"><CTABand /></div>
 </Layout>
 
 <script>

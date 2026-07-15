@@ -1,0 +1,170 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import CTABand from "../components/CTABand.astro";
+import FaqAccordion from "../components/FaqAccordion.astro";
+import { withBase } from "../lib/base";
+
+// Family journey — each stage links to a guide (some live, some coming soon).
+const stages = [
+  {
+    title: "You're wondering if this is safe",
+    icon: "M12 1L3 5v6c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V5zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11z",
+    body: "Before a loved one does ibogaine or ayahuasca, families want the honest truth about the risks. We think you deserve it.",
+    href: "/is-ibogaine-safe",
+    cta: "Is ibogaine safe?",
+  },
+  {
+    title: "You want to help them get there",
+    icon: "M16 3.23Q17.065 2 18.7 2c.91 0 1.67.33 2.3 1s.96 1.43 1 2.3c0 .7-.33 1.51-1 2.46s-1.32 1.74-1.97 2.39q-.975.96-3.03 2.85q-2.085-1.89-3.06-2.85c-.975-.96-1.31-1.44-1.97-2.39S10 6 10 5.3c0-.91.32-1.67.97-2.3s1.43-.96 2.34-1c1.07 0 1.96.41 2.69 1.23",
+    body: "Talking to someone you love about plant medicine, and supporting them as they prepare, takes care and the right words.",
+    href: "/resources",
+    cta: "Explore resources",
+  },
+  {
+    title: "They're coming home",
+    icon: "M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z",
+    body: "The days after treatment are the most important, and the most fragile. What you do at home genuinely shapes what lasts.",
+    href: "/family-guide-after-ibogaine",
+    cta: "What happens now?",
+  },
+  {
+    title: "You need support too",
+    icon: "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z",
+    body: "Loving someone through this is exhausting. Caring for yourself is not selfish. It is part of how they heal, too.",
+    href: "/contact",
+    cta: "Reach out to us",
+  },
+];
+
+const faq = [
+  {
+    question: "My adult child did ibogaine abroad. What should we do now that they're home?",
+    answer:
+      "The first weeks home are a critical, vulnerable window. The most helpful things families can offer are a calm and stable environment, gentle routine, patience, and structured integration support so the insights from the medicine can take root before old patterns return. Our aftercare exists for exactly this moment.",
+  },
+  {
+    question: "Is ibogaine dangerous?",
+    answer:
+      "Ibogaine carries real cardiac risk and should only ever be taken under proper medical screening and supervision at a reputable facility. We do not administer ibogaine ourselves; we provide the grounded aftercare and integration that follows. Understanding the risks honestly is part of helping a loved one make a safe decision.",
+  },
+  {
+    question: "How can I convince my loved one to get help?",
+    answer:
+      "You usually can't force change, and pressure often backfires. What tends to help is staying connected, listening without judgment, learning about the options so you can talk about them calmly, and holding steady, loving boundaries. Sometimes the most powerful thing is simply remaining a safe person to come back to.",
+  },
+  {
+    question: "Do you work with families, or just the person in recovery?",
+    answer:
+      "Both. Healing rarely happens in isolation, and families are often the reason someone finds their way to us. We're glad to talk with you directly about your loved one's situation and what grounded aftercare could look like for them.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
+---
+
+<Layout
+  title="Ibogaine & Addiction Help for Families · Casa da Nova Vida"
+  description="If someone you love is considering ibogaine or ayahuasca, or is coming home after treatment, this is a place to start. Honest guidance and grounded aftercare for families."
+  image="/images/photos/heroes/for-families.jpg"
+  schema={faqSchema}
+>
+  <PageHero
+    eyebrow="For Families"
+    title="If Someone You Love Is Struggling"
+    intro="Most people find us because a mother, a partner, or a sibling went looking for help. If that's you, take a breath. You're in the right place."
+    image="/images/photos/heroes/for-families.jpg"
+    imageAlt="Two hands gently joined against a warm sunset"
+  />
+
+  <!-- ===================== EMPATHY OPENING ===================== -->
+  <section class="border-y border-sand bg-cream px-6 py-16 lg:px-10 lg:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow">You are not alone</p>
+      <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Loving someone through this is hard</h2>
+      <p class="mt-6 text-left leading-relaxed text-cocoa sm:text-center">
+        Watching someone you love struggle with addiction, trauma, or a pain you
+        can't reach is one of the hardest things a family can carry. Maybe they're
+        considering <strong class="text-pine">ibogaine or ayahuasca</strong> and
+        you're frightened. Maybe they've just come home from treatment and you
+        don't know what to expect. Maybe you're simply exhausted, and out of ideas.
+        Wherever you are, you don't need to have the answers today. This page is a
+        place to start.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== THE FAMILY JOURNEY ===================== -->
+  <section class="px-6 py-16 lg:px-10 lg:py-16">
+    <div class="mx-auto max-w-6xl">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Where you might be</p>
+        <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Wherever you are in this</h2>
+        <p class="mt-5 leading-relaxed text-cocoa">
+          Families reach us at every stage. Find the one that sounds like you.
+        </p>
+      </div>
+      <div class="mt-14 grid gap-5 sm:grid-cols-2">
+        {
+          stages.map((s) => (
+            <a
+              href={withBase(s.href)}
+              class="group flex flex-col rounded-2xl border border-sand bg-parchment p-7 transition-shadow duration-300 hover:shadow-[0_16px_40px_-24px_rgba(43,54,70,0.35)]"
+            >
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cream to-sage/40 text-pine ring-1 ring-sand">
+                <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor" aria-hidden="true">
+                  <path d={s.icon} />
+                </svg>
+              </div>
+              <h3 class="mt-5 text-xl text-forest">{s.title}</h3>
+              <p class="mt-2 flex-1 leading-relaxed text-cocoa">{s.body}</p>
+              <span class="mt-5 inline-flex items-center gap-1.5 border-t border-sand pt-4 text-sm font-medium text-forest">
+                {s.cta}
+                <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== REASSURANCE BAND ===================== -->
+  <section class="bg-forest px-6 py-20 text-linen lg:px-10 lg:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow text-gold">A word of hope</p>
+      <p class="mt-6 font-display text-2xl leading-[1.5] text-sagelight sm:text-3xl sm:leading-[1.45]">
+        You don't have to fix everything. You just have to stay, and stay loving.
+      </p>
+      <p class="mx-auto mt-6 max-w-2xl leading-relaxed text-sagelight">
+        The medicine can open a door, but it's the steady, ordinary presence of
+        people who love someone that helps them walk through it. That's the work
+        we do here, and we're glad to do it alongside you.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== FAMILY FAQ ===================== -->
+  <section class="px-6 py-16 lg:px-10 lg:py-16">
+    <div class="mx-auto max-w-3xl">
+      <p class="eyebrow">Common questions from families</p>
+      <h2 class="mt-3 text-3xl text-pine sm:text-4xl">What families ask us</h2>
+      <FaqAccordion items={faq} />
+    </div>
+  </section>
+
+  <div class="pb-20 lg:pb-20">
+    <CTABand
+      heading="Let's talk about your loved one"
+      body="Whatever stage you're in, we're glad to listen and help you understand what grounded aftercare could look like. There's no pressure, and no judgment."
+    />
+  </div>
+</Layout>

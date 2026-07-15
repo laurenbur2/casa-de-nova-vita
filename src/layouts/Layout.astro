@@ -7,14 +7,50 @@ import { withBase } from "../lib/base";
 interface Props {
   title?: string;
   description?: string;
+  /** Path or absolute URL to the social-share image. */
+  image?: string;
+  /** Extra JSON-LD to inject on this page (e.g. FAQPage, Article). */
+  schema?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   title = "Casa da Nova Vida · A Sanctuary for Healing & Integration",
   description = "A serene Texas Hill Country sanctuary for integration after Ibogaine and plant-medicine work. Grounded aftercare through coaching, lifestyle, and sacrament.",
+  image = "/images/photos/cards/story-hero.jpg",
+  schema,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://casadanovavida.com");
+const siteOrigin = Astro.site ?? new URL("https://casadanovavida.com");
+const canonical = new URL(Astro.url.pathname, siteOrigin);
+const ogImage = new URL(withBase(image), siteOrigin);
+
+// Sitewide organization schema. Casa da Nova Vida is a religious church and an
+// aftercare/integration sanctuary — deliberately NOT typed as a medical entity,
+// matching the site's own disclaimer that it does not provide medical treatment.
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Casa da Nova Vida",
+  alternateName: "Casa da Nova Vida · House of Healing",
+  url: siteOrigin.href,
+  logo: new URL(withBase("/images/logo/mark-navy.png"), siteOrigin).href,
+  description:
+    "A Texas Hill Country sanctuary for healing and integration after Ibogaine and plant-medicine work, offering grounded aftercare through coaching, community, and spiritual practice.",
+  email: "info@casadanovavida.com",
+  telephone: "+1-512-222-7752",
+  areaServed: "US",
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: "TX",
+    addressCountry: "US",
+  },
+  sameAs: [
+    "https://www.instagram.com/casadanovavida/",
+    "https://www.facebook.com/novavidahoh/",
+  ],
+};
+
+const schemas = [orgSchema, ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])];
 ---
 
 <!doctype html>
@@ -32,10 +68,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://casadanovav
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Casa da Nova Vida" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Structured data -->
+    {
+      schemas.map((s) => (
+        <script type="application/ld+json" set:html={JSON.stringify(s)} />
+      ))
+    }
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

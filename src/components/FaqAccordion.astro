@@ -1,0 +1,34 @@
+---
+// Click-to-expand FAQ. Uses native <details>/<summary> so it's accessible and
+// keyboard-friendly with no JS. Answers stay in the DOM (crawlable + matches the
+// FAQPage structured data even while collapsed).
+interface Props {
+  items: { question: string; answer: string }[];
+}
+const { items } = Astro.props;
+---
+
+<div class="mt-8 border-t border-sand">
+  {
+    items.map((f) => (
+      <details class="faq-item border-b border-sand">
+        <summary class="faq-summary flex cursor-pointer items-center justify-between gap-4 py-5 text-lg text-forest transition-colors hover:text-pine">
+          <span>{f.question}</span>
+          <svg
+            class="faq-chevron h-5 w-5 text-clay"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </summary>
+        <div class="faq-answer pb-5 leading-relaxed text-cocoa">{f.answer}</div>
+      </details>
+    ))
+  }
+</div>

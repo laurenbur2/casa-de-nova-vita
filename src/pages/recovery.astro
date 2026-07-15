@@ -1,0 +1,227 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import CTABand from "../components/CTABand.astro";
+import FaqAccordion from "../components/FaqAccordion.astro";
+import { withBase } from "../lib/base";
+
+// Who we walk with — the two realities most of our clients arrive from.
+const paths = [
+  {
+    title: "Fresh from plant medicine",
+    icon: "M15.5 9.63a14.2 14.2 0 0 0-3.5 2.63a13.7 13.7 0 0 0-3.5-2.63C8.74 6.86 9.92 4.14 12.06 2c2.12 2.12 3.25 4.84 3.44 7.63M12 15.45C14.15 12.17 17.82 10 22 10c0 10-9.32 11.88-10 12c-.68-.11-10-2-10-12c4.18 0 7.85 2.17 10 5.45",
+    body: "You've had a profound experience with ibogaine or ayahuasca, and now you need to make it last. Integration is where insight becomes a life.",
+  },
+  {
+    title: "Rehab didn't stick",
+    icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m-1-13h2v6h-2zm0 8h2v2h-2z",
+    body: "You've been through treatment before, maybe more than once, and it didn't hold. You're not looking for another program. You're looking for something deeper.",
+  },
+];
+
+// What makes recovery actually last here.
+const pillars = [
+  {
+    title: "Recovery as a way of living",
+    icon: "M12 3L2 12h3v8h6v-6h2v6h6v-8h3z",
+    body: "Not a program you complete, but a life you build, rooted in coherence, responsibility, and connection. Support that adapts as you grow.",
+  },
+  {
+    title: "Healing the whole person",
+    icon: "m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05",
+    body: "Addiction is rarely just about a substance. We tend to the body, the nervous system, the spirit, and the relationships underneath it.",
+  },
+  {
+    title: "A spiritual foundation",
+    icon: "m3.55 19.09l1.41 1.41l1.8-1.79l-1.42-1.42M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6s6-2.69 6-6c0-3.32-2.69-6-6-6m8 7h3v-2h-3m-2.76 7.71l1.8 1.79l1.41-1.41l-1.79-1.8M20.45 5l-1.41-1.4l-1.8 1.79l1.42 1.42M13 1h-2v3h2M6.76 5.39L4.96 3.6L3.55 5l1.79 1.81zM1 13h3v-2H1m12 9h-2v3h2",
+    body: "For many, lasting recovery begins with reconnection to something larger. We ground that reconnection in everyday, embodied practice.",
+  },
+  {
+    title: "Community and structure",
+    icon: "M16.5 6.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0M12 8.5m-8 6a2 2 0 1 1-4 0a2 2 0 0 1 4 0",
+    body: "Safe, attuned connection and gentle daily rhythm give the nervous system a steady container in which to relearn trust and calm.",
+  },
+];
+
+const guides = [
+  {
+    href: "/when-rehab-didnt-work",
+    label: "When rehab didn't work: another path to healing",
+    body: "If you've tried treatment before and it didn't hold, the problem may not be you.",
+  },
+  {
+    href: "/spiritual-approach-to-addiction-recovery",
+    label: "A spiritual approach to addiction recovery",
+    body: "Why reconnection to spirit becomes the foundation lasting recovery is built on.",
+  },
+  {
+    href: "/life-after-rehab",
+    label: "Life after rehab: why aftercare makes recovery last",
+    body: "The window after treatment is where recovery is truly won or lost.",
+  },
+];
+
+const faq = [
+  {
+    question: "Is Casa da Nova Vida a rehab or treatment center?",
+    answer:
+      "No. We are not a medical or clinical rehab, and we do not administer ibogaine or provide medical treatment. We are a sanctuary for the ongoing work of recovery: a grounded place for integration, aftercare, and building a life that recovery can stand on.",
+  },
+  {
+    question: "I've been to rehab before and relapsed. Is this different?",
+    answer:
+      "Many of the people we walk with have been through traditional treatment, sometimes more than once. What we offer isn't another program to complete, but a different, deeper approach that is holistic, spiritual, and integration-based, for people who need something more than abstinence alone.",
+  },
+  {
+    question: "Do I need to have done plant medicine to come here?",
+    answer:
+      "Not necessarily. Some of our guests arrive fresh from ibogaine or ayahuasca and need to integrate it. Others come simply seeking a deeper, more sustainable way to live in recovery. We'd be glad to talk about where you are and whether we're a fit.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+};
+---
+
+<Layout
+  title="Addiction Recovery & Aftercare · Casa da Nova Vida"
+  description="Recovery is a way of living, not a program you finish. A grounded, spiritual, whole-person path for people integrating plant medicine, or for whom traditional rehab didn't stick."
+  image="/images/photos/attractions/krause-springs.jpg"
+  schema={faqSchema}
+>
+  <PageHero
+    eyebrow="Recovery"
+    title="Recovery Is a Way of Living"
+    intro="Not a program you complete, but a life you build, one honest day at a time. Whether you're integrating plant medicine or you've tried everything else, there's a path here."
+    image="/images/photos/attractions/krause-springs.jpg"
+    imageAlt="A lush Hill Country spring with cypress trees over a calm green pool"
+  />
+
+  <!-- ===================== OPENING ===================== -->
+  <section class="border-y border-sand bg-cream px-6 py-16 lg:px-10 lg:py-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow">The real work</p>
+      <h2 class="mt-3 text-3xl text-pine sm:text-4xl">The work after the breakthrough</h2>
+      <p class="mt-6 text-left leading-relaxed text-cocoa sm:text-center">
+        A breakthrough can open a door, whether it comes through ibogaine,
+        ayahuasca, or the hard work of getting sober. But recovery is what happens
+        on the other side of it: the daily work of building a life that no longer
+        needs the old pattern. That's the work we're here for, and it is a
+        <strong class="text-pine">way of living</strong> you grow into over time.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== WHO WE WALK WITH ===================== -->
+  <section class="px-6 py-16 lg:px-10 lg:py-16">
+    <div class="mx-auto max-w-5xl">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Who we walk with</p>
+        <h2 class="mt-3 text-3xl text-pine sm:text-4xl">You might recognize yourself here</h2>
+      </div>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2">
+        {
+          paths.map((p) => (
+            <div class="rounded-2xl border border-sand bg-parchment p-8">
+              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cream to-sage/40 text-pine ring-1 ring-sand">
+                <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor" aria-hidden="true">
+                  <path d={p.icon} />
+                </svg>
+              </div>
+              <h3 class="mt-5 text-xl text-forest">{p.title}</h3>
+              <p class="mt-2 leading-relaxed text-cocoa">{p.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WHAT MAKES RECOVERY LAST ===================== -->
+  <section class="relative isolate overflow-hidden px-6 py-16 lg:px-10 lg:py-20">
+    <img
+      src={withBase("/images/photos/forest-light-rays.png")}
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover object-center"
+    />
+    <div class="pointer-events-none absolute inset-0 -z-10 bg-pine/75" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-6xl">
+      <div class="mx-auto max-w-2xl text-center [text-shadow:0_2px_20px_rgba(20,26,36,0.5)]">
+        <p class="eyebrow text-gold">What makes it last</p>
+        <h2 class="mt-3 text-3xl text-linen sm:text-4xl">Why recovery holds here</h2>
+        <p class="mt-5 leading-relaxed text-cream/90">
+          Lasting change isn't willpower. It's a whole life, gently rebuilt around
+          truth instead of survival.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          pillars.map((p) => (
+            <div class="rounded-2xl border border-sand bg-linen/95 p-6 text-center shadow-lg backdrop-blur-sm">
+              <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cream to-sage/40 text-pine ring-1 ring-sand">
+                <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor" aria-hidden="true">
+                  <path d={p.icon} />
+                </svg>
+              </div>
+              <h3 class="mt-4 text-base text-forest">{p.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-cocoa">{p.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GUIDES ===================== -->
+  <section class="px-6 py-16 lg:px-10 lg:py-16">
+    <div class="mx-auto max-w-5xl">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Read more</p>
+        <h2 class="mt-3 text-3xl text-pine sm:text-4xl">On the path of recovery</h2>
+      </div>
+      <div class="mt-12 grid gap-5 sm:grid-cols-3">
+        {
+          guides.map((g) => (
+            <a
+              href={withBase(g.href)}
+              class="group flex flex-col rounded-2xl border border-sand bg-parchment p-7 transition-shadow duration-300 hover:shadow-[0_16px_40px_-24px_rgba(43,54,70,0.35)]"
+            >
+              <h3 class="text-lg leading-snug text-forest transition-colors group-hover:text-pine">
+                {g.label}
+              </h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-cocoa">{g.body}</p>
+              <span class="mt-5 inline-flex items-center gap-1.5 border-t border-sand pt-4 text-sm font-medium text-forest">
+                Read more
+                <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="border-t border-sand px-6 py-16 lg:px-10 lg:py-16">
+    <div class="mx-auto max-w-3xl">
+      <p class="eyebrow">Common questions</p>
+      <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Questions about recovery here</h2>
+      <FaqAccordion items={faq} />
+    </div>
+  </section>
+
+  <div class="pb-20 lg:pb-20">
+    <CTABand
+      heading="Wherever you are in recovery"
+      body="If you're ready for a deeper, more lasting way to live in recovery, we'd be honored to talk with you about the path ahead."
+    />
+  </div>
+</Layout>

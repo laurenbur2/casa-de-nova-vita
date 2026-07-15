@@ -180,3 +180,83 @@ h1, h2, h3, .font-display {
   .scroll-cue { animation: none; }
   html { scroll-behavior: auto; }
 }
+
+/* ── "About" nav dropdown ───────────────────────────────────────────────── */
+.about-trigger { cursor: pointer; background: none; border: 0; }
+.about-chevron { transition: transform 0.18s ease; }
+.about-panel {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+}
+.about-dd:hover .about-panel,
+.about-dd:focus-within .about-panel,
+.about-dd.is-open .about-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.about-dd:hover .about-chevron,
+.about-dd.is-open .about-chevron { transform: rotate(180deg); }
+
+/* ── Mobile drawer "About" collapsible ──────────────────────────────────── */
+.m-about-summary { list-style: none; }
+.m-about-summary::-webkit-details-marker { display: none; }
+.m-chevron { transition: transform 0.2s ease; }
+.m-about[open] .m-chevron { transform: rotate(180deg); }
+
+/* ── FAQ accordion ──────────────────────────────────────────────────────── */
+.faq-summary { list-style: none; }
+.faq-summary::-webkit-details-marker { display: none; }
+.faq-chevron { transition: transform 0.2s ease; flex-shrink: 0; }
+.faq-item[open] .faq-chevron { transform: rotate(180deg); }
+/* Keep the answer hidden until opened (explicit, so it holds even when the
+   summary is a flex container and UA auto-hiding doesn't apply). */
+.faq-item:not([open]) .faq-answer { display: none; }
+
+/* ── Long-form article body (rendered Markdown) ─────────────────────────── */
+.article-prose {
+  color: var(--color-cocoa);
+  font-size: 1.075rem;
+  line-height: 1.75;
+}
+.article-prose > * + * { margin-top: 1.25em; }
+.article-prose h2 {
+  font-family: var(--font-display);
+  color: var(--color-pine);
+  font-size: 1.9rem;
+  line-height: 1.2;
+  margin-top: 2.2em;
+}
+.article-prose h3 {
+  font-family: var(--font-display);
+  color: var(--color-forest);
+  font-size: 1.4rem;
+  line-height: 1.3;
+  margin-top: 1.8em;
+}
+.article-prose h2 + *, .article-prose h3 + * { margin-top: 0.6em; }
+.article-prose strong { color: var(--color-pine); font-weight: 600; }
+.article-prose a {
+  color: var(--color-forest);
+  text-decoration: underline;
+  text-decoration-color: var(--color-sage);
+  text-underline-offset: 3px;
+}
+.article-prose a:hover { text-decoration-color: var(--color-forest); }
+.article-prose ul, .article-prose ol { padding-left: 1.4em; }
+.article-prose ul { list-style: disc; }
+.article-prose ol { list-style: decimal; }
+.article-prose li { margin-top: 0.5em; }
+.article-prose li::marker { color: var(--color-moss); }
+.article-prose blockquote {
+  border-left: 3px solid var(--color-gold);
+  padding-left: 1.25rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  color: var(--color-forest);
+}
+.article-prose hr { border: 0; border-top: 1px solid var(--color-sand); margin: 2.5em 0; }

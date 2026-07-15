@@ -1,16 +1,26 @@
 ---
 import { withBase } from "../lib/base";
-const links = [
-  { href: "/our-story", label: "Our Story" },
-  { href: "/our-approach", label: "Our Approach" },
+
+// Service / intent pages lead the nav — they're the conversion and SEO money
+// pages, so they stay top-level and come first.
+const leadLinks = [
   { href: "/our-program", label: "Our Program" },
   { href: "/ibogaine-aftercare", label: "Ibogaine Aftercare" },
-  { href: "/resources", label: "Resources" },
+  { href: "/recovery", label: "Recovery" },
+  { href: "/for-families", label: "For Families" },
+];
+// "About" (who we are) collapses into a dropdown / mobile group.
+const aboutLinks = [
+  { href: "/our-story", label: "Our Story" },
+  { href: "/our-approach", label: "Our Approach" },
   { href: "/our-location", label: "Our Location" },
 ];
+// Supporting content trails the nav.
+const trailLinks = [{ href: "/resources", label: "Resources" }];
 const path = Astro.url.pathname;
 const isActive = (href: string) =>
   path === withBase(href) || path === withBase(href) + "/";
+const aboutActive = aboutLinks.some((l) => isActive(l.href));
 ---
 
 <header
@@ -47,7 +57,45 @@ const isActive = (href: string) =>
 
     <div class="hidden items-center gap-5 xl:flex">
       {
-        links.map((l) => (
+        leadLinks.map((l) => (
+          <a
+            href={withBase(l.href)}
+            class:list={["nav-link whitespace-nowrap text-sm transition-colors", isActive(l.href) && "is-current"]}
+          >
+            {l.label}
+          </a>
+        ))
+      }
+      <div class="about-dd relative">
+        <button
+          type="button"
+          class:list={["about-trigger nav-link inline-flex items-center gap-1 whitespace-nowrap text-sm transition-colors", aboutActive && "is-current"]}
+          aria-expanded="false"
+          aria-controls="about-menu"
+          aria-haspopup="true"
+        >
+          About
+          <svg class="about-chevron h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div id="about-menu" class="about-panel absolute left-1/2 top-full -translate-x-1/2 pt-3">
+          <div class="min-w-[13rem] rounded-xl border border-sand bg-parchment p-2 shadow-[0_18px_50px_-24px_rgba(43,54,70,0.45)]">
+            {
+              aboutLinks.map((l) => (
+                <a
+                  href={withBase(l.href)}
+                  class:list={["block rounded-lg px-3 py-2 text-sm text-cocoa transition-colors hover:bg-cream hover:text-pine", isActive(l.href) && "bg-cream text-pine"]}
+                >
+                  {l.label}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+      {
+        trailLinks.map((l) => (
           <a
             href={withBase(l.href)}
             class:list={["nav-link whitespace-nowrap text-sm transition-colors", isActive(l.href) && "is-current"]}
@@ -70,8 +118,14 @@ const isActive = (href: string) =>
       </a>
     </div>
 
-    <!-- Always-visible Donate + menu on smaller screens -->
-    <div class="flex items-center gap-3 xl:hidden">
+    <!-- Always-visible Contact + Donate + menu on smaller screens -->
+    <div class="flex items-center gap-2.5 xl:hidden">
+      <a
+        href={withBase("/contact")}
+        class="header-cta whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors"
+      >
+        Contact
+      </a>
       <a
         href={withBase("/donate")}
         class="donate-cta rounded-full px-4 py-2 text-sm font-semibold transition-colors"
@@ -130,7 +184,37 @@ const isActive = (href: string) =>
 
     <nav class="mt-6 flex flex-col px-7" aria-label="Mobile">
       {
-        links.map((l) => (
+        leadLinks.map((l) => (
+          <a
+            href={withBase(l.href)}
+            class="border-b border-sand/70 py-4 font-display text-2xl text-pine transition-colors hover:text-forest"
+          >
+            {l.label}
+          </a>
+        ))
+      }
+      <details class="m-about border-b border-sand/70" open={aboutActive}>
+        <summary class="m-about-summary flex cursor-pointer items-center justify-between py-4 font-display text-2xl text-pine">
+          About
+          <svg class="m-chevron" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </summary>
+        <div class="flex flex-col pb-2 pl-4">
+          {
+            aboutLinks.map((l) => (
+              <a
+                href={withBase(l.href)}
+                class="border-t border-sand/50 py-3 font-display text-xl text-cocoa transition-colors hover:text-pine"
+              >
+                {l.label}
+              </a>
+            ))
+          }
+        </div>
+      </details>
+      {
+        trailLinks.map((l) => (
           <a
             href={withBase(l.href)}
             class="border-b border-sand/70 py-4 font-display text-2xl text-pine transition-colors hover:text-forest"
@@ -189,7 +273,26 @@ const isActive = (href: string) =>
   closeBtn?.addEventListener("click", () => setMenu(false));
   backdrop?.addEventListener("click", () => setMenu(false));
   menuLinks?.forEach((a) => a.addEventListener("click", () => setMenu(false)));
+
+  // "About" dropdown: hover is handled in CSS; this adds click + keyboard.
+  const aboutDd = document.querySelector<HTMLElement>(".about-dd");
+  const aboutTrigger = aboutDd?.querySelector<HTMLButtonElement>(".about-trigger");
+  const setAbout = (open: boolean) => {
+    aboutDd?.classList.toggle("is-open", open);
+    aboutTrigger?.setAttribute("aria-expanded", String(open));
+  };
+  aboutTrigger?.addEventListener("click", () =>
+    setAbout(!aboutDd?.classList.contains("is-open")),
+  );
+  document.addEventListener("click", (e) => {
+    if (aboutDd && !aboutDd.contains(e.target as Node)) setAbout(false);
+  });
+
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && menuOpen) setMenu(false);
+    if (e.key === "Escape") {
+      if (menuOpen) setMenu(false);
+      setAbout(false);
+      aboutTrigger?.blur();
+    }
   });
 </script>

@@ -47,6 +47,31 @@ const activities = [
   { title: "Acupuncture", body: "Balances the body and eases stress.", icon: "m11.15 15.18l-1.42-1.41l1.42-1.42l1.41 1.42l1.41-1.42l-1.41-1.41l1.41-1.41l1.42 1.41l1.41-1.41l-2.83-2.83l-7.07 7.07l2.83 2.83zM3.08 19l3.12-3.11l-2.12-2.12l9.89-9.9L16.1 6l1.4-1.42l-1.4-1.42l1.4-1.41L21.75 6l-1.41 1.4L18.92 6L17.5 7.4l2.13 2.13l-9.9 9.89l-2.12-2.12l-4.53 4.54z" },
   { title: "Meditation & Mindfulness", body: "Builds the capacity to meet thoughts and feelings with calm.", icon: "M12 4c1.11 0 2 .89 2 2s-.89 2-2 2s-2-.89-2-2s.9-2 2-2m9 12v-2c-2.24 0-4.16-.96-5.6-2.68l-1.34-1.6A1.98 1.98 0 0 0 12.53 9H11.5c-.61 0-1.17.26-1.55.72l-1.34 1.6C7.16 13.04 5.24 14 3 14v2c2.77 0 5.19-1.17 7-3.25V15l-3.88 1.55c-.67.27-1.12.95-1.12 1.66C5 19.2 5.8 20 6.79 20H9v-.5a2.5 2.5 0 0 1 2.5-2.5h3c.28 0 .5.22.5.5s-.22.5-.5.5h-3c-.83 0-1.5.67-1.5 1.5v.5h7.21c.99 0 1.79-.8 1.79-1.79c0-.71-.45-1.39-1.12-1.66L14 15v-2.25c1.81 2.08 4.23 3.25 7 3.25" },
 ];
+
+// Links to the rest of who we are, so visitors can explore and feel secure.
+const about = [
+  {
+    href: "/our-story",
+    img: "/images/photos/mountain-sunrise.jpg",
+    alt: "Golden sunrise over layered mountains",
+    title: "Our Story",
+    body: "Why Casa da Nova Vida exists, and the journey of healing that began it.",
+  },
+  {
+    href: "/our-approach",
+    img: "/images/photos/cards/welcome-grow.jpg",
+    alt: "Warm sunrise over the Texas Hill Country",
+    title: "Our Approach",
+    body: "How we treat addiction at the root by healing the whole person.",
+  },
+  {
+    href: "/our-location",
+    img: "/images/photos/cards/gallery-porch.jpg",
+    alt: "A covered porch and fire pit overlooking the Hill Country",
+    title: "Our Location",
+    body: "The serene Texas Hill Country property, just outside Austin.",
+  },
+];
 ---
 
 <Layout
@@ -57,27 +82,27 @@ const activities = [
   <PageHero
     eyebrow="Our Program"
     title="What to Expect"
-    image="/images/photos/cards/program-hero.jpg"
-    imageAlt="A forest path lit by golden sunrise light"
+    image="/images/photos/property-meadow-view.jpeg"
+    imageAlt="The Casa da Nova Vida house on its wooded hilltop above an open meadow"
   />
 
   <!-- ===================== LEAD + STATS ===================== -->
-  <section class="px-6 py-16 lg:px-10 lg:py-24">
+  <section class="px-6 py-12 lg:px-10 lg:py-16">
     <div class="mx-auto max-w-3xl text-center">
       <p class="eyebrow">Room to breathe</p>
-      <p class="mt-5 font-display text-2xl leading-[1.5] text-cocoa sm:text-3xl sm:leading-[1.45]">
+      <p class="mt-4 font-display text-xl leading-[1.4] text-cocoa sm:text-2xl sm:leading-[1.4]">
         Healing requires a <span class="text-pine">conscious breath</span>. We
         give our guests time and space, outside the everyday, to reflect and
         integrate, through spiritual work, therapy, and community.
       </p>
-      <p class="mx-auto mt-6 max-w-2xl leading-relaxed text-cocoa">
+      <p class="mx-auto mt-5 max-w-2xl leading-relaxed text-cocoa">
         Our program incorporates entheogenic plant medicine traditions with
         comprehensive integration practices that address spiritual, mental,
         emotional, and physical well-being.
       </p>
     </div>
     <div
-      class="mx-auto mt-14 grid max-w-4xl gap-8 border-t border-sand pt-12 text-center sm:grid-cols-3 sm:divide-x sm:divide-sand lg:mt-16 lg:pt-14"
+      class="mx-auto mt-10 grid max-w-4xl gap-8 border-t border-sand pt-8 text-center sm:grid-cols-3 sm:divide-x sm:divide-sand lg:mt-12 lg:pt-10"
     >
       <div>
         <p class="font-display text-4xl text-clay">3-5</p>
@@ -95,7 +120,7 @@ const activities = [
   </section>
 
   <!-- ===================== CURRICULUM (roadmap) ===================== -->
-  <section class="border-y border-sand bg-cream px-6 py-20 lg:px-10 lg:py-28">
+  <section class="border-y border-sand bg-cream px-6 py-20 lg:px-10 lg:py-20">
     <div class="mx-auto max-w-3xl">
       <div class="text-center">
         <p class="eyebrow">Our Curriculum</p>
@@ -136,7 +161,7 @@ const activities = [
   </section>
 
   <!-- ===================== TOOLS & PRACTICES (was Activities) ===================== -->
-  <section class="px-6 py-20 lg:px-10 lg:py-28">
+  <section class="px-6 py-20 lg:px-10 lg:py-20">
     <div class="mx-auto max-w-6xl">
       <div class="mx-auto max-w-2xl text-center">
         <p class="eyebrow">Tools &amp; practices</p>
@@ -168,13 +193,13 @@ const activities = [
   </section>
 
   <!-- ===================== NUTRITION ===================== -->
-  <section class="bg-forest px-6 py-20 text-linen lg:px-10 lg:py-28">
-    <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
+  <section class="bg-forest px-6 py-16 text-linen lg:px-10 lg:py-20">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-12">
       <div class="overflow-hidden rounded-[1.75rem] shadow-xl">
         <img
           src={withBase("/images/photos/cards/food.jpg")}
           alt="A spread of fresh, seasonal whole foods on a wooden table"
-          class="h-72 w-full object-cover sm:h-96 lg:h-[30rem]"
+          class="h-56 w-full object-cover sm:h-72 lg:h-[22rem]"
           loading="lazy"
           width="1024"
           height="768"
@@ -182,13 +207,13 @@ const activities = [
       </div>
       <div>
         <p class="eyebrow text-gold">Nutrition</p>
-        <p class="mt-6 text-lg leading-relaxed text-sagelight">
+        <p class="mt-4 leading-relaxed text-sagelight">
           We serve healthy, organic, seasonal meals designed to stabilize and
           nourish body, mind, and emotions. And we teach the fundamentals of
           shopping, cooking, and intentional eating, so a healthy relationship
           with food continues long after you leave.
         </p>
-        <blockquote class="mt-8 border-l-2 border-gold/60 pl-6 font-display text-2xl italic leading-relaxed text-gold sm:text-3xl">
+        <blockquote class="mt-6 border-l-2 border-gold/60 pl-6 font-display text-xl italic leading-relaxed text-gold sm:text-2xl">
           “Let food be thy medicine and medicine be thy food”
           <cite class="mt-3 block font-sans text-sm not-italic uppercase tracking-[0.18em] text-sage">
             Hippocrates
@@ -198,18 +223,46 @@ const activities = [
     </div>
   </section>
 
-  <!-- ===================== APPLY ===================== -->
-  <section class="px-6 py-20 text-center lg:px-10 lg:py-28">
-    <div class="mx-auto max-w-2xl">
-      <h2 class="text-3xl text-pine sm:text-4xl">Interested in becoming a guest?</h2>
-      <a
-        href={withBase("/apply")}
-        class="mt-9 inline-flex rounded-full bg-pine px-8 py-4 font-medium text-linen transition-colors hover:bg-forest"
-      >
-        Apply to become a guest
-      </a>
+  <!-- ===================== GET TO KNOW US (about links) ===================== -->
+  <section class="border-t border-sand px-6 pt-16 pb-12 lg:px-10 lg:pt-20 lg:pb-14">
+    <div class="mx-auto max-w-6xl">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Get to know us</p>
+        <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Learn more about who we are</h2>
+        <p class="mx-auto mt-5 max-w-xl leading-relaxed text-cocoa">
+          You should know exactly who you're trusting with your healing. Explore
+          our story, our approach, and the place you'd call home.
+        </p>
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-3">
+        {
+          about.map((a) => (
+            <a
+              href={withBase(a.href)}
+              class="group flex flex-col overflow-hidden rounded-2xl border border-sand bg-parchment shadow-sm transition-shadow duration-300 hover:shadow-[0_18px_50px_-24px_rgba(43,54,70,0.35)]"
+            >
+              <div class="overflow-hidden">
+                <img
+                  src={withBase(a.img)}
+                  alt={a.alt}
+                  class="h-40 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <div class="flex flex-1 flex-col p-6">
+                <h3 class="text-xl text-forest transition-colors group-hover:text-pine">{a.title}</h3>
+                <p class="mt-2 flex-1 text-sm leading-relaxed text-cocoa">{a.body}</p>
+                <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-forest">
+                  Learn more
+                  <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
     </div>
   </section>
 
-  <div class="pb-20 lg:pb-28"><CTABand /></div>
+  <div class="pt-4 pb-20 lg:pb-20"><CTABand /></div>
 </Layout>
