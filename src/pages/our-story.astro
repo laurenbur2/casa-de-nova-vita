@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CTABand from "../components/CTABand.astro";
+import PageHero from "../components/PageHero.astro";
 import { withBase } from "../lib/base";
 
 const beliefs = [
@@ -24,26 +25,13 @@ const beliefs = [
   description="Why Casa da Nova Vida exists: a sanctuary born from the belief that spirituality is the cornerstone of lasting recovery and a truly new life."
 >
   <!-- ===================== HERO ===================== -->
-  <section class="relative isolate flex min-h-[58vh] items-center justify-center overflow-hidden px-6 py-28 text-linen lg:min-h-[66vh] lg:px-10 lg:py-36">
-    <img
-      src={withBase("/images/photos/cards/story-hero.jpg")}
-      alt="Golden mist rising over layered forested mountains at dawn"
-      class="absolute inset-0 -z-20 h-full w-full object-cover"
-      loading="eager"
-    />
-    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-bark/75 via-pine/70 to-pine/85"></div>
-    <div class="mx-auto max-w-3xl text-center [text-shadow:0_2px_24px_rgba(20,26,36,0.5)]">
-      <p class="eyebrow rise text-gold">Our Story</p>
-      <h1 class="rise rise-2 mt-5 text-4xl leading-[1.12] sm:text-5xl">
-        A call from Spirit
-      </h1>
-      <p class="rise rise-3 mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-cream/90">
-        Casa da Nova Vida, House of New Life, is a recovery house in the Texas
-        Hill Country founded by Drew Walsh, offering an alternative, holistic path of
-        healing for those working with sacred plant medicine.
-      </p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="Our Story"
+    title="A call from Spirit"
+    intro="Casa da Nova Vida, House of New Life, is a recovery house in the Texas Hill Country founded by Drew Walsh, offering an alternative, holistic path of healing for those working with sacred plant medicine."
+    image="/images/photos/property-sunset-hills.png"
+    imageAlt="Golden-hour sun over the rolling Texas Hill Country"
+  />
 
   <!-- ===================== FOUNDER FEATURE ===================== -->
   <section class="px-6 pt-20 lg:px-10 lg:pt-28">
