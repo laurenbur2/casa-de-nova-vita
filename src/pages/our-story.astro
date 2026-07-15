@@ -24,7 +24,7 @@ const beliefs = [
   description="Why Casa da Nova Vida exists: a sanctuary born from the belief that spirituality is the cornerstone of lasting recovery and a truly new life."
 >
   <!-- ===================== HERO ===================== -->
-  <section class="relative isolate overflow-hidden px-6 pb-24 pt-32 text-linen lg:px-10 lg:pb-28 lg:pt-40">
+  <section class="relative isolate flex min-h-[58vh] items-center justify-center overflow-hidden px-6 py-28 text-linen lg:min-h-[66vh] lg:px-10 lg:py-36">
     <img
       src={withBase("/images/photos/cards/story-hero.jpg")}
       alt="Golden mist rising over layered forested mountains at dawn"
@@ -98,8 +98,8 @@ const beliefs = [
   </section>
 
   <!-- ===================== WHAT WE BELIEVE ===================== -->
-  <section class="relative isolate mt-20 overflow-hidden border-y border-sand px-6 py-20 lg:mt-28 lg:px-10 lg:py-28">
-    <!-- A clearing in the woods, softened under a light wash behind the text -->
+  <section class="relative isolate mt-20 overflow-hidden px-6 py-24 lg:mt-28 lg:px-10 lg:py-32">
+    <!-- A clearing in the woods under a deep pine wash, echoing the homepage band -->
     <img
       src={withBase("/images/photos/life/clearing.jpg")}
       alt=""
@@ -107,21 +107,21 @@ const beliefs = [
       class="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover object-center"
     />
     <div
-      class="pointer-events-none absolute inset-0 -z-10 bg-cream/45"
+      class="pointer-events-none absolute inset-0 -z-10 bg-pine/75"
       aria-hidden="true"
     >
     </div>
     <div class="relative mx-auto max-w-6xl">
-      <div class="mx-auto max-w-2xl text-center">
-        <p class="eyebrow">What we believe</p>
-        <h2 class="mt-4 text-3xl text-pine sm:text-4xl">
+      <div class="mx-auto max-w-2xl text-center [text-shadow:0_2px_20px_rgba(20,26,36,0.5)]">
+        <p class="eyebrow text-gold">What we believe</p>
+        <h2 class="mt-4 text-3xl text-linen sm:text-4xl">
           The convictions that shape this home
         </h2>
       </div>
       <div class="mt-14 grid gap-6 md:grid-cols-3">
         {
           beliefs.map((b, i) => (
-            <div class="group rounded-3xl border border-sand/70 bg-parchment/75 p-8 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-sage hover:shadow-md">
+            <div class="group rounded-3xl border border-sand bg-parchment/95 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-sage hover:shadow-xl">
               <div class="flex items-center gap-3">
                 <span class="font-display text-4xl leading-none text-gold">
                   0{i + 1}
