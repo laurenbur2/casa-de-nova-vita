@@ -76,38 +76,56 @@ const inputClass =
         </div>
 
         <label class="block text-sm font-medium text-cocoa">
-          Date of birth <span class="text-clay">*</span>
+          Birthday <span class="text-clay">*</span>
           <input type="date" name="birthday" required class={inputClass} />
         </label>
 
         <label class="block text-sm font-medium text-cocoa">
-          This application is for
-          <select name="application_for" class={inputClass}>
-            <option>Myself</option>
-            <option>A family member or loved one</option>
-            <option>Other</option>
-          </select>
+          Briefly describe your situation and the support you're looking for
+          <span class="text-clay">*</span>
+          <textarea name="situation" required rows="5" class={inputClass}></textarea>
         </label>
 
         <label class="block text-sm font-medium text-cocoa">
-          Where are you in your journey?
-          <select name="journey_stage" class={inputClass}>
-            <option>Exploring Ibogaine or considering treatment</option>
-            <option>Preparing for an upcoming treatment or retreat</option>
-            <option>Recently completed treatment, seeking integration</option>
-            <option>Some time has passed, seeking support</option>
-            <option>Not sure yet</option>
-          </select>
+          Please list all drugs (including street drugs, alcohol and all
+          prescription medications, psychoactive and non-psychoactive) that you
+          have consumed within the last three months, and frequency of
+          consumption <span class="text-clay">*</span>
+          <textarea name="substances" required rows="5" class={inputClass}></textarea>
         </label>
 
         <label class="block text-sm font-medium text-cocoa">
-          Tell us about yourself and what you are seeking <span class="text-clay">*</span>
-          <textarea
-            name="message"
-            required
-            rows="6"
-            placeholder="Share as much or as little as you'd like about where you are and what brings you here."
-            class={inputClass}></textarea>
+          When would you like to begin your stay at Nova Vida?
+          <span class="text-clay">*</span>
+          <input type="text" name="begin_stay" required class={inputClass} />
+        </label>
+
+        <label class="block text-sm font-medium text-cocoa">
+          Have you ever been diagnosed with a mental health disorder? Please
+          specify what and when? <span class="text-clay">*</span>
+          <input type="text" name="mental_health" required class={inputClass} />
+        </label>
+
+        <label class="block text-sm font-medium text-cocoa">
+          Do you have any physical health issues -- illness, extreme allergy,
+          physical limitation, pain or injury? Please specify.
+          <span class="text-clay">*</span>
+          <input type="text" name="physical_health" required class={inputClass} />
+        </label>
+
+        <label class="block text-sm font-medium text-cocoa">
+          How did you hear about us? <span class="text-clay">*</span>
+          <input type="text" name="how_heard" required class={inputClass} />
+        </label>
+
+        <label class="block text-sm font-medium text-cocoa">
+          What motivates you to seek a New Life? <span class="text-clay">*</span>
+          <textarea name="motivation" required rows="5" class={inputClass}></textarea>
+        </label>
+
+        <label class="block text-sm font-medium text-cocoa">
+          Additional Info / Comments
+          <input type="text" name="additional_info" class={inputClass} />
         </label>
 
         <button
