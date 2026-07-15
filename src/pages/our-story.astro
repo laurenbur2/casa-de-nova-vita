@@ -98,8 +98,20 @@ const beliefs = [
   </section>
 
   <!-- ===================== WHAT WE BELIEVE ===================== -->
-  <section class="mt-20 border-y border-sand bg-cream px-6 py-20 lg:mt-28 lg:px-10 lg:py-28">
-    <div class="mx-auto max-w-6xl">
+  <section class="relative isolate mt-20 overflow-hidden border-y border-sand px-6 py-20 lg:mt-28 lg:px-10 lg:py-28">
+    <!-- A clearing in the woods, softened under a light wash behind the text -->
+    <img
+      src={withBase("/images/photos/life/clearing.jpg")}
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover object-center"
+    />
+    <div
+      class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-linen via-linen/65 to-linen"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="relative mx-auto max-w-6xl">
       <div class="mx-auto max-w-2xl text-center">
         <p class="eyebrow">What we believe</p>
         <h2 class="mt-4 text-3xl text-pine sm:text-4xl">
@@ -109,7 +121,7 @@ const beliefs = [
       <div class="mt-14 grid gap-6 md:grid-cols-3">
         {
           beliefs.map((b, i) => (
-            <div class="group rounded-3xl border border-sand bg-parchment p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-sage hover:shadow-md">
+            <div class="group rounded-3xl border border-sand/70 bg-parchment/75 p-8 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-sage hover:shadow-md">
               <div class="flex items-center gap-3">
                 <span class="font-display text-4xl leading-none text-gold">
                   0{i + 1}
