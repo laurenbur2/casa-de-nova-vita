@@ -110,20 +110,31 @@ const who = [
   </section>
 
   <!-- ===================== INTRO STATEMENT ===================== -->
-  <section id="intro" class="scroll-mt-24 px-6 py-24 lg:px-10 lg:py-32">
+  <section
+    id="intro"
+    class="relative isolate scroll-mt-24 overflow-hidden px-6 py-28 lg:px-10 lg:py-36"
+  >
+    <img
+      src={withBase("/images/logo/mark-navy.png")}
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute left-1/2 top-1/2 -z-10 w-[34rem] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-[0.035]"
+    />
     <div class="mx-auto max-w-3xl text-center">
       <p class="eyebrow">Because we've been there</p>
+      <span class="mx-auto mt-5 block h-px w-12 bg-gold" aria-hidden="true"></span>
       <p
-        class="mt-8 font-display text-2xl leading-[1.5] text-cocoa sm:text-3xl sm:leading-[1.5]"
+        class="mt-9 font-display text-[1.75rem] leading-[1.45] text-pine sm:text-[2.15rem] sm:leading-[1.4]"
       >
         Whether you're looking for help for yourself or a loved one, we
         understand the pain, frustration, and hopelessness that accompany
         addiction, because we've been there. At Casa da Nova Vida, we provide an
-        alternative, holistic approach to recovery, with a deep emphasis on
-        <span class="text-pine">spiritual development</span> and working with
-        sacrament.
+        alternative, holistic approach to recovery, with a deep emphasis on <span
+          class="italic text-gold">spiritual development</span
+        > and working with sacrament.
       </p>
-      <p class="mx-auto mt-6 max-w-2xl leading-relaxed text-cocoa">
+      <div class="mx-auto mt-10 h-px w-16 bg-sand" aria-hidden="true"></div>
+      <p class="mx-auto mt-8 max-w-2xl leading-relaxed text-cocoa">
         Our program incorporates entheogenic plant medicine traditions with
         comprehensive integration practices that address spiritual, mental,
         emotional, and physical well-being, on our serene property just outside
@@ -131,7 +142,7 @@ const who = [
       </p>
       <a
         href={withBase("/our-story")}
-        class="group mt-7 inline-flex items-center gap-1.5 text-sm font-medium text-clay transition-colors hover:text-gold"
+        class="group mt-10 inline-flex items-center gap-1.5 text-sm font-medium text-clay transition-colors hover:text-gold"
       >
         Read our story
         <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">&rarr;</span>
