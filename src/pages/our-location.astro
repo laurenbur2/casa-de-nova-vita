@@ -45,16 +45,44 @@ const nearby = [
 
 const gallery = [
   {
-    src: "/images/photos/life/church-gathering.jpg",
-    alt: "Guests and staff gathered around the table for worship, with a cross, candle, and guitar",
+    src: "/images/photos/property-front.png",
+    alt: "The stone-and-stucco sanctuary house with its arched entry and stone walkway, framed by hill country oaks",
   },
   {
     src: "/images/photos/life/living-room.jpg",
     alt: "The great room with a lit stone fireplace where guests gather and talk",
   },
   {
+    src: "/images/photos/property-porch-firepit.png",
+    alt: "A covered porch with a Texas fire pit overlooking the green rolling hills",
+  },
+  {
+    src: "/images/photos/life/church-gathering.jpg",
+    alt: "Guests and staff gathered around the table for worship, with a cross, candle, and guitar",
+  },
+  {
+    src: "/images/photos/property-interior-dining.png",
+    alt: "A light-filled dining nook with a round table and wide windows onto the land",
+  },
+  {
     src: "/images/photos/life/kitchen.jpg",
     alt: "The open kitchen where guests share meals and learn to cook",
+  },
+  {
+    src: "/images/photos/property-sunset-hills.png",
+    alt: "Golden-hour sun setting over the rolling wooded hills beyond the property",
+  },
+  {
+    src: "/images/photos/life/cross.jpg",
+    alt: "A handmade wooden cross with prayer beads on the table while guests rest in the living room",
+  },
+  {
+    src: "/images/photos/property-meadow-view.jpeg",
+    alt: "The house resting on the hilltop above a golden Hill Country meadow",
+  },
+  {
+    src: "/images/photos/life/practice-meditation.jpg",
+    alt: "Guests meditating together on blankets under the Hill Country oaks",
   },
   {
     src: "/images/photos/life/clearing.jpg",
@@ -89,24 +117,50 @@ const gallery = [
     </div>
   </section>
 
-  <!-- ===================== GALLERY ===================== -->
-  <section class="px-6 pb-20 lg:px-10 lg:pb-28">
-    <div class="mx-auto mb-10 max-w-3xl text-center">
-      <p class="eyebrow">A glimpse of life here</p>
-      <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Inside the house</h2>
+  <!-- ===================== GALLERY (carousel) ===================== -->
+  <section class="overflow-hidden px-6 pb-20 lg:px-10 lg:pb-28">
+    <div class="mx-auto flex max-w-5xl items-end justify-between gap-4">
+      <div>
+        <p class="eyebrow">A glimpse of life here</p>
+        <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Inside the house</h2>
+      </div>
+      <div class="hidden shrink-0 gap-2 sm:flex">
+        <button
+          type="button"
+          data-house-scroll="prev"
+          aria-label="Scroll left"
+          class="flex h-11 w-11 items-center justify-center rounded-full border border-moss/40 text-pine transition-colors hover:border-moss hover:bg-cream"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+        </button>
+        <button
+          type="button"
+          data-house-scroll="next"
+          aria-label="Scroll right"
+          class="flex h-11 w-11 items-center justify-center rounded-full border border-moss/40 text-pine transition-colors hover:border-moss hover:bg-cream"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+        </button>
+      </div>
     </div>
-    <div class="mx-auto grid max-w-5xl grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
+    <div
+      id="house-track"
+      class="no-scrollbar mx-auto mt-10 flex max-w-5xl snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4"
+    >
       {
         gallery.map((g) => (
           <img
             src={withBase(g.src)}
             alt={g.alt}
-            class="h-64 w-full rounded-2xl object-cover shadow-sm sm:h-72"
+            class="h-64 w-[80%] shrink-0 snap-start rounded-2xl object-cover shadow-sm sm:h-72 sm:w-[46%] lg:w-[calc(25%-1.125rem)]"
             loading="lazy"
           />
         ))
       }
     </div>
+    <p class="mx-auto mt-4 max-w-5xl text-xs text-stone sm:hidden">
+      Swipe to see more.
+    </p>
   </section>
 
   <!-- ===================== OTHER LOCAL ATTRACTIONS (carousel) ===================== -->
@@ -175,6 +229,13 @@ const gallery = [
   const step = () => Math.min(track?.clientWidth ? track.clientWidth * 0.85 : 340, 360);
   prev?.addEventListener("click", () => track?.scrollBy({ left: -step(), behavior: "smooth" }));
   next?.addEventListener("click", () => track?.scrollBy({ left: step(), behavior: "smooth" }));
+
+  const houseTrack = document.getElementById("house-track");
+  const housePrev = document.querySelector('[data-house-scroll="prev"]');
+  const houseNext = document.querySelector('[data-house-scroll="next"]');
+  const houseStep = () => (houseTrack?.clientWidth || 340) * 0.8;
+  housePrev?.addEventListener("click", () => houseTrack?.scrollBy({ left: -houseStep(), behavior: "smooth" }));
+  houseNext?.addEventListener("click", () => houseTrack?.scrollBy({ left: houseStep(), behavior: "smooth" }));
 </script>
 
 <style>
