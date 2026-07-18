@@ -279,7 +279,7 @@ const library = [
   description="A library of research, articles, and stories on integration and recovery after ibogaine, ayahuasca, and plant medicine, from Casa da Nova Vida."
 >
   <!-- ===================== HERO ===================== -->
-  <section class="relative isolate overflow-hidden px-6 pb-20 pt-24 text-linen lg:px-10 lg:pb-16 lg:pt-40">
+  <section class="relative isolate overflow-hidden px-6 pb-14 sm:pb-20 pt-24 text-linen lg:px-10 lg:pb-16 lg:pt-40">
     <img
       src={withBase(R + "hero.jpg")}
       alt="An open notebook and pen in warm window light"
@@ -304,7 +304,7 @@ const library = [
   <!-- ===================== OUR GUIDES (on-site articles) ===================== -->
   {
     guides.length > 0 && (
-      <section class="border-b border-sand px-6 pt-16 lg:px-10 lg:pt-16">
+      <section class="border-b border-sand px-6 pt-12 sm:pt-16 lg:px-10 lg:pt-16">
         <div class="mx-auto max-w-6xl">
           <p class="eyebrow">Our guides</p>
           <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Written by Casa da Nova Vida</h2>
@@ -312,7 +312,7 @@ const library = [
             In-depth guides to healing and integration after ibogaine, ayahuasca,
             and other plant medicines, written from our own experience and practice.
           </p>
-          <div class="mt-10 grid gap-6 pb-16 sm:grid-cols-2 lg:grid-cols-3 lg:pb-16">
+          <div class="mt-10 grid gap-6 pb-12 sm:pb-16 sm:grid-cols-2 lg:grid-cols-3 lg:pb-16">
             {guides.map((g) => (
               <a
                 href={withBase(`/${g.id}`)}
@@ -348,7 +348,7 @@ const library = [
   }
 
   <!-- ===================== LIBRARY + FILTERS ===================== -->
-  <section class="px-6 py-16 lg:px-10 lg:py-16">
+  <section class="px-6 py-12 sm:py-16 lg:px-10 lg:py-16">
     <div class="mx-auto max-w-6xl">
       <p class="eyebrow">The library</p>
       <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Reading &amp; research</h2>
@@ -412,7 +412,7 @@ const library = [
     </div>
   </section>
 
-  <div class="pb-20 lg:pb-20"><CTABand /></div>
+  <div class="pb-14 sm:pb-20 lg:pb-20"><CTABand /></div>
 </Layout>
 
 <script>

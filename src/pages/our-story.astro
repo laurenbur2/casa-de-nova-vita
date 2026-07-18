@@ -34,7 +34,7 @@ const beliefs = [
   />
 
   <!-- ===================== FOUNDER FEATURE ===================== -->
-  <section class="px-6 pt-20 lg:px-10 lg:pt-20">
+  <section class="px-6 pt-14 sm:pt-20 lg:px-10 lg:pt-20">
     <div class="relative mx-auto max-w-5xl">
       <img
         src={withBase("/images/photos/cards/drew.jpg")}
@@ -43,7 +43,7 @@ const beliefs = [
         loading="eager"
       />
       <figure
-        class="relative mx-auto -mt-20 max-w-md rounded-[1.5rem] bg-pine p-8 text-linen shadow-xl lg:absolute lg:bottom-8 lg:right-8 lg:mx-0 lg:mt-0 lg:p-9"
+        class="relative mx-auto -mt-20 max-w-md rounded-[1.5rem] bg-pine p-6 sm:p-8 text-linen shadow-xl lg:absolute lg:bottom-8 lg:right-8 lg:mx-0 lg:mt-0 lg:p-9"
       >
         <span class="font-display text-5xl leading-none text-gold/70">&ldquo;</span>
         <blockquote class="-mt-4 font-display text-xl italic leading-relaxed sm:text-2xl">
@@ -58,7 +58,7 @@ const beliefs = [
   </section>
 
   <!-- ===================== STORY ===================== -->
-  <section class="px-6 pt-16 lg:px-10 lg:pt-16">
+  <section class="px-6 pt-12 sm:pt-16 lg:px-10 lg:pt-16">
     <div class="mx-auto max-w-3xl">
       <div class="flex items-center gap-4">
         <span class="h-px w-12 flex-none bg-gold" aria-hidden="true"></span>
@@ -86,7 +86,7 @@ const beliefs = [
   </section>
 
   <!-- ===================== WHAT WE BELIEVE ===================== -->
-  <section class="relative isolate mt-20 overflow-hidden px-6 py-16 lg:mt-16 lg:px-10 lg:py-20">
+  <section class="relative isolate mt-20 overflow-hidden px-6 py-12 sm:py-16 lg:mt-16 lg:px-10 lg:py-20">
     <!-- A clearing in the woods under a deep pine wash, echoing the homepage band -->
     <img
       src={withBase("/images/photos/life/clearing.jpg")}
@@ -106,10 +106,10 @@ const beliefs = [
           The convictions that shape this home
         </h2>
       </div>
-      <div class="mt-14 grid gap-6 md:grid-cols-3">
+      <div class="mt-9 sm:mt-14 grid gap-6 md:grid-cols-3">
         {
           beliefs.map((b, i) => (
-            <div class="group rounded-3xl border border-sand bg-parchment/95 p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-sage hover:shadow-xl">
+            <div class="group rounded-3xl border border-sand bg-parchment/95 p-6 sm:p-8 shadow-lg backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-sage hover:shadow-xl">
               <div class="flex items-center gap-3">
                 <span class="font-display text-4xl leading-none text-gold">
                   0{i + 1}
@@ -126,7 +126,7 @@ const beliefs = [
   </section>
 
   <!-- ===================== THE CARE / PROPERTY ===================== -->
-  <section class="px-6 py-20 lg:px-10 lg:py-20">
+  <section class="px-6 py-14 sm:py-20 lg:px-10 lg:py-20">
     <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
       <div class="overflow-hidden rounded-[1.75rem] shadow-lg">
         <img
@@ -158,7 +158,7 @@ const beliefs = [
     </div>
   </section>
 
-  <div class="pb-20 lg:pb-20">
+  <div class="pb-14 sm:pb-20 lg:pb-20">
     <CTABand
       heading="Come see if this feels like home"
       body="The best way to know whether Casa da Nova Vida is right for you is simply to talk. Reach out. There is no pressure, only a conversation."

@@ -120,7 +120,7 @@ const about = [
   </section>
 
   <!-- ===================== CURRICULUM (roadmap) ===================== -->
-  <section class="border-y border-sand bg-cream px-6 py-20 lg:px-10 lg:py-20">
+  <section class="border-y border-sand bg-cream px-6 py-14 sm:py-20 lg:px-10 lg:py-20">
     <div class="mx-auto max-w-3xl">
       <div class="text-center">
         <p class="eyebrow">Our Curriculum</p>
@@ -132,7 +132,7 @@ const about = [
         </p>
       </div>
 
-      <ol class="relative mx-auto mt-16 max-w-xl space-y-9 border-l-2 border-sand">
+      <ol class="relative mx-auto mt-10 sm:mt-16 max-w-xl space-y-9 border-l-2 border-sand">
         {
           curriculum.map((c, i) => (
             <li class="relative pl-12">
@@ -161,7 +161,7 @@ const about = [
   </section>
 
   <!-- ===================== TOOLS & PRACTICES (was Activities) ===================== -->
-  <section class="px-6 py-20 lg:px-10 lg:py-20">
+  <section class="px-6 py-14 sm:py-20 lg:px-10 lg:py-20">
     <div class="mx-auto max-w-6xl">
       <div class="mx-auto max-w-2xl text-center">
         <p class="eyebrow">Tools &amp; practices</p>
@@ -172,7 +172,7 @@ const about = [
         </p>
       </div>
 
-      <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="mt-9 sm:mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {
           activities.map((a) => (
             <div class="group flex items-start gap-4 rounded-2xl border border-sand bg-linen p-6 transition-shadow duration-300 hover:shadow-[0_16px_40px_-24px_rgba(43,54,70,0.35)]">
@@ -193,7 +193,7 @@ const about = [
   </section>
 
   <!-- ===================== NUTRITION ===================== -->
-  <section class="bg-forest px-6 py-16 text-linen lg:px-10 lg:py-20">
+  <section class="bg-forest px-6 py-12 sm:py-16 text-linen lg:px-10 lg:py-20">
     <div class="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-12">
       <div class="overflow-hidden rounded-[1.75rem] shadow-xl">
         <img
@@ -224,7 +224,7 @@ const about = [
   </section>
 
   <!-- ===================== GET TO KNOW US (about links) ===================== -->
-  <section class="border-t border-sand px-6 pt-16 pb-12 lg:px-10 lg:pt-20 lg:pb-14">
+  <section class="border-t border-sand px-6 pt-12 sm:pt-16 pb-12 lg:px-10 lg:pt-20 lg:pb-14">
     <div class="mx-auto max-w-6xl">
       <div class="mx-auto max-w-2xl text-center">
         <p class="eyebrow">Get to know us</p>
@@ -234,7 +234,7 @@ const about = [
           our story, our approach, and the place you'd call home.
         </p>
       </div>
-      <div class="mt-12 grid gap-6 sm:grid-cols-3">
+      <div class="mt-8 sm:mt-12 grid gap-6 sm:grid-cols-3">
         {
           about.map((a) => (
             <a
@@ -264,5 +264,5 @@ const about = [
     </div>
   </section>
 
-  <div class="pt-4 pb-20 lg:pb-20"><CTABand /></div>
+  <div class="pt-4 pb-14 sm:pb-20 lg:pb-20"><CTABand /></div>
 </Layout>
