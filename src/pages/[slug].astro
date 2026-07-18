@@ -66,16 +66,16 @@ const schema = faqSchema ? [articleSchema, faqSchema] : [articleSchema];
     imageAlt={data.heroImageAlt}
   />
 
-  <article class="px-6 py-12 sm:py-16 lg:px-10 lg:py-16">
+  <article class="px-6 py-10 sm:py-16 lg:px-10 lg:py-16">
     <div class="article-prose prose-links mx-auto max-w-2xl">
       <Content />
     </div>
 
     {
       data.faq && data.faq.length > 0 && (
-        <div class="mx-auto mt-10 sm:mt-16 max-w-2xl">
+        <div class="mx-auto mt-8 sm:mt-16 max-w-2xl">
           <p class="eyebrow">Common questions</p>
-          <h2 class="mt-3 text-3xl text-pine sm:text-4xl">Frequently asked</h2>
+          <h2 class="mt-3 text-2xl text-pine sm:text-4xl">Frequently asked</h2>
           <FaqAccordion items={data.faq} />
         </div>
       )
@@ -83,7 +83,7 @@ const schema = faqSchema ? [articleSchema, faqSchema] : [articleSchema];
 
     {
       data.related && data.related.length > 0 && (
-        <div class="mx-auto mt-10 sm:mt-16 max-w-2xl border-t border-sand pt-10">
+        <div class="mx-auto mt-8 sm:mt-16 max-w-2xl border-t border-sand pt-10">
           <p class="eyebrow">Keep reading</p>
           <ul class="mt-5 space-y-3">
             {data.related.map((r) => (

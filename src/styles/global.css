@@ -46,6 +46,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Denser mobile scale — shrinks every rem-based size (type, spacing,
+   icons) uniformly below the `sm` breakpoint so the phone layout reads
+   tight without hand-tuning each utility. Desktop keeps the 16px base. */
+@media (max-width: 639px) {
+  html {
+    font-size: 14.5px;
+  }
+}
+
 /* Toast shown when an email address is copied to the clipboard */
 .email-toast {
   position: fixed;
