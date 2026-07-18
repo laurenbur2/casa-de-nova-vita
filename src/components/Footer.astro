@@ -109,7 +109,15 @@ const links = [
     <div
       class="mt-14 flex flex-col gap-3 border-t border-sage/25 pt-6 text-xs text-sage sm:flex-row sm:items-center sm:justify-between"
     >
-      <p>&copy; {year} Casa da Nova Vida. All rights reserved.</p>
+      <p class="flex flex-wrap items-center gap-x-2 gap-y-1">
+        <span>&copy; {year} Casa da Nova Vida. All rights reserved.</span>
+        <span aria-hidden="true" class="text-sage/50">&middot;</span>
+        <a
+          href={withBase("/terms")}
+          class="underline decoration-sage/40 underline-offset-4 transition-colors hover:text-linen"
+          >Terms &amp; Conditions</a
+        >
+      </p>
       <p class="max-w-xl leading-relaxed">
         Casa da Nova Vida is a nonprofit church offering an alternative, holistic
         path of healing and integration. We do not administer Ibogaine or provide
