@@ -4,13 +4,16 @@ compatibility_date = "2024-11-01"
 
 # Public, non-secret config. Edit these to match your setup.
 [vars]
-# The "from" address. The domain MUST be verified in Resend.
+# The "from" address for form relays. The domain MUST be verified in Resend.
 FROM_EMAIL = "Casa da Nova Vida <forms@casadanovavida.com>"
+# The "from" for donor thank-you emails — a personal name lands in Primary far
+# more often than a brand address. Same verified domain; replies route to info@.
+THANKYOU_FROM = "Drew at Casa da Nova Vida <drew@casadanovavida.com>"
 # Where submissions are delivered. Comma-separated for multiple recipients.
 TO_EMAIL = "info@casadanovavida.com,lburandt2@gmail.com"
-# Origins allowed to POST to this Worker (your live site + local dev).
-# Add your custom domain here if/when you point one at the site.
-ALLOWED_ORIGINS = "https://laurenbur2.github.io,http://localhost:4321"
+# Origins allowed to POST to this Worker (live domain, www, old GH Pages URL
+# during transition, and local dev).
+ALLOWED_ORIGINS = "https://casadanovavida.com,https://www.casadanovavida.com,https://laurenbur2.github.io,http://localhost:4321"
 
 # SECRETS — do not put these here. Set each with `wrangler secret put NAME`:
 #   RESEND_API_KEY     re_...        (forms)
