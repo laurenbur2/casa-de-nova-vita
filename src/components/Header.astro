@@ -1,6 +1,13 @@
 ---
 import { withBase } from "../lib/base";
 
+interface Props {
+  /** Pages without a dark hero behind the header need the solid treatment
+   *  from the first paint, or the light logo and nav vanish into the cream. */
+  solid?: boolean;
+}
+const { solid = false } = Astro.props;
+
 // Service / intent pages lead the nav — they're the conversion and SEO money
 // pages, so they stay top-level and come first.
 const leadLinks = [
@@ -25,7 +32,11 @@ const aboutActive = aboutLinks.some((l) => isActive(l.href));
 
 <header
   id="site-header"
-  class="fixed inset-x-0 top-0 z-40 border-b border-transparent transition-colors duration-300"
+  data-always-solid={solid ? "" : undefined}
+  class:list={[
+    "fixed inset-x-0 top-0 z-40 border-b border-transparent transition-colors duration-300",
+    solid && "is-scrolled",
+  ]}
 >
   <nav
     class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4 lg:px-10"
@@ -250,8 +261,9 @@ const aboutActive = aboutLinks.some((l) => isActive(l.href));
   const menuLinks = menu?.querySelectorAll("a");
 
   let menuOpen = false;
+  const alwaysSolid = header?.hasAttribute("data-always-solid") ?? false;
   const syncHeader = () => {
-    const solid = window.scrollY > 12 || menuOpen;
+    const solid = alwaysSolid || window.scrollY > 12 || menuOpen;
     header?.classList.toggle("is-scrolled", solid);
   };
 

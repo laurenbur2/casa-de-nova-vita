@@ -13,3 +13,12 @@ export const FORMS_ENDPOINT = WORKER_BASE;
 
 // Donate page POSTs here to open a Stripe Checkout Session.
 export const DONATE_ENDPOINT = `${WORKER_BASE}/donate`;
+
+// Google Analytics 4 measurement ID (looks like "G-XXXXXXXXXX"). Create the
+// property at analytics.google.com → Admin → Data Streams → Web, then paste the
+// ID below (or set PUBLIC_GA_MEASUREMENT_ID in the build environment).
+//
+// Leave it empty and no analytics script is emitted at all — so local builds and
+// previews stay clean, and nothing breaks before the property exists.
+export const GA_MEASUREMENT_ID =
+  import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? "";

@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://laurenbur2.github.io/casa-de-nova-vita/sitemap-index.xml

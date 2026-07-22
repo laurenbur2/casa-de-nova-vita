@@ -1,11 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { withBase } from "../lib/base";
+
+// Old Squarespace links and mistyped URLs land here. Rather than a dead end,
+// point people at the handful of pages someone arriving from a stale link is
+// most likely looking for.
+const suggestions = [
+  { label: "Our program", href: "/our-program" },
+  { label: "Ibogaine aftercare", href: "/ibogaine-aftercare" },
+  { label: "Our story", href: "/our-story" },
+  { label: "Resources & guides", href: "/resources" },
+];
 ---
 
 <Layout
-  title="Thank you · Casa da Nova Vida"
-  description="Thank you for your donation to Casa da Nova Vida. Your gift helps make healing and spiritual renewal accessible to those who need it most."
+  title="Page not found · Casa da Nova Vida"
+  description="That page has moved or no longer exists. Find your way back to Casa da Nova Vida."
   noindex
   lightHeader
 >
@@ -24,19 +34,28 @@ import { withBase } from "../lib/base";
         alt="Casa da Nova Vida hummingbird emblem"
         class="mx-auto mb-6 w-14 opacity-90"
       />
-      <p class="eyebrow">With gratitude</p>
+      <p class="eyebrow">Page not found</p>
       <h1 class="mx-auto mt-4 max-w-xl text-2xl leading-tight text-pine sm:text-4xl">
-        Thank you for your donation
+        This path has moved
       </h1>
       <p class="mx-auto mt-6 max-w-lg leading-relaxed text-cocoa">
-        Your generosity will help change someone's life, supporting their
-        recovery and spiritual development, and keeping our doors open to those
-        walking this path of healing. A receipt is on its way to your email.
+        We recently rebuilt our website, and the page you were looking for may
+        have found a new home. Here are a few places to pick the thread back up.
       </p>
-      <p class="mx-auto mt-4 max-w-lg leading-relaxed text-cocoa">
-        From all of us at Casa da Nova Vida, thank you for being part of this
-        work.
-      </p>
+      <ul class="mx-auto mt-8 flex max-w-md flex-wrap justify-center gap-2.5">
+        {
+          suggestions.map((s) => (
+            <li>
+              <a
+                href={withBase(s.href)}
+                class="inline-block rounded-full border border-moss/40 bg-parchment/60 px-4 py-2 text-sm text-pine transition-colors hover:border-moss hover:bg-cream"
+              >
+                {s.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
       <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
         <a
           href={withBase("/")}

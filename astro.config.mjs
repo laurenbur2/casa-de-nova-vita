@@ -19,5 +19,11 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [sitemap()]
+  // Confirmation and dead-end pages carry no search value — keep them out of
+  // the sitemap so crawl budget goes to the pages we actually want ranking.
+  integrations: [
+    sitemap({
+      filter: (page) => !/\/(thank-you)\/?$/.test(page),
+    }),
+  ]
 });
