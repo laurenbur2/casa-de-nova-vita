@@ -1,135 +1,32 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/PageHero.astro";
-import FaqAccordion from "../components/FaqAccordion.astro";
 import CTABand from "../components/CTABand.astro";
 import { withBase } from "../lib/base";
 
-// What we look for before we are willing to send anyone somewhere. These are
-// the questions we ask a clinic, not a certification we issue.
-const criteria = [
-  {
-    title: "Screening before you travel",
-    icon: "M21 11c0 5.55-3.84 10.74-9 12c-5.16-1.26-9-6.45-9-12V5l9-4l9 4zm-9 10c3.75-1 7-5.46 7-9.78V6.3l-7-3.12L5 6.3v4.92C5 15.54 8.25 20 12 21m-2-4l-4-4l1.41-1.41L10 14.17l6.59-6.59L18 9",
-    body: "Ibogaine affects the heart. A clinic should require an EKG and bloodwork, read them before you book a flight, and turn people away when the results say to.",
-  },
-  {
-    title: "Medical people on site, overnight",
-    icon: "M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h14c1.11 0 2-.89 2-2V5a2 2 0 0 0-2-2m0 16H5V9h14zM5 7V5h14v2zm5.56 10.46l5.94-5.93l-1.07-1.06l-4.87 4.87l-2.11-2.11l-1.06 1.06z",
-    body: "Not on call. In the building, through the night, on the days medicine is given, with cardiac monitoring and emergency equipment within reach.",
-  },
-  {
-    title: "Small groups, unhurried",
-    icon: "M16 3.23Q17.065 2 18.7 2c.91 0 1.67.33 2.3 1s.96 1.43 1 2.3c0 .7-.33 1.51-1 2.46s-1.32 1.74-1.97 2.39q-.975.96-3.03 2.85q-2.085-1.89-3.06-2.85c-.975-.96-1.31-1.44-1.97-2.39S10 6 10 5.3c0-.91.32-1.67.97-2.3s1.43-.96 2.34-1c1.07 0 1.96.41 2.69 1.23M22 19v1l-8 2.5l-7-1.94V22H1V11h7.97l6.16 2.3A2.89 2.89 0 0 1 17 16h2c1.66 0 3 1.34 3 3M5 20v-7H3v7zm14.9-1.43c-.16-.33-.51-.57-.9-.57h-5.35c-.54 0-1.07-.08-1.58-.25l-2.38-.79l.63-1.9l2.38.79c.3.1 2.3.15 2.3.15c0-.37-.23-.7-.57-.83L8.61 13H7v5.5l6.97 1.91z",
-    body: "A place that takes one group at a time can see each person. A place running back-to-back weeks at volume usually cannot, however good its intentions.",
-  },
-  {
-    title: "Honest about what ibogaine is not",
-    icon: "M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2M12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8",
-    body: "It is not a cure, and one week does not undo a life. A clinic that says otherwise is selling something. The ones we trust say the work starts after.",
-  },
-  {
-    title: "They care where you go next",
-    icon: "M23 4.1V2.3l-1.8-.2c-.1 0-.7-.1-1.7-.1c-4.1 0-7.1 1.2-8.8 3.3C9.4 4.5 7.6 4 5.5 4c-1 0-1.7.1-1.7.1l-1.9.3l.1 1.7c.1 3 1.6 8.7 6.8 8.7H9v3.4c-3.8.5-7 1.8-7 1.8v2h20v-2s-3.2-1.3-7-1.8V15c6.3-.1 8-7.2 8-10.9M12 18h-1v-5.6S10.8 9 8 9c0 0 1.5.8 1.9 3.7c-.4.1-.8.1-1.1.1C4.2 12.8 4 6.1 4 6.1S4.6 6 5.5 6c1.9 0 5 .4 5.9 3.1C11.9 4.6 17 4 19.5 4c.9 0 1.5.1 1.5.1s0 9-6.3 9H14c0-2 2-5 2-5c-3 1-3 4.9-3 4.9v5z",
-    body: "Integration sessions before you leave, a conversation about the flight home, and no pretense that discharge is the finish line.",
-  },
-  {
-    title: "Clear about money",
-    icon: "M11.8 10.9c-2.27-.59-3-1.2-3-2.15c0-1.09 1.01-1.85 2.7-1.85c1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61c0 2.31 1.91 3.46 4.7 4.13c2.5.6 3 1.48 3 2.41c0 .69-.49 1.79-2.7 1.79c-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55c0-2.84-2.43-3.81-4.7-4.4",
-    body: "A published price, what it covers, what a medical detox adds, and no pressure to decide this week.",
-  },
-];
+const IQ = "/images/photos/clinics/ibogaquest/";
 
-// Each clinic's own published information, as we read it. We have not audited
-// their records — see the note below the list.
+// Clinics we are willing to point people toward. Written from each clinic's
+// own copy and published protocols; photos are theirs, used with permission.
+// New clinics are added here and render as another entry below.
 const clinics = [
   {
     name: "IbogaQuest",
-    tagline: "Ibogaine treatment in Mexico, since 2009",
-    location: "Tepoztlán, Morelos, Mexico",
-    distance: "About 90 minutes south of Mexico City",
-    since: "2009",
+    meta: "Tepoztlán, Morelos, Mexico · Since 2009",
     href: "https://ibogaquest.com/",
-    costHref: "https://ibogaquest.com/ibogaine-treatment-and-therapy-costs/",
-    languages: "English and Spanish",
+    site: "ibogaquest.com",
     body: [
-      "IbogaQuest offers medically supervised ibogaine treatment in Tepoztlán, Morelos, about 90 minutes south of Mexico City. The team has done this work since 2009 and stays small on purpose: one group a month, up to seven participants, Monday to Monday. That deliberate limit is the first thing we would point to. The people who receive you have had three weeks to rest.",
-      "Care begins long before anyone travels. Each person goes through a medical and psychological intake, and the medical team reviews an EKG and lab work before arrival. During the week there is on-site medical supervision, two medicine sessions, and therapeutic and integration support every day, along with massage, temazcal, a mountain hike and Janzu water therapy.",
-      "The work holds iboga's roots in the Bwiti traditions of Gabon, Cameroon and the Republic of the Congo with respect, which matters to us more than it might sound. And they are plain about the limits: they say the real work begins after ibogaine, and nobody leaves without an integration session and a medical and psychological assessment. The week in Mexico is a beginning.",
+      "IbogaQuest offers medically supervised ibogaine treatment in Tepoztlán, Morelos, about 90 minutes south of Mexico City. The team has done this work since 2009 and stays small on purpose: one group a month, up to seven participants, Monday to Monday.",
+      "Care begins long before anyone travels. Each person goes through a medical and psychological intake, and the medical team reviews an EKG and lab work before arrival. During the week there is on-site medical supervision, two medicine sessions, and therapeutic and integration support every day, along with massage, temazcal, a mountain hike and Janzu water therapy. The work holds iboga's roots in the Bwiti traditions of Gabon, Cameroon and the Republic of the Congo with respect.",
+      "The week in Mexico is a beginning. When a guest fits what Casa da Nova Vida offers, or would like to keep integrating back in the U.S., IbogaQuest refers them to the house.",
     ],
-    facts: [
-      { label: "In operation since", value: "2009" },
-      { label: "Group size", value: "Up to 7 participants, one group a month" },
-      { label: "Length", value: "7 days, Monday to Monday" },
-      { label: "Before you travel", value: "Medical and psychological intake; EKG and lab work reviewed before arrival" },
-      { label: "During the week", value: "On-site medical supervision, two medicine sessions, daily therapeutic and integration support" },
-      { label: "Also offered", value: "Massage, temazcal, a mountain hike and Janzu water therapy" },
-    ],
-    treats: [
-      "Opioid and fentanyl dependence",
-      "Alcohol",
-      "Kratom and 7-OH",
-      "Depression and anxiety",
-      "PTSD and C-PTSD",
-      "Traumatic brain injury",
-      "Veterans",
-      "Spiritual growth",
+    gallery: [
+      { src: IQ + "house-garden.jpg", alt: "The IbogaQuest treatment house, garden and pool with the mountains of Tepoztlán behind" },
+      { src: IQ + "terrace.jpg", alt: "A covered terrace with seating, looking out over the garden and pool" },
+      { src: IQ + "common-room.jpg", alt: "The common room, with a beamed wooden ceiling and a stone fireplace" },
+      { src: IQ + "garden-mountains.jpg", alt: "The garden in bloom beneath the cliffs of Tepoztlán" },
     ],
   },
 ];
-
-const asks = [
-  "Who reads my EKG and labs, and what would make you tell me no?",
-  "Who is physically in the building overnight, and what are their credentials?",
-  "What emergency equipment is on site on the day I take medicine, and how far is the nearest hospital?",
-  "How many people are in my group, and how many weeks a month do you run?",
-  "Do I need a taper or a medical detox first, and who supervises it?",
-  "What does the price include, and what does it not?",
-  "What happens on my last day, and what do you expect me to do in the first ninety days after?",
-];
-
-const faq = [
-  {
-    question: "Does Casa da Nova Vida provide ibogaine treatment?",
-    answer:
-      "No. We are not a clinic. We do not administer ibogaine or provide medical treatment of any kind. Casa da Nova Vida is an aftercare and integration sanctuary in the Texas Hill Country, for the part of the journey that comes after treatment.",
-  },
-  {
-    question: "Why are these clinics all outside the United States?",
-    answer:
-      "Ibogaine is a Schedule I controlled substance in the United States and is not approved by the FDA for any use, so it cannot be legally administered here. Supervised treatment happens abroad, most often in Mexico. That is why nearly every American family's path includes travel and a return home afterward.",
-  },
-  {
-    question: "Are you paid to recommend these clinics?",
-    answer:
-      "No. We receive no payment, commission, or referral fee from any clinic on this page, and no clinic pays to appear here. We do send people to them, and some of them send people to us, because the two halves of this journey fit together. But nothing financial passes between us, and if that ever changes we will say so right here.",
-  },
-  {
-    question: "Have you inspected these clinics yourselves?",
-    answer:
-      "We are not a licensing body and we do not audit medical records. What we go on is the clinic's own published protocols, the way they talk about risk and about what ibogaine cannot do, and what guests who have been through them tell us afterward. Verify anything that matters to you directly with the clinic and with your own doctor.",
-  },
-  {
-    question: "Can you help me decide whether ibogaine is right for me?",
-    answer:
-      "We can talk with you about it honestly, including the reasons it might not be. We cannot give medical advice, and no decision about ibogaine should be made without a physician who knows your heart, your medications, and your history.",
-  },
-  {
-    question: "Should I plan aftercare before I go, or after I get back?",
-    answer:
-      "Before. The window ibogaine opens is real and it is temporary, and the hardest part for most people is the week they fly home into their old city, their old apartment, and their old routines. Planning where you land before you leave is the difference we see most often.",
-  },
-];
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faq.map((f) => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: { "@type": "Answer", text: f.answer },
-  })),
-};
 
 const listSchema = {
   "@context": "https://schema.org",
@@ -138,271 +35,105 @@ const listSchema = {
   itemListElement: clinics.map((c, i) => ({
     "@type": "ListItem",
     position: i + 1,
-    item: {
-      "@type": "Organization",
-      name: c.name,
-      url: c.href,
-      address: { "@type": "PostalAddress", addressLocality: "Tepoztlán", addressRegion: "Morelos", addressCountry: "MX" },
-    },
+    item: { "@type": "Organization", name: c.name, url: c.href },
   })),
 };
 ---
 
 <Layout
-  title="Trusted Ibogaine Clinics · Casa da Nova Vida"
-  description="The ibogaine clinics we trust enough to name, what we look for before we will point anyone toward a provider, and the questions worth asking any clinic before you book."
-  schema={[faqSchema, listSchema]}
+  title="Trusted Clinics · Casa da Nova Vida"
+  description="The ibogaine clinics we trust enough to name. Casa da Nova Vida is an aftercare and integration sanctuary in the Texas Hill Country, for the part that comes after treatment."
+  schema={listSchema}
 >
   <!-- ===================== HERO ===================== -->
-  <PageHero
-    eyebrow="Trusted Clinics"
-    title="Where the work begins"
-    intro="We are the part that comes after. These are the clinics we trust enough to name."
-    image="/images/photos/heroes/aftercare-after-ibogaine-in-mexico.jpg"
-    imageAlt="Clouds at sunset seen through an airplane window"
-  />
-
-  <!-- ===================== WHY THIS PAGE ===================== -->
-  <section class="border-y border-sand bg-cream px-6 py-10 sm:py-14 lg:px-10 lg:py-16">
-    <div class="mx-auto max-w-3xl">
-      <p class="eyebrow">Why this page exists</p>
-      <h2 class="mt-3 text-2xl text-pine sm:text-4xl">The question we are asked most</h2>
-      <p class="mt-6 leading-relaxed text-cocoa">
-        Casa da Nova Vida is not a clinic. We do not administer ibogaine, and we
-        never will. We are the house you come home to: a place in the Texas Hill
-        Country for the integration and aftercare that follow medicine work.
+  <section class="relative isolate overflow-hidden px-6 pb-14 sm:pb-20 pt-24 text-linen lg:px-10 lg:pb-16 lg:pt-40">
+    <img
+      src={withBase("/images/photos/mountain-sunrise.jpg")}
+      alt="First light over a mountain ridge"
+      class="absolute inset-0 -z-20 h-full w-full object-cover"
+      loading="eager"
+    />
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-bark/80 via-pine/75 to-pine/85"></div>
+    <div class="mx-auto max-w-3xl text-center [text-shadow:0_2px_20px_rgba(20,26,36,0.55)]">
+      <p class="eyebrow rise text-gold">Trusted Clinics</p>
+      <h1 class="rise rise-2 mt-5 text-4xl leading-[1.1] sm:text-5xl">Trusted Clinics</h1>
+      <p class="rise rise-3 mx-auto mt-5 font-display text-xl italic text-sagelight sm:text-2xl">
+        Where the work begins.
       </p>
-      <p class="mt-4 leading-relaxed text-cocoa">
-        But because ibogaine is a <strong class="text-pine">Schedule I substance
-        in the United States</strong> and cannot be legally administered here,
-        almost everyone who reaches us is facing the same decision first: where
-        to go, and who to trust with a loved one's heart. It is the question we
-        are asked more than any other, usually by a parent, usually at the worst
-        moment of their life.
+      <p class="rise rise-3 mx-auto mt-6 max-w-2xl leading-relaxed text-cream/90">
+        We are not a clinic and we do not administer ibogaine. Because it cannot
+        be legally administered in the United States, almost everyone who
+        reaches us is choosing a treatment center abroad first. These are the
+        ones we trust.
       </p>
-      <p class="mt-4 leading-relaxed text-cocoa">
-        So we will answer it plainly. Below are the clinics we would point our
-        own family toward, and the reasons why.
-      </p>
-    </div>
-  </section>
-
-  <!-- ===================== WHAT WE LOOK FOR ===================== -->
-  <section class="px-6 py-10 sm:py-16 lg:px-10 lg:py-16">
-    <div class="mx-auto max-w-6xl">
-      <div class="mx-auto max-w-2xl text-center">
-        <p class="eyebrow">What we look for</p>
-        <h2 class="mt-3 text-2xl text-pine sm:text-4xl">Before we will name anyone</h2>
-        <p class="mt-5 leading-relaxed text-cocoa">
-          Ibogaine carries real cardiac risk, and the gap between a careful
-          clinic and a careless one is measured in lives. These are the things
-          we look for.
-        </p>
-      </div>
-      <div class="mt-9 sm:mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          criteria.map((c) => (
-            <div class="rounded-2xl border border-sand bg-parchment p-6 transition-shadow duration-300 hover:shadow-[0_16px_40px_-24px_rgba(43,54,70,0.35)]">
-              <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cream to-sage/40 text-pine ring-1 ring-sand">
-                <svg viewBox="0 0 24 24" class="h-6 w-6" fill="currentColor" aria-hidden="true">
-                  <path d={c.icon} />
-                </svg>
-              </div>
-              <h3 class="mt-5 text-lg text-forest">{c.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-cocoa">{c.body}</p>
-            </div>
-          ))
-        }
-      </div>
     </div>
   </section>
 
   <!-- ===================== THE CLINICS ===================== -->
-  <section class="border-t border-sand bg-cream px-6 py-10 sm:py-16 lg:px-10 lg:py-16">
+  <section class="px-6 py-12 sm:py-16 lg:px-10 lg:py-16">
     <div class="mx-auto max-w-6xl">
-      <p class="eyebrow">The list</p>
-      <h2 class="mt-3 text-2xl text-pine sm:text-4xl">Clinics we trust</h2>
+      <p class="eyebrow">Trusted clinics</p>
+      <h2 class="mt-3 text-2xl text-pine sm:text-4xl">Places we would send our own</h2>
       <p class="mt-5 max-w-2xl leading-relaxed text-cocoa">
-        A short list on purpose. We would rather name one clinic we would send
-        our own people to than thirty we have only read about.
+        A short list on purpose. We look for real medical screening before you
+        travel, qualified people on site overnight, small groups, and honesty
+        about what one week can and cannot do.
       </p>
 
-      <div class="mt-9 sm:mt-12 space-y-8">
+      <div class="mt-10 space-y-8">
         {
           clinics.map((c) => (
-            <article class="overflow-hidden rounded-[1.75rem] border border-sand bg-parchment shadow-sm">
-              <div class="grid gap-8 p-7 sm:p-9 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12">
-                <div>
-                  <p class="text-[0.7rem] uppercase tracking-[0.16em] text-clay">
-                    {c.location} · Since {c.since}
-                  </p>
-                  <h3 class="mt-2 font-display text-2xl text-pine sm:text-3xl">{c.name}</h3>
-                  <p class="mt-1 font-display text-lg italic text-clay">{c.tagline}</p>
-
-                  {c.body.map((p) => (
-                    <p class="mt-4 leading-relaxed text-cocoa">{p}</p>
-                  ))}
-
-                  <p class="mt-6 text-[0.7rem] uppercase tracking-[0.16em] text-clay">
-                    What they treat
-                  </p>
-                  <ul class="mt-3 flex flex-wrap gap-2">
-                    {c.treats.map((t) => (
-                      <li class="rounded-full border border-sand bg-cream px-3 py-1.5 text-xs text-cocoa">
-                        {t}
-                      </li>
+            <article class="overflow-hidden rounded-2xl border border-sand bg-parchment shadow-sm">
+              <div class="grid lg:grid-cols-2">
+                <div class="flex h-full flex-col gap-2 p-2">
+                  <img
+                    src={withBase(c.gallery[0].src)}
+                    alt={c.gallery[0].alt}
+                    class="h-56 w-full flex-1 rounded-xl object-cover sm:h-72"
+                    loading="lazy"
+                  />
+                  <div class="grid shrink-0 grid-cols-3 gap-2">
+                    {c.gallery.slice(1).map((g) => (
+                      <img
+                        src={withBase(g.src)}
+                        alt={g.alt}
+                        class="h-24 w-full rounded-xl object-cover sm:h-28"
+                        loading="lazy"
+                      />
                     ))}
-                  </ul>
-
-                  <div class="mt-7 flex flex-col gap-3 sm:flex-row">
-                    <a
-                      href={c.href}
-                      target="_blank"
-                      rel="noopener"
-                      class="inline-flex items-center justify-center gap-1.5 rounded-full bg-pine px-6 py-3 text-sm font-medium text-linen transition-colors hover:bg-forest"
-                    >
-                      Visit {c.name}
-                      <span aria-hidden="true">↗</span>
-                    </a>
-                    <a
-                      href={withBase("/contact")}
-                      class="inline-flex items-center justify-center rounded-full border border-moss/50 px-6 py-3 text-sm font-medium text-pine transition-colors hover:border-moss hover:bg-cream"
-                    >
-                      Talk to us about aftercare
-                    </a>
                   </div>
                 </div>
 
-                <aside class="rounded-2xl border border-sand bg-cream p-6">
-                  <p class="text-[0.7rem] uppercase tracking-[0.16em] text-clay">
-                    At a glance
-                  </p>
-                  <dl class="mt-4 space-y-4">
-                    {c.facts.map((f) => (
-                      <div>
-                        <dt class="text-xs uppercase tracking-[0.1em] text-clay">{f.label}</dt>
-                        <dd class="mt-1 text-sm leading-relaxed text-cocoa">{f.value}</dd>
-                      </div>
-                    ))}
-                    <div>
-                      <dt class="text-xs uppercase tracking-[0.1em] text-clay">Getting there</dt>
-                      <dd class="mt-1 text-sm leading-relaxed text-cocoa">{c.distance}</dd>
-                    </div>
-                    <div>
-                      <dt class="text-xs uppercase tracking-[0.1em] text-clay">Languages</dt>
-                      <dd class="mt-1 text-sm leading-relaxed text-cocoa">{c.languages}</dd>
-                    </div>
-                    <div>
-                      <dt class="text-xs uppercase tracking-[0.1em] text-clay">Cost</dt>
-                      <dd class="mt-1 text-sm leading-relaxed text-cocoa">
-                        Published on their site, with a discount for veterans
-                        and first responders.{" "}
-                        <a
-                          href={c.costHref}
-                          target="_blank"
-                          rel="noopener"
-                          class="font-medium text-forest underline decoration-sand underline-offset-4 transition-colors hover:text-pine"
-                        >
-                          See treatment costs ↗
-                        </a>
-                      </dd>
-                    </div>
-                  </dl>
-                  <p class="mt-5 border-t border-sand pt-4 text-xs leading-relaxed text-clay">
-                    Details as published by the clinic. Confirm current pricing
-                    and protocols directly with them.
-                  </p>
-                </aside>
+                <div class="flex flex-col p-6 sm:p-8">
+                  <p class="text-[0.7rem] uppercase tracking-[0.16em] text-clay">{c.meta}</p>
+                  <h3 class="mt-2 font-display text-2xl text-pine">{c.name}</h3>
+                  {c.body.map((p) => (
+                    <p class="mt-3 text-sm leading-relaxed text-cocoa">{p}</p>
+                  ))}
+                  <a
+                    href={c.href}
+                    target="_blank"
+                    rel="noopener"
+                    class="mt-6 inline-flex items-center gap-1.5 self-start border-t border-sand pt-4 text-sm font-medium text-forest transition-colors hover:text-pine"
+                  >
+                    Visit {c.site}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
               </div>
             </article>
           ))
         }
       </div>
 
-      <!-- Honest about what this list is and is not. -->
-      <div class="mt-8 rounded-2xl border border-sand bg-parchment p-6 sm:p-7">
-        <p class="text-[0.7rem] uppercase tracking-[0.16em] text-clay">
-          What this list is, and what it isn't
-        </p>
-        <p class="mt-3 text-sm leading-relaxed text-cocoa">
-          Casa da Nova Vida does not own, operate, or hold any financial
-          interest in the clinics named here, and no clinic pays us to appear
-          on this page. We do refer people to them, and some of them refer
-          people to us; no money changes hands in either direction. We are not
-          a licensing or accrediting body, and we do not audit medical records.
-          This page reflects our own judgment, based on each clinic's published
-          protocols and on what guests tell us afterward. Nothing here is
-          medical advice. Ibogaine carries real cardiac risk and is not safe
-          for everyone. Verify everything that matters to you with the clinic
-          directly, and decide with a physician who knows your history.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== QUESTIONS TO ASK ===================== -->
-  <section class="px-6 py-10 sm:py-16 lg:px-10 lg:py-16">
-    <div class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[22rem_minmax(0,1fr)] lg:gap-16">
-      <div>
-        <p class="eyebrow">Do your own homework</p>
-        <h2 class="mt-3 text-2xl text-pine sm:text-4xl">What to ask any clinic</h2>
-        <p class="mt-5 leading-relaxed text-cocoa">
-          Whether or not a clinic appears on this page, ask these before you
-          send money or book a flight. How a clinic answers tells you most of
-          what you need to know.
-        </p>
-      </div>
-      <ol class="space-y-0 border-t border-sand">
-        {
-          asks.map((q, i) => (
-            <li class="flex gap-4 border-b border-sand py-4">
-              <span class="mt-0.5 font-display text-sm text-clay">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span class="leading-relaxed text-cocoa">{q}</span>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
-  <!-- ===================== AND THEN COME HOME ===================== -->
-  <section class="bg-forest px-6 py-12 sm:py-16 text-linen lg:px-10 lg:py-16">
-    <div class="mx-auto max-w-3xl text-center">
-      <p class="eyebrow text-gold">And then you come home</p>
-      <p class="mt-6 font-display text-2xl leading-[1.5] text-sagelight sm:text-3xl sm:leading-[1.45]">
-        The clinic's care ends when the stay does. The window it opens does not.
+      <p class="mt-8 max-w-3xl text-xs leading-relaxed text-clay">
+        Casa da Nova Vida does not own or operate the clinics named here, and no
+        clinic pays to appear on this page. We refer people to them and some of
+        them refer people to us; no money changes hands in either direction.
+        Photographs are each clinic's own. Nothing here is medical advice:
+        ibogaine carries real cardiac risk, and any decision about it belongs
+        with the clinic's medical team and a physician who knows your history.
       </p>
-      <p class="mx-auto mt-6 max-w-2xl leading-relaxed text-sagelight">
-        The best week of treatment in the world still ends with a flight home,
-        often within days, straight back into the old city and the old routines.
-        That gap is where progress is quietly lost, and it is the reason this
-        house exists. Plan where you land before you leave.
-      </p>
-      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a
-          href={withBase("/ibogaine-aftercare")}
-          class="rounded-full bg-linen px-7 py-3.5 font-medium text-pine transition-colors hover:bg-cream"
-        >
-          How aftercare works
-        </a>
-        <a
-          href={withBase("/aftercare-after-ibogaine-in-mexico")}
-          class="rounded-full border border-sagelight/40 px-7 py-3.5 font-medium text-sagelight transition-colors hover:border-sagelight hover:bg-linen/10"
-        >
-          Coming home from Mexico
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== FAQ ===================== -->
-  <section class="px-6 py-10 sm:py-16 lg:px-10 lg:py-16">
-    <div class="mx-auto max-w-3xl">
-      <p class="eyebrow">Questions</p>
-      <h2 class="mt-3 text-2xl text-pine sm:text-4xl">Before you ask us</h2>
-      <FaqAccordion items={faq} />
     </div>
   </section>
 
