@@ -22,6 +22,8 @@ related:
     href: "/is-ibogaine-safe"
   - label: "Ibogaine aftercare: the path forward"
     href: "/ibogaine-aftercare"
+  - label: "Ibogaine clinics we trust"
+    href: "/trusted-clinics"
 ---
 
 Almost every American family's ibogaine story follows the same map. Because ibogaine is a Schedule I substance in the United States and can't be legally administered here, treatment happens abroad, most often at a clinic in **Mexico.** Your loved one flies south, does the work, stays a few days, and then flies home.

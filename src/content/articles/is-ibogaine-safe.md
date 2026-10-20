@@ -20,6 +20,8 @@ related:
     href: "/family-guide-after-ibogaine"
   - label: "For families: where to start"
     href: "/for-families"
+  - label: "Ibogaine clinics we trust"
+    href: "/trusted-clinics"
 ---
 
 If someone you love is thinking about ibogaine, your first question is probably not "how does it work?" It's "could this hurt them?"

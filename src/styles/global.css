@@ -190,30 +190,30 @@ h1, h2, h3, .font-display {
   html { scroll-behavior: auto; }
 }
 
-/* ── "About" nav dropdown ───────────────────────────────────────────────── */
-.about-trigger { cursor: pointer; background: none; border: 0; }
-.about-chevron { transition: transform 0.18s ease; }
-.about-panel {
+/* ── Nav dropdowns (About, Resources) ───────────────────────────────────── */
+.nav-dd-trigger { cursor: pointer; background: none; border: 0; }
+.nav-dd-chevron { transition: transform 0.18s ease; }
+.nav-dd-panel {
   opacity: 0;
   visibility: hidden;
   transform: translateX(-50%) translateY(-4px);
   transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
 }
-.about-dd:hover .about-panel,
-.about-dd:focus-within .about-panel,
-.about-dd.is-open .about-panel {
+.nav-dd:hover .nav-dd-panel,
+.nav-dd:focus-within .nav-dd-panel,
+.nav-dd.is-open .nav-dd-panel {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
 }
-.about-dd:hover .about-chevron,
-.about-dd.is-open .about-chevron { transform: rotate(180deg); }
+.nav-dd:hover .nav-dd-chevron,
+.nav-dd.is-open .nav-dd-chevron { transform: rotate(180deg); }
 
-/* ── Mobile drawer "About" collapsible ──────────────────────────────────── */
-.m-about-summary { list-style: none; }
-.m-about-summary::-webkit-details-marker { display: none; }
+/* ── Mobile drawer collapsible groups ───────────────────────────────────── */
+.m-dd-summary { list-style: none; }
+.m-dd-summary::-webkit-details-marker { display: none; }
 .m-chevron { transition: transform 0.2s ease; }
-.m-about[open] .m-chevron { transform: rotate(180deg); }
+.m-dd[open] .m-chevron { transform: rotate(180deg); }
 
 /* ── FAQ accordion ──────────────────────────────────────────────────────── */
 .faq-summary { list-style: none; }
