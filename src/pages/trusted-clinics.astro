@@ -50,10 +50,12 @@ const listSchema = {
     <img
       src={withBase("/images/photos/mountain-sunrise.jpg")}
       alt="First light over a mountain ridge"
-      class="absolute inset-0 -z-20 h-full w-full object-cover"
+      class="absolute inset-0 -z-20 h-full w-full object-cover object-bottom sm:object-center"
       loading="eager"
     />
-    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-bark/80 via-pine/75 to-pine/85"></div>
+    <!-- The sun flare sits dead centre, which is exactly where the headline
+         lands on a phone, so this scrim runs heavier than the Resources one. -->
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-bark/85 via-pine/85 to-pine/90"></div>
     <div class="mx-auto max-w-3xl text-center [text-shadow:0_2px_20px_rgba(20,26,36,0.55)]">
       <p class="eyebrow rise text-gold">Trusted Clinics</p>
       <h1 class="rise rise-2 mt-5 text-4xl leading-[1.1] sm:text-5xl">Trusted Clinics</h1>
@@ -114,7 +116,7 @@ const listSchema = {
                     href={c.href}
                     target="_blank"
                     rel="noopener"
-                    class="mt-6 inline-flex items-center gap-1.5 self-start border-t border-sand pt-4 text-sm font-medium text-forest transition-colors hover:text-pine"
+                    class="mt-6 inline-flex items-center gap-1.5 self-start border-t border-sand pb-2 pt-4 text-sm font-medium text-forest transition-colors hover:text-pine"
                   >
                     Visit {c.site}
                     <span aria-hidden="true">↗</span>
